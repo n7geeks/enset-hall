@@ -1,3 +1,6 @@
 {
-	"TEST": "Essai"
+	"HELLO": "Bonjour",
+	"TOGGLE_THEME": "Changer de thème",
+	"SWITCH_TO_LIGHT_MODE": "Passer en mode clair",
+	"SWITCH_TO_DARK_MODE": "Passer en mode sombre"
 }

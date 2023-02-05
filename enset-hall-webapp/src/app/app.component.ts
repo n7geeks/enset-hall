@@ -10,6 +10,9 @@ import { UserPreferencesService } from "./user-preferences/user-preferences.serv
 import {
 	ChangeLanguageWidgetComponent
 } from "./user-preferences/components/change-language-widget/change-language-widget.component";
+import {
+	ToggleThemeWidgetComponent
+} from "./user-preferences/components/toggle-theme-widget/toggle-theme-widget.component";
 @Component({
 	selector: 'enset-hall-root',
 	standalone: true,
@@ -19,6 +22,7 @@ import {
 		CommonModule,
 		RouterModule,
 		TranslateModule,
+		ToggleThemeWidgetComponent,
 		ChangeLanguageWidgetComponent
 	]
 })
@@ -27,8 +31,10 @@ export class AppComponent implements OnInit {
 	@Select(UserPreferencesState) preferences$!: Observable<UserPreferencesStateModel>;
 	ngOnInit(): void {
         this.store.dispatch(new UserPreferencesActions.InitLang());
+		this.store.dispatch(new UserPreferencesActions.InitTheme());
 		this.preferences$.subscribe(preferences => {
-			this.preferencesService.updateLang(preferences.lang);
+			this.preferencesService.setLang(preferences.lang);
+			this.preferencesService.setTheme(preferences.theme);
 		});
     }
 }

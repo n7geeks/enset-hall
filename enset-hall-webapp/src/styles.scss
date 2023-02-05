@@ -1,0 +1,96 @@
+@use '@angular/material' as mat;
+@include mat.core();
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700;900&display=swap');
+
+$enset-hall-webapp-light-primary: mat.define-palette(mat.$indigo-palette);
+$enset-hall-webapp-light-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+$enset-hall-webapp-light-warn: mat.define-palette(mat.$red-palette);
+$enset-hall-webapp-light-background: (
+	50: #FFFFFF,
+	100: #FFFFFF,
+	200: #FFFFFF,
+	300: #FFFFFF,
+	400: #FFFFFF,
+	500: #FFFFFF,
+	600: #FFFFFF,
+	700: #FFFFFF,
+	800: #FFFFFF,
+	900: #FFFFFF,
+	contrast: (
+		50: rgba(black, 0.87),
+		100: rgba(black, 0.87),
+		200: rgba(black, 0.87),
+		300: rgba(black, 0.87),
+		400: rgba(black, 0.87),
+		500: rgba(black, 0.87),
+		600: rgba(black, 0.87),
+		700: rgba(black, 0.87),
+		800: rgba(black, 0.87),
+		900: rgba(black, 0.87),
+	)
+);
+
+$enset-hall-webapp-dark-primary: mat.define-palette(mat.$indigo-palette);
+$enset-hall-webapp-dark-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$enset-hall-webapp-dark-warn: mat.define-palette(mat.$red-palette);
+$enset-hall-webapp-dark-background: (
+	50: #11100F,
+	100: #11100F,
+	200: #11100F,
+	300: #11100F,
+	400: #11100F,
+	500: #11100F,
+	600: #11100F,
+	700: #11100F,
+	800: #11100F,
+	900: #11100F,
+	contrast: (
+		50: rgba(black, 0.87),
+		100: rgba(black, 0.87),
+		200: rgba(black, 0.87),
+		300: rgba(black, 0.87),
+		400: rgba(black, 0.87),
+		500: rgba(black, 0.87),
+		600: rgba(black, 0.87),
+		700: rgba(black, 0.87),
+		800: rgba(black, 0.87),
+		900: rgba(black, 0.87),
+	)
+);
+
+$enset-hall-webapp-light-theme: mat.define-light-theme((
+	color: (
+		primary: $enset-hall-webapp-light-primary,
+		accent: $enset-hall-webapp-light-accent,
+		warn: $enset-hall-webapp-light-warn,
+		background: $enset-hall-webapp-light-background
+	)
+));
+
+$enset-hall-webapp-dark-theme: mat.define-dark-theme((
+	color: (
+		primary: $enset-hall-webapp-dark-primary,
+		accent: $enset-hall-webapp-dark-accent,
+		warn: $enset-hall-webapp-dark-warn,
+		background: $enset-hall-webapp-dark-background
+	)
+));
+
+@include mat.all-component-themes($enset-hall-webapp-dark-theme);
+
+html, body { height: 100%; }
+
+body {
+	--primary: #FFFFFF;
+	--background: #11100F;
+	margin: 0;
+	font-family: Poppins, sans-serif;
+	background: var(--background);
+}
+
+body[theme="light"] {
+	--primary: #11100F;
+	--background: #FFFFFF;
+	@include mat.all-component-colors($enset-hall-webapp-light-theme);
+}
+

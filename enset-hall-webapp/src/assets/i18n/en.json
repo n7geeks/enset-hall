@@ -1,3 +1,6 @@
 {
-	"TEST": "Test"
+	"HELLO": "Hello",
+	"TOGGLE_THEME": "Toggle theme",
+	"SWITCH_TO_LIGHT_MODE": "Switch to light mode",
+	"SWITCH_TO_DARK_MODE": "Switch to dark mode"
 }

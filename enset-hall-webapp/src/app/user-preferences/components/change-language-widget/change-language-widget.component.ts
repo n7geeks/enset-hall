@@ -6,6 +6,7 @@ import { UserPreferencesState } from "../../user-preferences.state";
 import { Observable } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 
 @Component({
 	selector: 'enset-hall-change-language-widget',
@@ -15,12 +16,14 @@ import { TranslateModule } from "@ngx-translate/core";
 			<option #en value="en" [selected]="(lang$ | async) === en.value">English</option>
 			<option #fr value="fr" [selected]="(lang$ | async) === fr.value">Français</option>
 		</select>
+<!--		<mat-slide-toggle>Slide me!</mat-slide-toggle>-->
 	`,
 	styles: [``],
 	standalone: true,
 	imports: [
 		CommonModule,
 		TranslateModule,
+		MatSlideToggleModule
 	]
 })
 export class ChangeLanguageWidgetComponent {

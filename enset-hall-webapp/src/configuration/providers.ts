@@ -22,7 +22,6 @@ const modules = [
 	AngularFireAuthModule,
 	AngularFirestoreModule,
 	RouterModule.forRoot(routes),
-	BrowserAnimationsModule,
 	HttpClientModule,
 	TranslateModule.forRoot({
 		loader: {
@@ -34,5 +33,6 @@ const modules = [
 	})
 ];
 export const providers: EnvironmentProviders[] = [
-	importProvidersFrom(modules)
+	importProvidersFrom(modules),
+	importProvidersFrom(BrowserAnimationsModule)
 ];

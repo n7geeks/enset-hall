@@ -21,7 +21,7 @@ export class UserPreferencesState {
 	constructor(private UserPreferencesService: UserPreferencesService) {}
 	@Action(UserPreferencesActions.InitLang)
 	initLang(ctx: StateContext<UserPreferencesStateModel>) {
-		this.UserPreferencesService.initLang(ctx.getState().lang);
+		this.UserPreferencesService.setLang(ctx.getState().lang);
 	}
 	@Action(UserPreferencesActions.UpdateLang)
 	updateLang(ctx: StateContext<UserPreferencesStateModel>,
@@ -30,8 +30,23 @@ export class UserPreferencesState {
 			lang: payload
 		});
 	}
+	@Action(UserPreferencesActions.InitTheme)
+	initTheme(ctx: StateContext<UserPreferencesStateModel>) {
+		this.UserPreferencesService.setTheme(ctx.getState().theme);
+	}
+	@Action(UserPreferencesActions.ToggleTheme)
+	updateTheme(ctx: StateContext<UserPreferencesStateModel>) {
+		ctx.patchState({
+			theme: ctx.getState().theme === 'dark' ? 'light' : 'dark'
+		});
+	}
 	@Selector()
 	static getLang(state: UserPreferencesStateModel) {
 		return state.lang;
+	}
+
+	@Selector()
+	static getTheme(state: UserPreferencesStateModel) {
+		return state.theme;
 	}
 }

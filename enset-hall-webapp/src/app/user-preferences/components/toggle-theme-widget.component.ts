@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { Select, Store } from "@ngxs/store";
-import { UserPreferencesActions } from "../../user-preferences.actions";
-import { SupportedTheme } from "../../types";
-import { UserPreferencesState } from "../../user-preferences.state";
+import { UserPreferencesActions } from "../user-preferences.actions";
+import { SupportedTheme } from "../types";
+import { UserPreferencesState } from "../user-preferences.state";
 import { Observable } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";

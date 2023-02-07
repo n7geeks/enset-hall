@@ -9,10 +9,10 @@ import { Observable } from "rxjs";
 import { UserPreferencesService } from "./user-preferences/user-preferences.service";
 import {
 	ChangeLanguageWidgetComponent
-} from "./user-preferences/components/change-language-widget/change-language-widget.component";
+} from "./user-preferences/components/change-language-widget.component";
 import {
 	ToggleThemeWidgetComponent
-} from "./user-preferences/components/toggle-theme-widget/toggle-theme-widget.component";
+} from "./user-preferences/components/toggle-theme-widget.component";
 @Component({
 	selector: 'enset-hall-root',
 	standalone: true,

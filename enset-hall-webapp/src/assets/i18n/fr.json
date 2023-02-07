@@ -1,6 +1,7 @@
 {
-	"HELLO": "Bonjour",
+	"TEST_TEXT": "Ceci est un texte de test en français, pour voir si la traduction fonctionne correctement.",
 	"TOGGLE_THEME": "Changer de thème",
 	"SWITCH_TO_LIGHT_MODE": "Passer en mode clair",
-	"SWITCH_TO_DARK_MODE": "Passer en mode sombre"
+	"SWITCH_TO_DARK_MODE": "Passer en mode sombre",
+	"CHANGE_LANGUAGE": "Changer la langue"
 }

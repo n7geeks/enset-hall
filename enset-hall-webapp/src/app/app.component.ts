@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
@@ -24,7 +24,8 @@ import {
 		TranslateModule,
 		ToggleThemeWidgetComponent,
 		ChangeLanguageWidgetComponent
-	]
+	],
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit {
 	constructor(private store: Store, private preferencesService: UserPreferencesService) {}

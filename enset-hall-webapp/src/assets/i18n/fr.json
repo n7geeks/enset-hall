@@ -3,5 +3,6 @@
 	"TOGGLE_THEME": "Changer de thème",
 	"SWITCH_TO_LIGHT_MODE": "Passer en mode clair",
 	"SWITCH_TO_DARK_MODE": "Passer en mode sombre",
-	"CHANGE_LANGUAGE": "Changer la langue"
+	"CHANGE_LANGUAGE": "Changer la langue",
+	"CHANGE_LANGUAGE_TOOLTIP": "Changer la langue de l'application"
 }

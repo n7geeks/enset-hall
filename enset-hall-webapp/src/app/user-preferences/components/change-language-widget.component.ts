@@ -8,12 +8,22 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
+import { UserPreferencesState } from "../user-preferences.state";
+import { Observable } from "rxjs";
+
+interface LangSelectorMenuItem {
+	code: SupportedLang;
+	label: string;
+	inactiveTooltip: string;
+	activeTooltip: string;
+}
 
 @Component({
 	selector: 'enset-hall-change-language-widget',
 	template: `
         <button mat-fab
                 extended
+                [title]="'CHANGE_LANGUAGE_TOOLTIP' | translate"
                 color="background"
                 [matMenuTriggerFor]="menu">
             <mat-icon>language</mat-icon>
@@ -22,16 +32,23 @@ import { MatIconModule } from "@angular/material/icon";
 			</span>
         </button>
 		<mat-menu #menu="matMenu">
-            <button *ngFor="let lang of langs"
-                    mat-menu-item
-            		(click)="changeLang(lang.code)">
-                <span>{{ lang.label }}</span>
-            </button>
+			<ng-container *ngIf="currentLang$ | async as currentLang">
+	            <button *ngFor="let lang of langs"
+	                    mat-menu-item
+	                    [disabled]="lang.code === currentLang"
+	                    (click)="changeLang(lang.code)"
+	                    [title]="lang.code === currentLang ? lang.activeTooltip : lang.inactiveTooltip">
+	                <span>{{ lang.label }}</span>
+	            </button>
+			</ng-container>
 		</mat-menu>
 	`,
 	styles: [`
 		mat-icon, span {
 			color: var(--primary);
+		}
+		.active-lang {
+			cursor: not-allowed;
 		}
 	`],
 	standalone: true,
@@ -45,13 +62,22 @@ import { MatIconModule } from "@angular/material/icon";
 	]
 })
 export class ChangeLanguageWidgetComponent {
-	protected langs: {
-		code: SupportedLang;
-		label: string;
-	}[] = [
-		{ code: 'en', label: 'English' },
-		{ code: 'fr', label: 'Français' }
+	protected langs: LangSelectorMenuItem[] = [
+		{
+			code: 'en',
+			label: 'English',
+			inactiveTooltip: 'Switch to english',
+			activeTooltip: 'English is already selected'
+		},
+		{
+			code: 'fr',
+			label: 'Français',
+			inactiveTooltip: 'Basculer en français',
+			activeTooltip: 'Français est déjà sélectionné'
+		}
 	];
+	protected currentLang$: Observable<SupportedLang>
+		= this.store.select(UserPreferencesState.getLang);
 	constructor(private store: Store) { }
 	protected changeLang(selection: string) {
 		if (selection.match('fr|en')) {

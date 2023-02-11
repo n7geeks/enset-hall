@@ -15,9 +15,9 @@ import {
 } from "./user-preferences/components/toggle-theme-widget.component";
 @Component({
 	selector: 'enset-hall-root',
-	standalone: true,
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
+	standalone: true,
 	imports: [
 		CommonModule,
 		RouterModule,

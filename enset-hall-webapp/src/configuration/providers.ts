@@ -1,4 +1,4 @@
-import { EnvironmentProviders, importProvidersFrom } from "@angular/core";
+import { EnvironmentProviders, importProvidersFrom, isDevMode } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { routes } from "./routes";
 import { NgxsModule } from "@ngxs/store";
@@ -13,8 +13,13 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { NgxsStoragePluginModule } from "@ngxs/storage-plugin";
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const modules = [
+	ServiceWorkerModule.register('ngsw-worker.js', {
+		enabled: !isDevMode(),
+		registrationStrategy: 'registerWhenStable:30000'
+	}),
 	NgxsModule.forRoot(states),
 	NgxsStoragePluginModule.forRoot(storage),
 	NgxsReduxDevtoolsPluginModule.forRoot(),

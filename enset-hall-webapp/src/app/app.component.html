@@ -1,6 +1,7 @@
 <router-outlet></router-outlet>
 <main>
 	<span>{{ 'TEST_TEXT' | translate }}</span>
+	<div [class]="connectivity$ | async "></div>
 </main>
 <footer>
 	<enset-hall-change-language-widget></enset-hall-change-language-widget>

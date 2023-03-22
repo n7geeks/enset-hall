@@ -1,0 +1,13 @@
+<ng-container *ngIf="user$ | async as user">
+	<span>{{ user.displayName }}</span>
+	<br />
+	<span>{{ user.email }}</span>
+	<br />
+	<ng-container *ngIf="!user.ensetien">
+		<span>You are not from ENSET</span>
+		<br />
+	</ng-container>
+	<button type="button" (click)="signOut()">
+		Logout
+	</button>
+</ng-container>

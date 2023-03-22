@@ -1,8 +1,8 @@
 import { Component } from "@angular/core";
 import { Select, Store } from "@ngxs/store";
-import { UserPreferencesActions } from "../user-preferences.actions";
+import { UserPreferencesActions } from "../state/user-preferences.actions";
 import { SupportedTheme } from "../types";
-import { UserPreferencesState } from "../user-preferences.state";
+import { UserPreferencesState } from "../state/user-preferences.state";
 import { Observable } from "rxjs";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
@@ -10,12 +10,11 @@ import { MatButtonModule } from "@angular/material/button";
 import { MatIconModule } from "@angular/material/icon";
 
 @Component({
-	selector: 'enset-hall-toggle-theme-widget',
+	selector: 'n7h-toggle-theme-widget',
 	template: `
         <button *ngIf="(theme$ | async) as theme"
                 [title]="(theme === 'light' ? 'SWITCH_TO_DARK_MODE' : 'SWITCH_TO_LIGHT_MODE') | translate"
                 mat-fab
-                color="background"
                 aria-label="Toggle Theme Widget"
                 (click)="toggleTheme()">
             <mat-icon>
@@ -60,7 +59,7 @@ import { MatIconModule } from "@angular/material/icon";
 	`,
 	styles: [`
 		.icon {
-			stroke: var(--primary);
+			stroke: var(--text);
 		}
 	`],
 	standalone: true,

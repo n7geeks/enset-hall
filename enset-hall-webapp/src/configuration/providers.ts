@@ -14,19 +14,25 @@ import { TranslateLoader, TranslateModule } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { NgxsStoragePluginModule } from "@ngxs/storage-plugin";
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireAuthGuardModule } from "@angular/fire/compat/auth-guard";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 const modules = [
 	ServiceWorkerModule.register('ngsw-worker.js', {
 		enabled: !isDevMode(),
 		registrationStrategy: 'registerWhenStable:30000'
 	}),
-	NgxsModule.forRoot(states),
-	NgxsStoragePluginModule.forRoot(storage),
-	NgxsReduxDevtoolsPluginModule.forRoot(),
+	AngularFireAuthGuardModule,
 	AngularFireModule.initializeApp(environment.firebaseConfig),
 	AngularFireAuthModule,
 	AngularFirestoreModule,
-	RouterModule.forRoot(routes),
+	MatSnackBarModule,
+	NgxsModule.forRoot(states),
+	NgxsStoragePluginModule.forRoot(storage),
+	NgxsReduxDevtoolsPluginModule.forRoot(),
+	RouterModule.forRoot(routes, {
+		scrollPositionRestoration: 'enabled'
+	}),
 	HttpClientModule,
 	TranslateModule.forRoot({
 		loader: {

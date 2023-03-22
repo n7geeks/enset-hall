@@ -1,8 +1,8 @@
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { Injectable } from "@angular/core";
 import { UserPreferencesActions } from "./user-preferences.actions";
-import { UserPreferencesService } from "./user-preferences.service";
-import { SupportedLang, SupportedTheme } from "./types";
+import { UserPreferencesService } from "../user-preferences.service";
+import { SupportedLang, SupportedTheme } from "../types";
 
 export interface UserPreferencesStateModel {
 	lang: SupportedLang;

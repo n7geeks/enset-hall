@@ -108,6 +108,7 @@ body {
 	--success: #34A853;
 	--mask: rgba(17, 16, 15, 0.75);
 	--bg-auth: url("assets/images/bg-auth-dark.jpg");
+	--bg-header: url("assets/images/bg-header-dark.jpg");
 	margin: 0;
 	font-family: Poppins, sans-serif;
 	background: var(--background);
@@ -125,6 +126,7 @@ body[theme="light"] {
 	--success: #34A853;
 	--mask: rgba(17, 16, 15, 0.4);
 	--bg-auth: url("assets/images/bg-auth-light.jpg");
+	--bg-header: url("assets/images/bg-header-light.jpg");
 	@include mat.core-color($n7h-light-theme);
 	@include mat.all-component-themes($n7h-light-theme);
 	.mat-mdc-snack-bar-container {

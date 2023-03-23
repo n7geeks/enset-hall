@@ -12,7 +12,12 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 @Component({
 	selector: 'n7h-continue-with-google-button',
 	template: `
-		<button matRipple matRippleColor="#e1e1e1" type="button" (click)="signIn()" [disabled]="busy$ | async">
+		<button matRipple
+		        matRippleColor="#e1e1e1"
+		        type="button"
+				[title]="'AUTH.CONTINUE_WITH_GOOGLE_HINT' | translate"
+		        (click)="signIn()"
+		        [disabled]="busy$ | async">
 			<ng-container *ngIf="busy$ | async; else notBusy">
 				<mat-spinner [diameter]="24" [strokeWidth]="3" color="primary"></mat-spinner>
 			</ng-container>
@@ -23,7 +28,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M5.56523 14.1851C5.33523 13.4951 5.20455 12.758 5.20455 12.0001C5.20455 11.2421 5.33523 10.5051 5.56523 9.81506V6.83552H1.72318C0.944318 8.38802 0.5 10.1444 0.5 12.0001C0.5 13.8557 0.944318 15.6121 1.72318 17.1646L5.56523 14.1851Z" fill="#FBBC05"/>
 					<path fill-rule="evenodd" clip-rule="evenodd" d="M11.9999 5.07386C13.6883 5.07386 15.2042 5.65409 16.3961 6.79364L19.6945 3.49523C17.7029 1.63955 15.0997 0.5 11.9999 0.5C7.50446 0.5 3.61537 3.07705 1.7231 6.83545L5.56514 9.815C6.46946 7.09682 9.00469 5.07386 11.9999 5.07386Z" fill="#EA4335"/>
 				</svg>
-				<span>Continue with Google</span>
+				<span>
+					{{ "AUTH.CONTINUE_WITH_GOOGLE" | translate }}
+				</span>
 			</ng-template>
 		</button>
 	`,

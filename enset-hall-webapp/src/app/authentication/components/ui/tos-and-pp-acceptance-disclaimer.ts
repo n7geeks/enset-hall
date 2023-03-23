@@ -7,9 +7,15 @@ import { TranslateModule } from "@ngx-translate/core";
 	template: `
 		<div class="wrapper">
 			<span>{{ "TOS_AND_PP_ACCEPTANCE_DISCLAIMER" | translate }}</span>
-			<a href="https://www.n7heroes.com/tos" target="_blank">
-				{{ "TOS_AND_PP_ACCEPTANCE_DISCLAIMER_LINK" | translate }}
-			</a>
+			<span>
+				<a href="/tos" target="_blank">
+					{{ "TOS" | translate }}
+				</a>
+				{{ "AND" | translate }}
+				<a href="/privacy" target="_blank">
+					{{ "PRIVACY_POLICY" | translate }}
+				</a>
+			</span>
 		</div>
 	`,
 	styles: [`

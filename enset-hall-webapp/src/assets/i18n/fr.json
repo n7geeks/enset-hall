@@ -7,13 +7,17 @@
 	"CHANGE_LANGUAGE_TOOLTIP": "Changer la langue de l'application",
 	"ENSET_HALL_LOGO": "Logo de l'ENSET Hall",
 	"AUTH.WELCOMING": "Bienvenue sur ENSET Hall",
+	"AUTH.CONTINUE_WITH_GOOGLE": "Continuer avec Google",
+	"AUTH.CONTINUE_WITH_GOOGLE_HINT": "Vous allez être redirigé vers Google pour vous connecter",
 	"TOS_AND_PP_ACCEPTANCE_DISCLAIMER": "En vous inscrivant, vous acceptez nos",
 	"TOS_AND_PP_ACCEPTANCE_DISCLAIMER_LINK": "Conditions d'utilisation et Politique de confidentialité",
+	"AND": "et",
 	"TOS": "Conditions d'utilisation",
 	"PRIVACY_POLICY": "Confidentialité",
 	"ABOUT": "À propos",
 	"FAQ": "FAQ",
 	"CONTACT_US": "Contactez-nous",
 	"ROADMAP": "Roadmap",
-	"CANCEL": "annuler"
+	"CANCEL": "annuler",
+	"ENSET_HALL": "ENSET Hall"
 }

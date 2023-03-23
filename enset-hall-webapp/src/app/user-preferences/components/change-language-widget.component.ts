@@ -1,6 +1,6 @@
 import { Component } from "@angular/core";
 import { Store } from "@ngxs/store";
-import { UserPreferencesActions } from "../user-preferences.actions";
+import { UserPreferencesActions } from "../state/user-preferences.actions";
 import { SupportedLang } from "../types";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
@@ -8,7 +8,7 @@ import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatIconModule } from "@angular/material/icon";
-import { UserPreferencesState } from "../user-preferences.state";
+import { UserPreferencesState } from "../state/user-preferences.state";
 import { Observable } from "rxjs";
 
 interface LangSelectorMenuItem {
@@ -19,12 +19,11 @@ interface LangSelectorMenuItem {
 }
 
 @Component({
-	selector: 'enset-hall-change-language-widget',
+	selector: 'n7h-change-language-widget',
 	template: `
         <button mat-fab
                 extended
                 [title]="'CHANGE_LANGUAGE_TOOLTIP' | translate"
-                color="background"
                 [matMenuTriggerFor]="menu">
             <mat-icon>language</mat-icon>
 			<span>
@@ -45,7 +44,7 @@ interface LangSelectorMenuItem {
 	`,
 	styles: [`
 		mat-icon, span {
-			color: var(--primary);
+			color: var(--text);
 		}
 		.active-lang {
 			cursor: not-allowed;

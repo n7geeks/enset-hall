@@ -4,5 +4,16 @@
 	"SWITCH_TO_LIGHT_MODE": "Passer en mode clair",
 	"SWITCH_TO_DARK_MODE": "Passer en mode sombre",
 	"CHANGE_LANGUAGE": "Changer la langue",
-	"CHANGE_LANGUAGE_TOOLTIP": "Changer la langue de l'application"
+	"CHANGE_LANGUAGE_TOOLTIP": "Changer la langue de l'application",
+	"ENSET_HALL_LOGO": "Logo de l'ENSET Hall",
+	"AUTH.WELCOMING": "Bienvenue sur ENSET Hall",
+	"TOS_AND_PP_ACCEPTANCE_DISCLAIMER": "En vous inscrivant, vous acceptez nos",
+	"TOS_AND_PP_ACCEPTANCE_DISCLAIMER_LINK": "Conditions d'utilisation et Politique de confidentialité",
+	"TOS": "Conditions d'utilisation",
+	"PRIVACY_POLICY": "Confidentialité",
+	"ABOUT": "À propos",
+	"FAQ": "FAQ",
+	"CONTACT_US": "Contactez-nous",
+	"ROADMAP": "Roadmap",
+	"CANCEL": "annuler"
 }

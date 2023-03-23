@@ -1,0 +1,11 @@
+@media (max-width: 768px) {
+	n7h-change-language-widget, n7h-toggle-theme-widget {
+		display: none;
+	}
+	footer {
+		justify-content: center;
+		n7h-footer {
+			margin: 0;
+		}
+	}
+}

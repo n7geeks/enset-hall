@@ -1,4 +1,4 @@
-import { SupportedLang } from "./types";
+import { SupportedLang } from "../types";
 
 export namespace UserPreferencesActions {
 	export class InitLang {

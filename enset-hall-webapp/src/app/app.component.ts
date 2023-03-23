@@ -1,39 +1,36 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
-import { RouterModule } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import { Select, Store } from "@ngxs/store";
-import { UserPreferencesActions } from "./user-preferences/user-preferences.actions";
-import { UserPreferencesState, UserPreferencesStateModel } from "./user-preferences/user-preferences.state";
+import { Actions, ofActionDispatched, Select, Store } from "@ngxs/store";
+import { UserPreferencesActions } from "./user-preferences/state/user-preferences.actions";
+import { UserPreferencesState, UserPreferencesStateModel } from "./user-preferences/state/user-preferences.state";
 import { Observable, Subscription } from "rxjs";
 import { UserPreferencesService } from "./user-preferences/user-preferences.service";
-import {
-	ChangeLanguageWidgetComponent
-} from "./user-preferences/components/change-language-widget.component";
-import {
-	ToggleThemeWidgetComponent
-} from "./user-preferences/components/toggle-theme-widget.component";
-import { ConnectivityState, ConnectivityStatus } from "./connectivity/connectivity.state";
+import { ConnectivityStatus } from "./connectivity/connectivity.state";
 import { ConnectivityActions } from "./connectivity/connectivity.actions";
+import { PushNotificationService } from "./notifications/push-notification.service";
+import { AuthenticationActions } from "./authentication/state/authentication.actions";
 @Component({
-	selector: 'enset-hall-root',
+	selector: 'n7h-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 	standalone: true,
 	imports: [
 		CommonModule,
 		RouterModule,
-		TranslateModule,
-		ToggleThemeWidgetComponent,
-		ChangeLanguageWidgetComponent
+		TranslateModule
 	],
-	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent implements OnInit, OnDestroy {
-	constructor(private store: Store, private preferencesService: UserPreferencesService) {}
+	constructor(private store: Store,
+	            private actions: Actions,
+				private router: Router,
+	            private preferencesService: UserPreferencesService,
+	            private pushNotificationService: PushNotificationService) {}
 	@Select(UserPreferencesState) preferences$?: Observable<UserPreferencesStateModel>;
-	@Select(ConnectivityState) connectivity$?: Observable<ConnectivityStatus>;
 	preferencesSubscription?: Subscription;
+	signOutSubscription?: Subscription;
 	public ngOnInit(): void {
         this.store.dispatch(new UserPreferencesActions.InitLang());
 		this.store.dispatch(new UserPreferencesActions.InitTheme());
@@ -52,10 +49,18 @@ export class AppComponent implements OnInit, OnDestroy {
 		window.addEventListener("offline", () => {
 			this.store.dispatch(new ConnectivityActions.UpdateStatus(ConnectivityStatus.Offline));
 		});
+		// this.pushNotificationService.subscribeToNotifications();
+		// this.actions.pipe(ofActionDispatched(AuthenticationActions.SignOut))
+		// 	.subscribe(() => {
+		// 		this.router.navigate(['/auth']);
+		// 	});
     }
 	public ngOnDestroy(): void {
 		if (this.preferencesSubscription && !this.preferencesSubscription.closed) {
 			this.preferencesSubscription.unsubscribe();
+		}
+		if (this.signOutSubscription && !this.signOutSubscription.closed) {
+			this.signOutSubscription.unsubscribe();
 		}
 	}
 }

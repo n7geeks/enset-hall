@@ -1,0 +1,43 @@
+:host {
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+mat-drawer-container {
+	height: 100%;
+	width: 100%;
+	mat-drawer {
+		width: 15rem;
+		padding: 3rem 1rem;
+		h1 {
+			font-size: 1.2rem;
+			font-weight: 500;
+			margin: 0;
+		}
+		ul {
+			list-style: none;
+			margin-top: 2rem;
+			padding: 0;
+			li {
+				a {
+					text-decoration: none;
+					font-size: 1rem;
+					margin: 0.5rem 0;
+					background-color: var(--background);
+					border-radius: .5rem;
+					color: var(--text);
+					padding: 1rem;
+					cursor: pointer;
+					display: flex;
+					align-items: center;
+					&:hover {
+						background-color: var(--highlight);
+					}
+					&.active {
+						background-color: var(--tab);
+					}
+				}
+			}
+		}
+	}
+}

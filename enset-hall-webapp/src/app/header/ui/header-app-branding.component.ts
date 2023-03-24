@@ -1,16 +1,23 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { TranslateModule } from "@ngx-translate/core";
+import { RouterLink } from "@angular/router";
+import { MatRippleModule } from "@angular/material/core";
 
 @Component({
 	selector: "n7h-header-app-branding",
 	standalone: true,
 	imports: [
 		CommonModule,
-		TranslateModule
+		TranslateModule,
+		RouterLink,
+		MatRippleModule
 	],
 	template: `
-		<a href="/" class="branding">
+		<a
+			matRipple
+			class="branding"
+			routerLink="/">
 			<img
 				class="n7h-logo undraggable"
 				src="../../../assets/vectors/enset-hall-h-only.svg"
@@ -38,7 +45,7 @@ import { TranslateModule } from "@ngx-translate/core";
 				color: white;
 			}
 		}
-		@media (max-width: 768px) {
+		@media (max-width: 680px) {
 			.branding {
 				.n7h-title {
 					display: none;

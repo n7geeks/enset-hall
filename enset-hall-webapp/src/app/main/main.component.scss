@@ -1,0 +1,10 @@
+main {
+	padding-top: 4rem;
+	height: calc(100% - 4rem);
+	width: 100%;
+	color: var(--text);
+	router-outlet {
+		height: 100%;
+		width: 100%;
+	}
+}

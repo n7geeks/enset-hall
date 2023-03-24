@@ -5,12 +5,14 @@ import { AuthUser } from "../authentication/models/AuthUser";
 import { FormsModule } from "@angular/forms";
 import { HomeComponent } from "../home/home.component";
 import { HeaderComponent } from "../header/header.component";
+import { RouterModule } from "@angular/router";
 
 @Component({
 	selector: 'n7h-main',
 	standalone: true,
 	imports: [
 		CommonModule,
+		RouterModule,
 		HeaderComponent,
 		HomeComponent,
 		FormsModule

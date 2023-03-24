@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { UserPreferencesActions } from "./user-preferences.actions";
 import { UserPreferencesService } from "../user-preferences.service";
 import { SupportedLang, SupportedTheme } from "../types";
+import { AlertService } from "../../shared/alert.service";
 
 export interface UserPreferencesStateModel {
 	lang: SupportedLang;
@@ -18,7 +19,9 @@ export interface UserPreferencesStateModel {
 })
 @Injectable()
 export class UserPreferencesState {
-	constructor(private UserPreferencesService: UserPreferencesService) {}
+	constructor(
+		private UserPreferencesService: UserPreferencesService,
+		private alertService: AlertService) {}
 	@Action(UserPreferencesActions.InitLang)
 	initLang(ctx: StateContext<UserPreferencesStateModel>) {
 		this.UserPreferencesService.setLang(ctx.getState().lang);
@@ -29,6 +32,7 @@ export class UserPreferencesState {
 		ctx.patchState({
 			lang: payload
 		});
+		this.alertService.showSuccess('PREFERENCES.LANG_UPDATED');
 	}
 	@Action(UserPreferencesActions.InitTheme)
 	initTheme(ctx: StateContext<UserPreferencesStateModel>) {
@@ -36,9 +40,18 @@ export class UserPreferencesState {
 	}
 	@Action(UserPreferencesActions.ToggleTheme)
 	updateTheme(ctx: StateContext<UserPreferencesStateModel>) {
-		ctx.patchState({
-			theme: ctx.getState().theme === 'dark' ? 'light' : 'dark'
-		});
+		if (ctx.getState().theme === 'dark') {
+			ctx.patchState({
+				theme: 'light'
+			});
+			this.alertService.showSuccess('PREFERENCES.THEME_UPDATED_LIGHT');
+		}
+		else {
+			ctx.patchState({
+				theme: 'dark'
+			});
+			this.alertService.showSuccess('PREFERENCES.THEME_UPDATED_DARK');
+		}
 	}
 	@Selector()
 	static getLang(state: UserPreferencesStateModel) {

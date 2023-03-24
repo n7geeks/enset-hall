@@ -4,6 +4,6 @@ export interface AuthUser {
 	ensetien: boolean;
 	displayName: string;
 	deleted: boolean;
-	photoUrl?: string;
+	photoURL?: string;
 	scopes: string[];
 }

@@ -70,13 +70,47 @@ $light-accent-palette: (
 		A700: black,
 	)
 );
+$danger-palette: (
+	50: #E9340C,
+	100: #E9340C,
+	200: #E9340C,
+	300: #E9340C,
+	400: #E9340C,
+	500: #E9340C,
+	600: #E9340C,
+	700: #E9340C,
+	800: #E9340C,
+	900: #E9340C,
+	A100: #E9340C,
+	A200: #E9340C,
+	A400: #E9340C,
+	A700: #E9340C,
+	contrast: (
+		50: red,
+		100: red,
+		200: red,
+		300: red,
+		400: red,
+		500: red,
+		600: red,
+		700: red,
+		800: red,
+		900: red,
+		A100: red,
+		A200: red,
+		A400: red,
+		A700: red,
+	)
+);
 
 $n7h-dark-primary: mat.define-palette(mat.$amber-palette, 500);
 $n7h-dark-accent:  mat.define-palette($dark-accent-palette, A200, A100, A400);
+$n7h-danger: mat.define-palette($danger-palette, 500);
 $n7h-dark-theme: mat.define-dark-theme((
 	color: (
 		primary: $n7h-dark-primary,
 		accent: $n7h-dark-accent,
+		warn: $n7h-danger,
 	),
 	typography: $n7h-typography,
 	density: 0
@@ -89,6 +123,7 @@ $n7h-light-theme: mat.define-light-theme((
 	color: (
 		primary: $n7h-light-primary,
 		accent: $n7h-light-accent,
+		warn: $n7h-danger,
 	)
 ));
 @include mat.core-theme($n7h-dark-theme);
@@ -139,6 +174,12 @@ body[theme="light"] {
 			--mdc-snackbar-container-color: var(--success);
 		}
 	}
+	.mat-drawer, .mat-drawer-container {
+		background: var(--background);
+	}
+	.mat-drawer-side {
+		border: none;
+	}
 
 }
 
@@ -162,4 +203,10 @@ n7h-root {
 	&.alert-success {
 		--mdc-snackbar-container-color: var(--success);
 	}
+}
+.mat-drawer, .mat-drawer-container {
+	background: var(--background);
+}
+.mat-drawer-side {
+	border: none;
 }

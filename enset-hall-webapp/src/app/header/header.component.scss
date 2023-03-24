@@ -8,6 +8,7 @@ header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	box-shadow: 0 0 1rem 0 rgba(0, 0, 0, .5);
 	&:before {
 		content: '';
 		position: absolute;
@@ -18,7 +19,15 @@ header {
 		z-index: 1;
 		background-color: var(--mask);
 	}
-	n7h-header-app-branding, n7h-toggle-theme-widget {
+	n7h-header-app-branding, .controls {
 		z-index: 2;
+	}
+}
+
+.controls {
+display: flex;
+	align-items: center;
+	& > * {
+		margin-left: 1rem;
 	}
 }

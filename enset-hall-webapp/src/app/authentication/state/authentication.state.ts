@@ -9,7 +9,6 @@ import { AlertService } from "../../shared/alert.service";
 import { TranslateService } from "@ngx-translate/core";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { AuthUser } from "../models/AuthUser";
-import UserCredential = firebase.auth.UserCredential;
 import { Prospect } from "../models/Prospect";
 import { User } from "../models/User";
 export interface AuthenticationStateModel {
@@ -86,11 +85,14 @@ export class AuthenticationState {
 						photoURL: user.photoURL
 					} as AuthUser);
 				}))
-				.subscribe(authUser => {
+				.subscribe(async authUser => {
 					if (authUser === undefined) {
 						return;
 					}
 					ctx.dispatch(new AuthenticationActions.SetUser(authUser));
+					if (this.router.url === '/login') {
+						await this.router.navigate(['/']);
+					}
 				});
 		});
 	}
@@ -116,7 +118,7 @@ export class AuthenticationState {
 	async signOut({ patchState }: StateContext<AuthenticationStateModel>) {
 		await this.angularFireAuth.signOut();
 		this.appUserSubscription.unsubscribe();
-		await this.router.navigate(['/auth']);
+		await this.router.navigate(['/login']);
 		patchState({ user: undefined, isAuthenticated: false });
 	}
 	@Action(AuthenticationActions.SetUser)
@@ -126,6 +128,5 @@ export class AuthenticationState {
 		this.alertService.showSuccess(
 			`${this.translateService.instant("AUTH.WELCOMING")}, ${user?.displayName}!`
 		);
-		await this.router.navigate(['/home']);
 	}
 }

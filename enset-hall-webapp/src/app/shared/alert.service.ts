@@ -1,16 +1,17 @@
-import { Injectable, NgZone } from "@angular/core";
+import { Injectable } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
+import { TranslateService } from "@ngx-translate/core";
 
 @Injectable({ providedIn: 'root' })
 export class AlertService {
 	private duration = 5000;
 	constructor(
 		private _snackBar: MatSnackBar,
-		private zone: NgZone
+		private translateService: TranslateService
 	) { }
 	public showSuccess(message: string) {
 		this._snackBar.open(
-			message,
+			this.translateService.instant(message),
 			"OK", {
 			duration: this.duration,
 			verticalPosition: "bottom",
@@ -20,7 +21,7 @@ export class AlertService {
 	}
 	public showError(message: string) {
 		this._snackBar.open(
-			message,
+			this.translateService.instant(message),
 			"OK", {
 			duration: this.duration,
 			verticalPosition: "bottom",

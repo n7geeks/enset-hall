@@ -1,27 +1,17 @@
 /* eslint-disable */
 import {
-	AuthEventContext,
 	AuthUserRecord
 } from "firebase-functions/lib/common/providers/identity";
-import { Prospect } from "./models/Prospect";
-import { User } from "./models/User";
 import { db } from "../index";
+import { Prospect } from "./models/Prospect";
+import { AppUser } from "./models/AppUser";
 
 
 export const beforeUserCreateHandler = async (
-	user: AuthUserRecord,
-	context: AuthEventContext) => {
+	user: AuthUserRecord) => {
 	const email = user.email;
 	if (!email) {
 		throw new Error("Email is required");
-	}
-	if (!isInstitutionalEmail(email)) {
-		const appUser: User =  {
-			ensetien: false,
-			deleted: false,
-		}
-		await db.collection("users").doc(user.uid).create(appUser);
-		return;
 	}
 	const prospect = await db
 		.collection("prospects")
@@ -34,35 +24,29 @@ export const beforeUserCreateHandler = async (
 			return snapshot.data() as Prospect;
 		});
 	if (!prospect) {
-		const appUser: User =  {
-			ensetien: false,
-			deleted: false
+		const appUser: AppUser =  {
+			deleted: false,
+			displayName: user.displayName || email.split("@")[0],
+			email,
+			photoUrl: user.photoURL || "",
+			scope_id: "external",
+			is_allowed: true
 		}
 		await db.collection("users").doc(user.uid).create(appUser);
 		return;
 	}
-	if (!prospect.allowed) {
+	if (!prospect.is_allowed) {
 		throw new Error("You are not allowed to register");
 	}
-	if (prospect.linked) {
-		throw new Error("This account is already linked");
+	const appUser: AppUser =  {
+		deleted: false,
+		displayName: prospect.displayName || user.displayName || email.split("@")[0],
+		email,
+		photoUrl: user.photoURL || "",
+		scope_id: prospect.scope_id,
+		is_allowed: prospect.is_allowed
 	}
-	await db
-		.collection("prospects")
-		.doc(email)
-		.update({ linked: true });
-	const appUser: User =  {
-		ensetien: true,
-		deleted: false
-	}
-	await db.collection("users").doc(user.uid).create(appUser);
-}
-
-function isInstitutionalEmail(email: string) {
-	const institutionalDomains = [
-		"etu.enset-media.ac.ma",
-		"enset-media.ac.ma"
-	];
-	const domain = email.split("@")[1];
-	return institutionalDomains.includes(domain);
+	await db.collection("users")
+		.doc(user.uid)
+		.create(appUser);
 }

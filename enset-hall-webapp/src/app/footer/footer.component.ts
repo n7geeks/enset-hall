@@ -12,7 +12,7 @@ import { TranslateModule } from "@ngx-translate/core";
 				<ng-container *ngFor="let link of links; index as i">
 					<a [routerLink]="link.url">
 						{{ link.name | translate }}
-					</a>w
+					</a>
 					<span *ngIf="i != links.length - 1" class="separator"> · </span>
 				</ng-container>
 			</div>

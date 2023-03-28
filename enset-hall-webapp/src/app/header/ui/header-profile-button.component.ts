@@ -33,7 +33,7 @@ import { SupportedLang, SupportedTheme } from "../../user-preferences/types";
 				[matMenuTriggerFor]="menu"
 				mat-icon-button
 				[style]="{
-			            'background-image': 'url(' + user.photoURL + ')',
+			            'background-image': 'url(' + user.photoUrl + ')',
 			            'background-size': 'cover',
 			            'background-position': 'center'
 			        }"

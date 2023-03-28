@@ -1,9 +1,10 @@
+import { UserScopes } from "./UserScopes";
+
 export interface AuthUser {
 	uid: string;
 	email: string;
-	ensetien: boolean;
 	displayName: string;
 	deleted: boolean;
-	photoURL?: string;
-	scopes: string[];
+	photoUrl?: string;
+	scopes: UserScopes;
 }

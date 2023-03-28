@@ -6,6 +6,7 @@ import { db } from "../index";
 import { Prospect } from "./models/Prospect";
 import { AppUser } from "./models/AppUser";
 
+const fallBackScopeId = "external";
 
 export const beforeUserCreateHandler = async (
 	user: AuthUserRecord) => {
@@ -29,7 +30,7 @@ export const beforeUserCreateHandler = async (
 			displayName: user.displayName || email.split("@")[0],
 			email,
 			photoUrl: user.photoURL || "",
-			scope_id: "external",
+			scope_id: fallBackScopeId,
 			is_allowed: true
 		}
 		await db.collection("users").doc(user.uid).create(appUser);

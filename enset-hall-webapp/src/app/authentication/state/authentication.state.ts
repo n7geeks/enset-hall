@@ -9,8 +9,8 @@ import { AlertService } from "../../shared/alert.service";
 import { TranslateService } from "@ngx-translate/core";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { AuthUser } from "../models/AuthUser";
-import { Prospect } from "../models/Prospect";
-import { User } from "../models/User";
+import { AppUser } from "../models/AppUser";
+import { UserScopes } from "../models/UserScopes";
 export interface AuthenticationStateModel {
 	user?: AuthUser;
 	isAuthenticated?: boolean;
@@ -44,46 +44,28 @@ export class AuthenticationState {
 			}
 			this.appUserSubscription = this.afs
 				.collection('users')
-				.doc<User>(user.uid)
+				.doc<AppUser>(user.uid)
 				.valueChanges()
-				.pipe(switchMap((u: User | undefined) => {
-					if (u === undefined) {
+				.pipe(switchMap(appUser => {
+					if (appUser === undefined) {
 						return of(undefined);
 					}
-					if (u.ensetien && user.email !== undefined && user.email !== null) {
-						return this.afs
-							.collection('prospects')
-							.doc<Prospect>(user.email)
-							.valueChanges()
-							.pipe(switchMap((p: Prospect | undefined) => {
-								if (p === undefined) {
-									return of(undefined);
-								}
-								if (!p.allowed) {
-									this.alertService.showError(this.translateService.instant('AUTH.ALERT.NOT_ALLOWED'));
-									this.angularFireAuth.signOut();
-									return of(undefined);
-								}
-								return of({
-									uid: user.uid,
-									email: user.email,
-									ensetien: u.ensetien,
-									deleted: u.deleted,
-									displayName: p.displayName,
-									scopes: p.scopes,
-									photoURL: user.photoURL
-								} as AuthUser);
-							}));
-					}
-					return of({
-						uid: user.uid,
-						email: user.email,
-						ensetien: u.ensetien,
-						deleted: u.deleted,
-						displayName: user.displayName,
-						scopes: [],
-						photoURL: user.photoURL
-					} as AuthUser);
+					return this.afs.collection('scopes')
+						.doc<UserScopes>(appUser.scope_id)
+						.valueChanges()
+						.pipe(switchMap(userScopes => {
+							if (userScopes === undefined) {
+								return of(undefined);
+							}
+							return of({
+								uid: user.uid,
+								scopes: userScopes,
+								displayName: appUser.displayName,
+								email: appUser.email,
+								photoUrl: appUser.photoUrl,
+								deleted: appUser.deleted,
+							} as AuthUser);
+						}));
 				}))
 				.subscribe(async authUser => {
 					if (authUser === undefined) {

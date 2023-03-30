@@ -5,12 +5,11 @@ import { of, Subscription, switchMap } from "rxjs";
 import firebase from "firebase/compat/app";
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
-import { AlertService } from "../../shared/alert.service";
-import { TranslateService } from "@ngx-translate/core";
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { AuthUser } from "../models/AuthUser";
 import { AppUser } from "../models/AppUser";
 import { UserScopes } from "../models/UserScopes";
+import { YearOfStudyService } from "../year-of-study.service";
 export interface AuthenticationStateModel {
 	user?: AuthUser;
 	isAuthenticated?: boolean;
@@ -32,9 +31,7 @@ export class AuthenticationState {
 	constructor(
 		private angularFireAuth: AngularFireAuth,
 		private router: Router,
-		private afs: AngularFirestore,
-		private translateService: TranslateService,
-		private alertService: AlertService) {
+		private afs: AngularFirestore) {
 		this.provider = new firebase.auth.GoogleAuthProvider();
 	}
 	ngxsOnInit(ctx: StateContext<AuthenticationStateModel>) {
@@ -89,6 +86,15 @@ export class AuthenticationState {
 	static inProgress(state: AuthenticationStateModel) : boolean {
 		return state.inProgress;
 	}
+	@Selector()
+	static userYearOfStudy(state: AuthenticationStateModel) {
+		if (state.user === undefined) {
+			return undefined;
+		}
+		return new YearOfStudyService().getYearOfStudy(
+			parseInt(state.user.scopes.promo),
+			state.user.scopes.diploma);
+	}
 	@Action(AuthenticationActions.GoogleSignIn)
 	signIn({ patchState }: StateContext<AuthenticationStateModel>) {
 		patchState({ inProgress: true });
@@ -107,8 +113,5 @@ export class AuthenticationState {
 	async setUser({ patchState }: StateContext<AuthenticationStateModel>,
 	        { user }: AuthenticationActions.SetUser) {
 		patchState({ user, isAuthenticated: true, inProgress: false });
-		this.alertService.showSuccess(
-			`${this.translateService.instant("AUTH.WELCOMING")}, ${user?.displayName}!`
-		);
 	}
 }

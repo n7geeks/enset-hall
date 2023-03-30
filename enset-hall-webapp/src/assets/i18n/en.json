@@ -45,5 +45,10 @@
 	"PROFILE_MENU.CHANGE_LANGUAGE_TOOLTIP": "Change the language of the application",
 	"PREFERENCES.THEME_UPDATED_LIGHT": "Theme updated to light mode",
 	"PREFERENCES.THEME_UPDATED_DARK": "Theme updated to dark mode",
-	"PREFERENCES.LANG_UPDATED": "Language updated to English"
+	"PREFERENCES.LANG_UPDATED": "Language updated to English",
+	"EXTERNAL": "External",
+	"EXTERNAL_TOOLTIP": "You can only access the publicly available content",
+	"GLSID_TOOLTIP": "Software and Distributed Systems Engineering",
+	"II-BDCC_TOOLTIP": "Computer Engineering - Big Data and Cloud Computing"
+
 }

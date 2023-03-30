@@ -1,5 +1,5 @@
 import { Component } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, NgOptimizedImage } from "@angular/common";
 import { MatButtonModule } from "@angular/material/button";
 import { MatMenuModule } from "@angular/material/menu";
 import { Store } from "@ngxs/store";
@@ -12,6 +12,8 @@ import { RouterModule } from "@angular/router";
 import { UserPreferencesActions } from "../../user-preferences/state/user-preferences.actions";
 import { UserPreferencesState } from "../../user-preferences/state/user-preferences.state";
 import { SupportedLang, SupportedTheme } from "../../user-preferences/types";
+import { MatRippleModule } from "@angular/material/core";
+import { AuthenticationState } from "../../authentication/state/authentication.state";
 
 @Component({
 	selector: "n7h-header-profile-button",
@@ -23,57 +25,48 @@ import { SupportedLang, SupportedTheme } from "../../user-preferences/types";
 		MatIconModule,
 		TranslateModule,
 		RouterModule,
-		MatListModule
+		MatListModule,
+		NgOptimizedImage,
+		MatRippleModule
 	],
 	template: `
 		<ng-container *ngIf="user$ | async as user">
 			<button
 				type="button"
+				mat-icon-button
+				*ngIf="user.photoUrl"
+				class="profile-button"
 				[title]="('LOGGED_IN_AS' | translate) + ' ' + user.displayName"
 				[matMenuTriggerFor]="menu"
-				mat-icon-button
-				[style]="{
-			            'background-image': 'url(' + user.photoUrl + ')',
-			            'background-size': 'cover',
-			            'background-position': 'center'
-			        }"
-				class="profile-button"
 			>
+				<img
+					[ngSrc]="user.photoUrl"
+					[alt]="user.displayName"
+					priority
+					fill/>
 			</button>
 			<mat-menu #menu="matMenu">
-				<span class="welcoming-statement" mat-menu-item disabled>
-					{{ 'PROFILE_MENU.HI' | translate }} {{ user.displayName }}
-					<span class="user-email">{{ user.email }}</span>
-				</span>
-				<mat-divider></mat-divider>
-				<a
-					mat-menu-item
-					[title]="'PROFILE_MENU.PROFILE_TOOLTIP' | translate"
-					[routerLink]="['/profile']"
-				>
-					<mat-icon>
-						<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-							<path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-							<path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
-						</svg>
-					</mat-icon>
-					<span>{{ 'PROFILE_MENU.PROFILE' | translate }}</span>
-				</a>
-				<a
-					mat-menu-item
-					[title]="'PROFILE_MENU.SETTINGS_TOOLTIP' | translate"
-					[routerLink]="['/settings']"
-				>
-					<mat-icon>
-						<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-							<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
-							<path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
-						</svg>
-					</mat-icon>
-					<span>{{ 'PROFILE_MENU.SETTINGS' | translate }}</span>
-				</a>
+				<div *ngIf="user"
+				     class="user-info-container"
+				     mat-menu-item
+					 [title]="'PROFILE_MENU.PROFILE_TOOLTIP' | translate"
+					 [routerLink]="['/profile']">
+					<div class="user-details">
+						<span class="user-name">{{ user.displayName }}</span>
+						<span class="user-email">{{ user.email }}</span>
+					</div>
+					<div
+						*ngIf="user.scopes.role != 'external'"
+						[title]="(user.scopes.major | uppercase) + '_TOOLTIP' | translate"
+						class="chip">
+						{{ user.scopes.major | uppercase }} {{ yearOfStudy$ | async }}
+					</div>
+					<div [class]="'chip ' + user.scopes.role"
+						 *ngIf="user.scopes.role == 'external'"
+						 [title]="'EXTERNAL_TOOLTIP' | translate">
+						{{ "EXTERNAL" | translate }}
+					</div>
+				</div>
 				<mat-divider></mat-divider>
 				<button *ngIf="theme$ | async as theme"
 						mat-menu-item (click)="toggleTheme()"
@@ -130,7 +123,8 @@ import { SupportedLang, SupportedTheme } from "../../user-preferences/types";
 				<button mat-menu-item
 						[matMenuTriggerFor]="langMenu">
 					<mat-icon>
-						<svg class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						<svg class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+							 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 							<path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
 							<path d="M3.6 9h16.8"></path>
@@ -153,11 +147,30 @@ import { SupportedLang, SupportedTheme } from "../../user-preferences/types";
 					</ng-container>
 				</mat-menu>
 				<mat-divider></mat-divider>
+				<a
+					mat-menu-item
+					[title]="'PROFILE_MENU.SETTINGS_TOOLTIP' | translate"
+					[routerLink]="['/settings']"
+				>
+					<mat-icon>
+						<svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+							 stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+							 stroke-linejoin="round">
+							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+							<path
+								d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z"></path>
+							<path d="M9 12a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+						</svg>
+					</mat-icon>
+					<span>{{ 'PROFILE_MENU.SETTINGS' | translate }}</span>
+				</a>
 				<button mat-menu-item (click)="signOut()" [title]="'PROFILE_MENU.SIGN_OUT_TOOLTIP' | translate">
 					<mat-icon>
-						<svg class="icon-danger" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						<svg class="icon-danger" width="24" height="24" viewBox="0 0 24 24" stroke-width="2"
+							 stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
 							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-							<path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
+							<path
+								d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"></path>
 							<path d="M7 12h14l-3 -3m0 6l3 -3"></path>
 						</svg>
 					</mat-icon>
@@ -172,14 +185,11 @@ import { SupportedLang, SupportedTheme } from "../../user-preferences/types";
 			height: 3rem;
 			border-radius: 50%;
 			background-color: #fff;
+			overflow: hidden;
 			border: solid .2rem var(--primary);
 		}
 		.sign-out-text {
 			color: var(--danger);
-		}
-		.user-email, .welcoming-statement {
-			font-size: .8rem;
-			white-space: nowrap;
 		}
 		.icon {
 			stroke: var(--text);
@@ -187,10 +197,53 @@ import { SupportedLang, SupportedTheme } from "../../user-preferences/types";
 		.icon-danger {
 			stroke: var(--danger);
 		}
+		.user-info-container {
+			display: flex;
+			flex-direction: column;
+			padding: .5rem 2rem;
+		}
+		.user-email, .user-name {
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+		.user-email {
+			font-size: .7rem;
+			color: var(--secondary);
+		}
+		.user-name {
+			font-size: .8rem;
+			font-weight: bold;
+			color: var(--text);
+		}
+		.chip {
+			margin: .5rem 0;
+			padding: .3rem;
+			border-radius: 5rem;
+			background-color: var(--primary);
+			color: white;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.user-details {
+			width: 100%;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		.user-photo {
+			margin-inline-end: 1rem;
+		}
+		.external {
+			background-color: var(--danger);
+		}
 	`]
 })
 export class HeaderProfileButtonComponent {
 	constructor(private store: Store) { }
+	protected yearOfStudy$ =
+		this.store.select(AuthenticationState.userYearOfStudy);
 	protected user$ = this.store.select<AuthUser>(state => state.authentication.user);
 	protected theme$ = this.store.select<SupportedTheme>(UserPreferencesState.getTheme);
 	protected lang$ = this.store.select<SupportedLang>(UserPreferencesState.getLang);

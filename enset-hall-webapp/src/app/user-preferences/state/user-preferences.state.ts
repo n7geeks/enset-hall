@@ -20,8 +20,7 @@ export interface UserPreferencesStateModel {
 @Injectable()
 export class UserPreferencesState {
 	constructor(
-		private UserPreferencesService: UserPreferencesService,
-		private alertService: AlertService) {}
+		private UserPreferencesService: UserPreferencesService) {}
 	@Action(UserPreferencesActions.InitLang)
 	initLang(ctx: StateContext<UserPreferencesStateModel>) {
 		this.UserPreferencesService.setLang(ctx.getState().lang);
@@ -32,7 +31,6 @@ export class UserPreferencesState {
 		ctx.patchState({
 			lang: payload
 		});
-		this.alertService.showSuccess('PREFERENCES.LANG_UPDATED');
 	}
 	@Action(UserPreferencesActions.InitTheme)
 	initTheme(ctx: StateContext<UserPreferencesStateModel>) {
@@ -44,13 +42,11 @@ export class UserPreferencesState {
 			ctx.patchState({
 				theme: 'light'
 			});
-			this.alertService.showSuccess('PREFERENCES.THEME_UPDATED_LIGHT');
 		}
 		else {
 			ctx.patchState({
 				theme: 'dark'
 			});
-			this.alertService.showSuccess('PREFERENCES.THEME_UPDATED_DARK');
 		}
 	}
 	@Selector()

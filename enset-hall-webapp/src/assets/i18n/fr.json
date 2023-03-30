@@ -45,5 +45,9 @@
 	"PROFILE_MENU.CHANGE_LANGUAGE_TOOLTIP": "Changer la langue de l'application",
 	"PREFERENCES.THEME_UPDATED_LIGHT": "Thème mis à jour en mode clair",
 	"PREFERENCES.THEME_UPDATED_DARK": "Thème mis à jour en mode sombre",
-	"PREFERENCES.LANG_UPDATED": "Langue mise à jour en français"
+	"PREFERENCES.LANG_UPDATED": "Langue mise à jour en français",
+	"EXTERNAL": "Externe",
+	"EXTERNAL_TOOLTIP": "Vous pouvez seulement accéder au contenu public",
+	"GLSID_TOOLTIP": "Génie du Logiciel et des Systèmes Informatiques Distribués",
+	"II-BDCC_TOOLTIP": "Ingénieurie Informatique - Big Data et Cloud Computing"
 }

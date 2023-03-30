@@ -163,7 +163,7 @@ body[theme="light"] {
 	--bg-auth: url("assets/images/bg-auth-light.jpg");
 	--bg-header: url("assets/images/bg-header-light.jpg");
 	@include mat.core-color($n7h-light-theme);
-	@include mat.all-component-themes($n7h-light-theme);
+	@include mat.all-component-colors($n7h-light-theme);
 	.mat-mdc-snack-bar-container {
 		--mat-mdc-snack-bar-button-color: #ffffff;
 		--mdc-snackbar-supporting-text-color: #ffffff;

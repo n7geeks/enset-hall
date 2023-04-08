@@ -12,6 +12,4 @@ import { CommonModule } from "@angular/common";
 	templateUrl: "./profile.component.html",
 	styleUrls: ["./profile.component.scss"]
 })
-export class ProfileComponent {
-	constructor() {}
-}
+export class ProfileComponent {}

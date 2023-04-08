@@ -22,6 +22,5 @@ import { RouterModule } from "@angular/router";
 })
 export class MainComponent {
 	constructor(private store: Store) {}
-	protected user$ =
-		this.store.select<AuthUser>(state => state.authentication.user);
+	protected user$ = this.store.select<AuthUser>(state => state.authentication.user);
 }

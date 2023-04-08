@@ -21,7 +21,8 @@ import GoogleAuthProvider = firebase.auth.GoogleAuthProvider;
 })
 export class HomeComponent {
 	constructor(private store: Store, private angularFireAuth: AngularFireAuth) {}
-		protected user$ = this.store.select<AuthUser>(state => state.authentication.user);
+		protected user$ = 
+			this.store.select<AuthUser>(state => state.authentication.user);
 	signOut() {
 		this.store.dispatch(new AuthenticationActions.SignOut());
 	}

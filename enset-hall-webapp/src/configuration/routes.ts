@@ -12,6 +12,8 @@ import { AccountSettingsComponent } from "../app/settings/components/account-set
 import { NotificationsSettingsComponent } from "../app/settings/components/notifications-settings.component";
 import { PreferencesSettingsComponent } from "../app/settings/components/preferences-settings.component";
 import { AdvancedSettingsComponent } from "../app/settings/components/advanced-settings.component";
+import {HomeComponent} from "../app/home/home.component";
+import {ClubsComponent} from "../app/clubs/clubs.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
@@ -22,6 +24,8 @@ export const routes: Routes = [
 		canActivate: [AngularFireAuthGuard],
 		data: { authGuardPipe: redirectUnauthorizedToLogin },
 		children: [
+			{ path: 'home', component: HomeComponent },
+			{ path: 'clubs', component: ClubsComponent },
 			{ path: 'settings', component: SettingsComponent, children: [
 					{ path: 'account', component: AccountSettingsComponent },
 					{ path: 'notifications', component: NotificationsSettingsComponent },

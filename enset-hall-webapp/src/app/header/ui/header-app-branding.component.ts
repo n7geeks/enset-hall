@@ -17,7 +17,7 @@ import { MatRippleModule } from "@angular/material/core";
 		<a
 			matRipple
 			class="branding"
-			routerLink="/">
+			routerLink="/home">
 			<img
 				class="n7h-logo undraggable"
 				src="../../../assets/vectors/enset-hall-h-only.svg"

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import {MatRippleModule} from "@angular/material/core";
@@ -10,7 +10,7 @@ import {SectionNavComponent} from "../main/ui/section-nav.component";
 
 
 @Component({
-	selector: 'n7h-home',
+	selector: 'n7h-clubs',
 	standalone: true,
 	imports: [
 		CommonModule,
@@ -24,21 +24,8 @@ import {SectionNavComponent} from "../main/ui/section-nav.component";
 		MatIconModule,
 		SectionNavComponent
 	],
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	templateUrl: './clubs.component.html',
+	styleUrls: ['./clubs.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
-	isSmallScreen: boolean = false;
-	ngOnInit(): void {
-		this.isSmallScreen = window.innerWidth < 680;
-		window.addEventListener("resize", () => {
-			this.isSmallScreen = window.innerWidth < 680;
-		});
-	}
-	ngOnDestroy(): void {
-		window.removeEventListener("resize", () => {
-			this.isSmallScreen = window.innerWidth < 680;
-		});
-	}
-
+export class ClubsComponent {
 }

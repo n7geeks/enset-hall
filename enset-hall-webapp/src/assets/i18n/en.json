@@ -49,6 +49,7 @@
 	"EXTERNAL": "External",
 	"EXTERNAL_TOOLTIP": "You can only access the publicly available content",
 	"GLSID_TOOLTIP": "Software and Distributed Systems Engineering",
-	"II-BDCC_TOOLTIP": "Computer Engineering - Big Data and Cloud Computing"
-
+	"II-BDCC_TOOLTIP": "Computer Engineering - Big Data and Cloud Computing",
+	"SIDE_NAV.HOME": "Home",
+	"SIDE_NAV.CLUBS": "Clubs"
 }

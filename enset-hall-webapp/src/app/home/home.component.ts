@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
-import {MatRippleModule} from "@angular/material/core";
-import {MatSidenavModule} from "@angular/material/sidenav";
+import { MatRippleModule } from "@angular/material/core";
+import { MatSidenavModule } from "@angular/material/sidenav";
 import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatIconModule} from "@angular/material/icon";

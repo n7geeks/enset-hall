@@ -38,6 +38,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 						class="example-margin">{{'DIALOG.NOT_STUDENT_ENSET_CHECKBOX'|translate}}</mat-checkbox>
 					<button (click)="$event"
 							class="section-button">{{'DIALOG.NOT_STUDENT_ENSET_BUTTON'|translate}}</button>
+
 				</section>
 			</mat-card-footer>
 		</mat-card>
@@ -46,7 +47,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 	 mat-card
 	  {
 		  background-color: #201F1E;
-		  height: 320px;
+		  height: 350px;
 		  width: 1000px;
 		  box-shadow: none;
 	 }

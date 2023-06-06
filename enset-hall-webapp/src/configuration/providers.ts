@@ -16,6 +16,7 @@ import { NgxsStoragePluginModule } from "@ngxs/storage-plugin";
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireAuthGuardModule } from "@angular/fire/compat/auth-guard";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import {MatDialogModule} from "@angular/material/dialog";
 
 const modules = [
 	ServiceWorkerModule.register('ngsw-worker.js', {
@@ -33,6 +34,7 @@ const modules = [
 	RouterModule.forRoot(routes, {
 		scrollPositionRestoration: 'enabled'
 	}),
+	MatDialogModule,
 	HttpClientModule,
 	TranslateModule.forRoot({
 		loader: {

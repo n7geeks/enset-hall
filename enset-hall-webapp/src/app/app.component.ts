@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from "@angular/common";
 import { Router, RouterModule } from "@angular/router";
 import { TranslateModule } from "@ngx-translate/core";
-import { Actions, ofActionDispatched, Select, Store } from "@ngxs/store";
+import { Actions, Select, Store } from "@ngxs/store";
 import { UserPreferencesActions } from "./user-preferences/state/user-preferences.actions";
 import { UserPreferencesState, UserPreferencesStateModel } from "./user-preferences/state/user-preferences.state";
 import { Observable, Subscription } from "rxjs";
@@ -10,7 +10,8 @@ import { UserPreferencesService } from "./user-preferences/user-preferences.serv
 import { ConnectivityStatus } from "./connectivity/connectivity.state";
 import { ConnectivityActions } from "./connectivity/connectivity.actions";
 import { PushNotificationService } from "./notifications/push-notification.service";
-import { AuthenticationActions } from "./authentication/state/authentication.actions";
+import {DialogService} from "./shared/dialog.service";
+import {NotEnsetStudentDialog} from "./authentication/components/ui/not-enset-student.dialog";
 @Component({
 	selector: 'n7h-root',
 	templateUrl: './app.component.html',
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	constructor(private store: Store,
 	            private actions: Actions,
 				private router: Router,
+				private dialog: DialogService,
 	            private preferencesService: UserPreferencesService,
 	            private pushNotificationService: PushNotificationService) {}
 	@Select(UserPreferencesState) preferences$?: Observable<UserPreferencesStateModel>;
@@ -54,6 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
 		// 	.subscribe(() => {
 		// 		this.router.navigate(['/auth']);
 		// 	});
+		this.dialog.open(NotEnsetStudentDialog);
     }
 	public ngOnDestroy(): void {
 		if (this.preferencesSubscription && !this.preferencesSubscription.closed) {

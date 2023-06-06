@@ -52,5 +52,12 @@
 	"II-BDCC_TOOLTIP": "Computer Engineering - Big Data and Cloud Computing",
 	"SIDE_NAV.HOME": "Home",
 	"SIDE_NAV.CLUBS": "Clubs",
+	"DIALOG.NOT_STUDENT_ENSET_TITLE": "Hey! you don't seem to be an ENSET Mohammedia Student",
+	"DIALOG.NOT_STUDENT_ENSET_PAR1": "The email you used to logged in is not an ENSET institutional  email",
+	"DIALOG.NOT_STUDENT_ENSET_PAR2": "Sign in with your institutional email to access all features ",
+	"DIALOG.NOT_STUDENT_ENSET_PAR3": "If you believe something is wrong, ",
+	"DIALOG.NOT_STUDENT_ENSET_LINK": "contact us!",
+	"DIALOG.NOT_STUDENT_ENSET_CHECKBOX": "Don't show this again",
+	"DIALOG.NOT_STUDENT_ENSET_BUTTON": "Ok"
 	"ACTIVE_STANDS": "Active stands"
 }

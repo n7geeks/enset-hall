@@ -7,6 +7,8 @@ import {RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatIconModule} from "@angular/material/icon";
 import {SectionNavComponent} from "../main/ui/section-nav.component";
+import {SideExtraComponent} from "./components/side-extra.component";
+import {MainContentComponent} from "./components/main-content.component";
 
 
 @Component({
@@ -22,7 +24,9 @@ import {SectionNavComponent} from "../main/ui/section-nav.component";
 		RouterOutlet,
 		TranslateModule,
 		MatIconModule,
-		SectionNavComponent
+		SectionNavComponent,
+		SideExtraComponent,
+		MainContentComponent
 	],
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.scss']

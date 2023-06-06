@@ -1,0 +1,14 @@
+main {
+	width: 100%;
+	height: calc(100% - 32px);
+	display: flex;
+	flex-direction: row;
+	n7h-main-content {
+		flex: 1;
+		height: 100%;
+	}
+	n7h-side-extra {
+		flex: 0 0 250px;
+		height: 100%;
+	}
+}

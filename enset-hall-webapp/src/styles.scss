@@ -103,7 +103,40 @@ $danger-palette: (
 	)
 );
 
-$n7h-dark-primary: mat.define-palette(mat.$amber-palette, 500);
+$primary-palette: (
+	50: #0C8CE9,
+	100: #0C8CE9,
+	200: #0C8CE9,
+	300: #0C8CE9,
+	400: #0C8CE9,
+	500: #0C8CE9,
+	600: #0C8CE9,
+	700: #0C8CE9,
+	800: #0C8CE9,
+	900: #0C8CE9,
+	A100: #0C8CE9,
+	A200: #0C8CE9,
+	A400: #0C8CE9,
+	A700: #0C8CE9,
+	contrast: (
+		50: blue,
+		100: blue,
+		200: blue,
+		300: blue,
+		400: blue,
+		500: blue,
+		600: blue,
+		700: blue,
+		800: blue,
+		900: blue,
+		A100: blue,
+		A200: blue,
+		A400: blue,
+		A700: blue,
+	)
+);
+
+$n7h-dark-primary: mat.define-palette($primary-palette, 500);
 $n7h-dark-accent:  mat.define-palette($dark-accent-palette, A200, A100, A400);
 $n7h-danger: mat.define-palette($danger-palette, 500);
 $n7h-dark-theme: mat.define-dark-theme((
@@ -116,7 +149,7 @@ $n7h-dark-theme: mat.define-dark-theme((
 	density: 0
 ));
 
-$n7h-light-primary: mat.define-palette(mat.$amber-palette, 500);
+$n7h-light-primary: mat.define-palette($primary-palette, 500);
 $n7h-light-accent:  mat.define-palette($light-accent-palette, A200, A100, A400);
 
 $n7h-light-theme: mat.define-light-theme((

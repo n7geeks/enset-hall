@@ -58,6 +58,12 @@
 	"DIALOG.NOT_STUDENT_ENSET_PAR3": "If you believe something is wrong, ",
 	"DIALOG.NOT_STUDENT_ENSET_LINK": "contact us!",
 	"DIALOG.NOT_STUDENT_ENSET_CHECKBOX": "Don't show this again",
-	"DIALOG.NOT_STUDENT_ENSET_BUTTON": "Ok"
-	"ACTIVE_STANDS": "Active stands"
+	"DIALOG.NOT_STUDENT_ENSET_BUTTON": "Ok",
+	"ACTIVE_STANDS": "Active stands",
+	"CLUBS.DISCOVER": "Discover clubs",
+	"CLUBS.ALL": "All",
+	"CLUBS.ALL_TOOLTIP": "View all clubs",
+	"CLUBS.MY_CLUBS": "My clubs",
+	"CLUBS.MY_CLUBS_TOOLTIP": "View the clubs you are a member of"
+
 }

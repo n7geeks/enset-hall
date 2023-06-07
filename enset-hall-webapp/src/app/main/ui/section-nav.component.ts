@@ -59,6 +59,10 @@ import {TranslateModule} from "@ngx-translate/core";
 			width: 100%;
 		}
 
+		mat-drawer-content {
+			padding: 1rem;
+		}
+
 		mat-drawer-container {
 			height: 100%;
 			width: 100%;

@@ -1,4 +1,4 @@
-import { Action, Selector, State, StateContext } from "@ngxs/store";
+import {Action, Selector, State, StateContext, Store} from "@ngxs/store";
 import { AuthenticationActions } from "./authentication.actions";
 import { AngularFireAuth } from "@angular/fire/compat/auth";
 import { of, Subscription, switchMap } from "rxjs";
@@ -10,6 +10,7 @@ import { AuthUser } from "../models/AuthUser";
 import { AppUser } from "../models/AppUser";
 import { UserScopes } from "../models/UserScopes";
 import { YearOfStudyService } from "../year-of-study.service";
+import {ClubsActions} from "../../clubs/clubs.actions";
 export interface AuthenticationStateModel {
 	user?: AuthUser;
 	isAuthenticated?: boolean;
@@ -29,6 +30,7 @@ export class AuthenticationState {
 	private userSubscription!: Subscription;
 	private appUserSubscription!: Subscription;
 	constructor(
+		private store: Store,
 		private angularFireAuth: AngularFireAuth,
 		private router: Router,
 		private afs: AngularFirestore) {
@@ -113,5 +115,6 @@ export class AuthenticationState {
 	async setUser({ patchState }: StateContext<AuthenticationStateModel>,
 	        { user }: AuthenticationActions.SetUser) {
 		patchState({ user, isAuthenticated: true, inProgress: false });
+		this.store.dispatch(new ClubsActions.GetClubs());
 	}
 }

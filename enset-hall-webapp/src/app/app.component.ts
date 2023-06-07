@@ -10,6 +10,8 @@ import { UserPreferencesService } from "./user-preferences/user-preferences.serv
 import { ConnectivityStatus } from "./connectivity/connectivity.state";
 import { ConnectivityActions } from "./connectivity/connectivity.actions";
 import { PushNotificationService } from "./notifications/push-notification.service";
+import {ScopesActions} from "./scopes/scopes.actions";
+import {ClubsActions} from "./clubs/clubs.actions";
 @Component({
 	selector: 'n7h-root',
 	templateUrl: './app.component.html',
@@ -33,6 +35,7 @@ export class AppComponent implements OnInit, OnDestroy {
 	public ngOnInit(): void {
         this.store.dispatch(new UserPreferencesActions.InitLang());
 		this.store.dispatch(new UserPreferencesActions.InitTheme());
+		this.store.dispatch(new ScopesActions.GetScopes());
 		if (this.preferences$) {
 			this.preferencesSubscription = this.preferences$
 				.subscribe(preferences => {

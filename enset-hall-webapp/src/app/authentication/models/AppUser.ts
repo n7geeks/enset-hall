@@ -1,4 +1,5 @@
 export interface AppUser {
+	id: string;
 	deleted: boolean;
 	email: string;
 	photoUrl: string;

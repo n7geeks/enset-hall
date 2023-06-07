@@ -44,120 +44,77 @@ import {ActiveStandComponent} from "../../stands/active-stand.component";
 	`]
 })
 export class ActiveStandsComponent {
-	stands: Stand[] = [
-		{
+	testStand: Stand = {
+		id: '1',
+		subject: 'Registration is open, join N7Geeks now!',
+		club: {
 			id: '1',
-			subject: 'Registration is open, join N7Geeks now!',
-			club: {
-				id: '1',
-				name: 'N7Geeks',
-				logo: 'https://files.bensadik.net/download/ejajZJWy.png',
-				banner: '',
-				isAdeClub: true,
-				members: [],
-				handle: 'n7geeks',
-				catchphrase: 'We are the N7Geeks, we are the best!',
-			},
-			organizers: [
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxaJyl7qRfyDcQz2fvT1qV1kfKWT6A_iaHcPNf6U=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxak62QoGu2GIuC8PPiyUfA7jp1hxcFMmHebeUBP=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxZhVo0dAELdOGGLmu9g4EWr6RX9ME5Hzth8gJSU=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AAcHTtffJ8N9jgzCF9V5VH38H8GDvJrg1VQ8xWhRO3_T=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-			],
-			link: '/stands/1'
+			name: 'N7Geeks',
+			logo: 'https://files.bensadik.net/download/ejajZJWy.png',
+			banner: '',
+			isAdeClub: true,
+			chapters: [],
+			isOpen: true,
+			handle: 'n7geeks',
+			catchphrase: 'We are the N7Geeks, we are the best!',
 		},
-		{
-			id: '2',
-			subject: 'Registration is open, join N7Geeks now!',
-			club: {
+		organizers: [
+			{
 				id: '1',
-				name: 'N7Geeks',
-				logo: 'https://files.bensadik.net/download/ejajZJWy.png',
-				banner: '',
-				isAdeClub: true,
-				members: [],
-				handle: 'n7geeks',
-				catchphrase: 'We are the N7Geeks, we are the best!',
+				displayName: "Zineb EDDAMGHI",
+				email: "z.eddamghi@etu.enset-media.ac.ma",
+				is_allowed: true,
+				photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxaJyl7qRfyDcQz2fvT1qV1kfKWT6A_iaHcPNf6U=s96-c",
+				scope_id: "iibdcc2021",
+				deleted: false,
 			},
-			organizers: [
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxaJyl7qRfyDcQz2fvT1qV1kfKWT6A_iaHcPNf6U=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxak62QoGu2GIuC8PPiyUfA7jp1hxcFMmHebeUBP=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxZhVo0dAELdOGGLmu9g4EWr6RX9ME5Hzth8gJSU=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AAcHTtffJ8N9jgzCF9V5VH38H8GDvJrg1VQ8xWhRO3_T=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxaJyl7qRfyDcQz2fvT1qV1kfKWT6A_iaHcPNf6U=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-				{
-					displayName: "Zineb EDDAMGHI",
-					email: "z.eddamghi@etu.enset-media.ac.ma",
-					is_allowed: true,
-					photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxaJyl7qRfyDcQz2fvT1qV1kfKWT6A_iaHcPNf6U=s96-c",
-					scope_id: "iibdcc2021",
-					deleted: false,
-				},
-			],
-			link: '/stands/2'
-		}
-	];
+			{
+				id: '2',
+				displayName: "Zineb EDDAMGHI",
+				email: "z.eddamghi@etu.enset-media.ac.ma",
+				is_allowed: true,
+				photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxak62QoGu2GIuC8PPiyUfA7jp1hxcFMmHebeUBP=s96-c",
+				scope_id: "iibdcc2021",
+				deleted: false,
+			},
+			{
+				id: '3',
+				displayName: "Zineb EDDAMGHI",
+				email: "z.eddamghi@etu.enset-media.ac.ma",
+				is_allowed: true,
+				photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxZhVo0dAELdOGGLmu9g4EWr6RX9ME5Hzth8gJSU=s96-c",
+				scope_id: "iibdcc2021",
+				deleted: false,
+			},
+			{
+				id: '4',
+				displayName: "Zineb EDDAMGHI",
+				email: "z.eddamghi@etu.enset-media.ac.ma",
+				is_allowed: true,
+				photoUrl: "https://lh3.googleusercontent.com/a/AAcHTtffJ8N9jgzCF9V5VH38H8GDvJrg1VQ8xWhRO3_T=s96-c",
+				scope_id: "iibdcc2021",
+				deleted: false,
+			},
+			{
+				id: '5',
+				displayName: "Zineb EDDAMGHI",
+				email: "z.eddamghi@etu.enset-media.ac.ma",
+				is_allowed: true,
+				photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxaJyl7qRfyDcQz2fvT1qV1kfKWT6A_iaHcPNf6U=s96-c",
+				scope_id: "iibdcc2021",
+				deleted: false,
+			},
+			{
+				id: '6',
+				displayName: "Zineb EDDAMGHI",
+				email: "z.eddamghi@etu.enset-media.ac.ma",
+				is_allowed: true,
+				photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxaJyl7qRfyDcQz2fvT1qV1kfKWT6A_iaHcPNf6U=s96-c",
+				scope_id: "iibdcc2021",
+				deleted: false,
+			},
+		],
+		link: '/stands/2'
+	};
+	stands: Stand[] = [this.testStand, this.testStand];
 }

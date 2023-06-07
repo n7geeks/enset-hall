@@ -1,3 +1,21 @@
 <n7h-section-nav>
-	Clubs
+	<h2>{{ 'CLUBS.DISCOVER' | translate }}</h2>
+	<mat-button-toggle-group name="fontStyle" aria-label="Font Style" (change)="setView($event)">
+		<mat-button-toggle
+			[value]="ClubsView.ALL_CLUBS"
+			checked [title]="'CLUBS.ALL_TOOLTIP' | translate">
+			{{ 'CLUBS.ALL' | translate }}
+		</mat-button-toggle>
+		<mat-button-toggle [value]="ClubsView.MY_CLUBS" [title]="'CLUBS.MY_CLUBS_TOOLTIP' | translate">
+			{{ 'CLUBS.MY_CLUBS' | translate }}
+		</mat-button-toggle>
+	</mat-button-toggle-group>
+	<ng-container *ngIf="clubsView$ | async as clubs">
+		<div class="clubs-container" *ngIf="clubs.length; else noClubs">
+			<n7h-club-card *ngFor="let club of clubs" [club]="club"></n7h-club-card>
+		</div>
+		<ng-template #noClubs>
+			<p>{{ 'CLUBS.NO_CLUBS' | translate }}</p>
+		</ng-template>
+	</ng-container>
 </n7h-section-nav>

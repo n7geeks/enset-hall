@@ -1,13 +1,13 @@
 import {Component} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {AnnouncementsComponent} from "./announcements.component";
 
 @Component({
 	selector: 'n7h-main-content',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, AnnouncementsComponent],
 	template: `
-		<h1>Home</h1>
-		<p>Home page content</p>
+		<n7h-announcements></n7h-announcements>
 	`,
 	styles: [``]
 })

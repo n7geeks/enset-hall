@@ -1,14 +1,25 @@
 import { Component } from "@angular/core";
 import { CommonModule } from "@angular/common";
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
 	selector: 'n7h-advanced-settings',
 	standalone: true,
 	imports: [
-		CommonModule
+		CommonModule,
+		TranslateModule
 	],
-	template: `advanced settings`,
-	styles: [``]
+	template: `
+		<h2>{{ "SETTINGS.ADVANCED" | translate }}</h2>
+	`,
+	styles: [`
+		:host {
+			display: flex;
+			width: calc(100% - 4rem);
+			height: calc(100% - 4rem);
+			padding: 1.5rem 2rem;
+		}
+	`]
 })
 export class AdvancedSettingsComponent {
 	constructor() {

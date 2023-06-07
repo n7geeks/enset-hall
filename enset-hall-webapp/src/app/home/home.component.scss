@@ -1,8 +1,9 @@
 main {
-	width: 100%;
+	width: calc(100% - 3rem);
 	height: calc(100% - 32px);
 	display: flex;
 	flex-direction: row;
+	padding: 0 1.5rem;
 	n7h-main-content {
 		flex: 1;
 		height: 100%;

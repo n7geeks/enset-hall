@@ -64,6 +64,8 @@
 	"CLUBS.ALL": "All",
 	"CLUBS.ALL_TOOLTIP": "View all clubs",
 	"CLUBS.MY_CLUBS": "My clubs",
-	"CLUBS.MY_CLUBS_TOOLTIP": "View the clubs you are a member of"
-
+	"CLUBS.MY_CLUBS_TOOLTIP": "View the clubs you are a member of",
+	"CLUBS.YOU_ARE_MEMBER": "You are a member",
+	"CLUBS.MEMBERS": "Membres",
+	"CLUBS.JOIN": "Join"
 }

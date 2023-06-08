@@ -50,7 +50,7 @@ import { AuthenticationState } from "../../authentication/state/authentication.s
 				     class="user-info-container"
 				     mat-menu-item
 					 [title]="'PROFILE_MENU.PROFILE_TOOLTIP' | translate"
-					 [routerLink]="['/profile']">
+					 [routerLink]="['profiles', user.uid]">
 					<div class="user-details">
 						<span class="user-name">{{ user.displayName }}</span>
 						<span class="user-email">{{ user.email }}</span>

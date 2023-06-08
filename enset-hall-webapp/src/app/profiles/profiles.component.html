@@ -1,0 +1,12 @@
+<n7h-section-nav>
+	<ng-container *ngIf="profile$ | async as profile; else loading">
+		<main>
+			<h1>{{ profile.displayName }}</h1>
+		</main>
+	</ng-container>
+	<ng-template #loading>
+		<main class="loading">
+			<mat-progress-spinner color="primary"></mat-progress-spinner>
+		</main>
+	</ng-template>
+</n7h-section-nav>

@@ -7,11 +7,12 @@ import {MatIconModule} from "@angular/material/icon";
 import {PeopleInvolvedComponent} from "./people-involved.component";
 import {AppUser} from "../../authentication/models/AppUser";
 import {MatButtonModule} from "@angular/material/button";
+import {TranslateModule} from "@ngx-translate/core";
 
 @Component({
 	selector: 'n7h-club-card',
 	standalone: true,
-	imports: [CommonModule, MatButtonModule, MatRippleModule, RouterLink, NgOptimizedImage, MatIconModule, PeopleInvolvedComponent],
+	imports: [CommonModule, MatButtonModule, MatRippleModule, RouterLink, NgOptimizedImage, MatIconModule, PeopleInvolvedComponent, TranslateModule],
 	template: `
 	<div matRipple
 		 class="club-card"
@@ -40,12 +41,12 @@ import {MatButtonModule} from "@angular/material/button";
 		<div class="club-card__content__members-actions">
 			<n7h-people-involved [people]="people"></n7h-people-involved>
 			<div class="club-card__content__members-actions__members">
-				<p>Members</p>
+				<p>{{ 'CLUBS.MEMBERS' | translate }}</p>
 				<div class="spacer"></div>
 				<p>{{ people.length }}</p>
 			</div>
-			<button *ngIf="!club.isMember && club.isOpen" mat-raised-button color="primary">Join</button>
-			<div class="is-member" *ngIf="club.isMember">You are a member</div>
+			<button *ngIf="!club.isMember && club.isOpen" mat-raised-button color="primary">{{ 'CLUBS.JOIN' | translate }}</button>
+			<div class="is-member" *ngIf="club.isMember">{{ 'CLUBS.YOU_ARE_MEMBER' | translate }}</div>
 		</div>
 	</div>
 `,

@@ -7,7 +7,7 @@ import {
 } from "@angular/fire/compat/auth-guard";
 import { MainComponent } from "../app/main/main.component";
 import { SettingsComponent } from "../app/settings/settings.component";
-import { ProfileComponent } from "../app/profile/profile.component";
+import { ProfilesComponent } from "../app/profiles/profiles.component";
 import { AccountSettingsComponent } from "../app/settings/components/account-settings.component";
 import { NotificationsSettingsComponent } from "../app/settings/components/notifications-settings.component";
 import { PreferencesSettingsComponent } from "../app/settings/components/preferences-settings.component";
@@ -34,7 +34,12 @@ export const routes: Routes = [
 					{ path: '', redirectTo: 'account', pathMatch: 'full' }
 				]
 			},
-			{ path: 'profile', component: ProfileComponent}
+			{
+				path: 'profiles/:id',
+				component: ProfilesComponent,
+				canActivate: [AngularFireAuthGuard],
+				data: { authGuardPipe: redirectUnauthorizedToLogin }
+			}
 		]
 	},
 	{

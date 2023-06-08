@@ -67,5 +67,6 @@
 	"CLUBS.MY_CLUBS_TOOLTIP": "View the clubs you are a member of",
 	"CLUBS.YOU_ARE_MEMBER": "You are a member",
 	"CLUBS.MEMBERS": "Membres",
-	"CLUBS.JOIN": "Join"
+	"CLUBS.JOIN": "Join",
+	"ACTIONS.CHAT_TOOLTIP": "Open a chat with {{name}}"
 }

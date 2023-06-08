@@ -14,6 +14,7 @@ import { PreferencesSettingsComponent } from "../app/settings/components/prefere
 import { AdvancedSettingsComponent } from "../app/settings/components/advanced-settings.component";
 import {HomeComponent} from "../app/home/home.component";
 import {ClubsComponent} from "../app/clubs/clubs.component";
+import {ClubComponent} from "../app/clubs/club/club.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['']);
@@ -25,7 +26,10 @@ export const routes: Routes = [
 		data: { authGuardPipe: redirectUnauthorizedToLogin },
 		children: [
 			{ path: 'home', component: HomeComponent },
-			{ path: 'clubs', component: ClubsComponent },
+			{
+				path: 'clubs', component: ClubsComponent
+			},
+			{ path: 'clubs/:handle', component: ClubComponent },
 			{ path: 'settings', component: SettingsComponent, children: [
 					{ path: 'account', component: AccountSettingsComponent },
 					{ path: 'notifications', component: NotificationsSettingsComponent },

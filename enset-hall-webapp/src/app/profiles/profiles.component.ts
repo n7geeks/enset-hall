@@ -12,6 +12,7 @@ import {map, Observable, take} from "rxjs";
 import {ProfilesActions} from "./profiles.actions";
 import {ProfilesState} from "./profiles.state";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {ProfileCardComponent} from "./components/profile-card.component";
 
 @Component({
 	selector: "n7h-profiles",
@@ -22,7 +23,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 		MainContentComponent,
 		SectionNavComponent,
 		SideExtraComponent,
-		MatProgressSpinnerModule
+		MatProgressSpinnerModule,
+		ProfileCardComponent
 	],
 	templateUrl: "./profiles.component.html",
 	styleUrls: ["./profiles.component.scss"]

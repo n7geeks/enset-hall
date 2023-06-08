@@ -1,7 +1,7 @@
 <n7h-section-nav>
 	<ng-container *ngIf="profile$ | async as profile; else loading">
 		<main>
-			<h1>{{ profile.displayName }}</h1>
+			<n7h-profile-card [profile]="profile"></n7h-profile-card>
 		</main>
 	</ng-container>
 	<ng-template #loading>

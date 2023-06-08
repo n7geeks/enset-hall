@@ -10,22 +10,24 @@ import {PeopleInvolvedComponent} from "../clubs/ui/people-involved.component";
 	standalone: true,
 	imports: [CommonModule, NgOptimizedImage, RouterLink, MatRippleModule, PeopleInvolvedComponent],
 	template: `
-		<a
-			[routerLink]="[stand.link]"
+		<div
 			class="active-stand"
 			matRipple
 			*ngIf="stand">
-			<div class="club-info">
-				<h2>{{stand.club.name}}</h2>
-				<img
-					[ngSrc]="stand.club.logo"
-					[alt]="stand.club.name"
-					[width]="imageSize"
-					[height]="imageSize" />
-			</div>
-			<p>{{stand.subject}}</p>
+			<a class="active-stand__link"
+				[routerLink]="[stand.link]">
+				<div class="club-info">
+					<h2>{{stand.club.name}}</h2>
+					<img
+						[ngSrc]="stand.club.logo"
+						[alt]="stand.club.name"
+						[width]="imageSize"
+						[height]="imageSize" />
+				</div>
+				<p>{{stand.subject}}</p>
+			</a>
 			<n7h-people-involved [people]="stand.organizers"></n7h-people-involved>
-		</a>
+		</div>
 	`,
 	styles: [`
 		.active-stand {
@@ -37,8 +39,12 @@ import {PeopleInvolvedComponent} from "../clubs/ui/people-involved.component";
 			border-radius: 10px;
 			cursor: pointer;
 			padding: .75rem;
-			color: white;
-			text-decoration: none;
+			.active-stand__link {
+				color: white;
+				text-decoration: none;
+				width: 100%;
+				height: 100%;
+			}
 			.club-info {
 				display: flex;
 				flex-direction: row;

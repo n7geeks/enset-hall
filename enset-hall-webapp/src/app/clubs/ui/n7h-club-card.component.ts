@@ -51,9 +51,6 @@ import {TranslateModule} from "@ngx-translate/core";
 	</div>
 `,
 	styles: [`
-		.spacer {
-			flex: 1 1 auto;
-		}
 		a {
 			text-decoration: none;
 			color: white;

@@ -67,6 +67,11 @@
 	"CLUBS.MY_CLUBS_TOOLTIP": "View the clubs you are a member of",
 	"CLUBS.YOU_ARE_MEMBER": "You are a member",
 	"CLUBS.MEMBERS": "Membres",
+	"CLUBS.OFFICE_MEMBERS": "Office",
 	"CLUBS.JOIN": "Join",
-	"ACTIONS.CHAT_TOOLTIP": "Open a chat with {{name}}"
+	"ACTIONS.CHAT_TOOLTIP": "Open a chat with {{name}}",
+	"CLUBS.CHAPTERS": "Chapters",
+	"CLUBS.POSTS": "Posts",
+	"CLUBS.ACTIVITIES": "Activities",
+	"CLUBS.ABOUT": "About"
 }

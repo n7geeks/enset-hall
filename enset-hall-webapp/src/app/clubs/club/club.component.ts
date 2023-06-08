@@ -6,11 +6,12 @@ import {map} from "rxjs";
 import {CommonModule} from "@angular/common";
 import {SectionNavComponent} from "../../main/ui/section-nav.component";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {ClubHeaderCardComponent} from "./ui/club-header-card.component";
 
 @Component({
 	selector: "n7h-club",
 	standalone: true,
-	imports: [CommonModule, SectionNavComponent, MatProgressSpinnerModule],
+	imports: [CommonModule, SectionNavComponent, MatProgressSpinnerModule, ClubHeaderCardComponent],
 	templateUrl: "./club.component.html",
 	styleUrls: ["./club.component.scss"]
 })
@@ -22,4 +23,8 @@ export class ClubComponent {
 			return clubs.find(club => club.handle === handle);
 		}));
 	constructor(private store: Store, private router: Router) {}
+
+	onTabChanged(tab: string) {
+		console.log(tab);
+	}
 }

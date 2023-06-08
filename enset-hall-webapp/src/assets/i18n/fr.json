@@ -67,6 +67,11 @@
 	"CLUBS.MY_CLUBS_TOOLTIP": "Voir les clubs dont vous êtes membre",
 	"CLUBS.YOU_ARE_MEMBER": "Vous êtes membre",
 	"CLUBS.MEMBERS": "Membres",
+	"CLUBS.OFFICE_MEMBERS": "Bureau",
 	"CLUBS.JOIN": "Rejoindre",
-	"ACTIONS.CHAT_TOOLTIP": "Ouvrir une discussion avec {{name}}"
+	"ACTIONS.CHAT_TOOLTIP": "Ouvrir une discussion avec {{name}}",
+	"CLUBS.CHAPTERS": "Chapitres",
+	"CLUBS.POSTS": "Publications",
+	"CLUBS.ACTIVITIES": "Activités",
+	"CLUBS.ABOUT": "À propos"
 }

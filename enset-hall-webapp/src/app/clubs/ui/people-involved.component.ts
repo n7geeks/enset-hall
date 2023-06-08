@@ -1,17 +1,20 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {AppUser} from "../../authentication/models/AppUser";
+import {RouterLink} from "@angular/router";
 
 @Component({
 	selector: 'n7h-people-involved',
 	standalone: true,
-	imports: [CommonModule, NgOptimizedImage],
+	imports: [CommonModule, NgOptimizedImage, RouterLink],
 	template: `
 		<div class="people-involved">
 			<img
 				class="person" *ngFor="let person of topFour"
 				[ngSrc]="person.photoUrl"
 				[alt]="person.displayName"
+				title="{{ person.displayName }}"
+				[routerLink]="['/profiles', person.id]"
 				width="30"
 				height="30" />
 			<ng-container *ngIf="people as p">
@@ -29,6 +32,11 @@ import {AppUser} from "../../authentication/models/AppUser";
 			height: 3rem;
 			position: relative;
 			align-items: center;
+			img {
+				&:hover {
+					scale: 1.1;
+				}
+			}
 			.person {
 				border-radius: 50%;
 				margin-right: -.75rem;

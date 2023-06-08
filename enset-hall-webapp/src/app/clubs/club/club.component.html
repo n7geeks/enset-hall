@@ -1,11 +1,11 @@
-<ng-container *ngIf="club$ | async as club; else noClub">
-	<n7h-section-nav>
+<n7h-section-nav>
+	<ng-container *ngIf="club$ | async as club; else noClub">
 		<h1>{{club.name}}</h1>
-	</n7h-section-nav>
-</ng-container>
+	</ng-container>
 
-<ng-template #noClub>
-	<div>
-		No club found
-	</div>
-</ng-template>
+	<ng-template #noClub>
+		<div class="loading">
+			<mat-spinner color="primary"></mat-spinner>
+		</div>
+	</ng-template>
+</n7h-section-nav>

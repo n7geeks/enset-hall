@@ -5,11 +5,12 @@ import {Club} from "../club.models";
 import {map} from "rxjs";
 import {CommonModule} from "@angular/common";
 import {SectionNavComponent} from "../../main/ui/section-nav.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @Component({
 	selector: "n7h-club",
 	standalone: true,
-	imports: [CommonModule, SectionNavComponent],
+	imports: [CommonModule, SectionNavComponent, MatProgressSpinnerModule],
 	templateUrl: "./club.component.html",
 	styleUrls: ["./club.component.scss"]
 })

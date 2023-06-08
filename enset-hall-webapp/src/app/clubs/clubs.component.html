@@ -15,7 +15,9 @@
 			<n7h-club-card *ngFor="let club of clubs" [club]="club"></n7h-club-card>
 		</div>
 		<ng-template #noClubs>
-			<p>{{ 'CLUBS.NO_CLUBS' | translate }}</p>
+			<p class="noClubs">
+				<mat-spinner color="primary"></mat-spinner>
+			</p>
 		</ng-template>
 	</ng-container>
 </n7h-section-nav>

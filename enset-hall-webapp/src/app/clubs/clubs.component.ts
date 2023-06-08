@@ -12,6 +12,7 @@ import {Store} from "@ngxs/store";
 import {Club} from "./club.models";
 import {map} from "rxjs";
 import {ClubCardComponent} from "./ui/n7h-club-card.component";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 enum ClubsView {
 	ALL_CLUBS = 'allClubs',
@@ -33,7 +34,8 @@ enum ClubsView {
 		MatIconModule,
 		SectionNavComponent,
 		MatButtonToggleModule,
-		ClubCardComponent
+		ClubCardComponent,
+		MatProgressSpinnerModule
 	],
 	templateUrl: './clubs.component.html',
 	styleUrls: ['./clubs.component.scss']

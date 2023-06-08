@@ -1,8 +1,18 @@
 .clubs-container {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-start;
 	width: 100%;
 	gap: 1rem;
 	margin: 1rem 0;
+	height: 100%;
+	overflow-y: auto;
+}
+
+.noClubs {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
 }

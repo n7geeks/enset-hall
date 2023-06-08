@@ -4,11 +4,12 @@ import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
 import {AppUser} from "../../../authentication/models/AppUser";
+import {RouterLink} from "@angular/router";
 
 @Component({
 	selector: "n7h-club-header-card",
 	standalone: true,
-	imports: [CommonModule, NgOptimizedImage, MatButtonModule, TranslateModule],
+	imports: [CommonModule, NgOptimizedImage, MatButtonModule, TranslateModule, RouterLink],
 	template: `
 		<ng-container *ngIf="club">
 			<div class="card">
@@ -55,22 +56,41 @@ import {AppUser} from "../../../authentication/models/AppUser";
 				<div class="tabs-container item">
 					<label class="tab">
 						{{ 'CLUBS.POSTS' | translate }}
-						<input type="radio" checked="checked" name="tabs" value="posts" (change)="onTabChange($event)">
+						<input
+							type="radio"
+							[checked]="tab === 'posts'"
+							name="tabs" value="posts"
+							(change)="onTabChange($event)">
 						<span class="checkmark"></span>
 					</label>
 					<label class="tab">
 						{{ 'CLUBS.ACTIVITIES' | translate }}
-						<input type="radio" name="tabs" value="activities" (change)="onTabChange($event)">
+						<input
+							type="radio"
+							[checked]="tab === 'activities'"
+							name="tabs"
+							value="activities"
+							(change)="onTabChange($event)">
 						<span class="checkmark"></span>
 					</label>
 					<label class="tab">
 						{{ 'CLUBS.MEMBERS' | translate }}
-						<input type="radio" name="tabs" value="members" (change)="onTabChange($event)">
+						<input
+							type="radio"
+							name="tabs"
+							[checked]="tab === 'members'"
+							value="members"
+							(change)="onTabChange($event)">
 						<span class="checkmark"></span>
 					</label>
 					<label class="tab">
 						{{ 'CLUBS.ABOUT' | translate }}
-						<input type="radio" name="tabs" value="about" (change)="onTabChange($event)">
+						<input
+							type="radio"
+							name="tabs"
+							[checked]="tab === 'about'"
+							value="about"
+							(change)="onTabChange($event)">
 						<span class="checkmark"></span>
 					</label>
 				</div>
@@ -228,6 +248,7 @@ export class ClubHeaderCardComponent implements OnInit {
 	@Input() club?: Club
 	people: AppUser[] = [];
 	officeMembers: AppUser[] = [];
+	@Input() tab: string = 'posts';
 	constructor() {}
 	ngOnInit(): void {
 		if (!this.club) return;
@@ -237,7 +258,6 @@ export class ClubHeaderCardComponent implements OnInit {
 		latestChapter.officeMembers.forEach(member => set.add(member));
 		this.people = Array.from(set);
 		this.officeMembers = latestChapter.officeMembers;
-		this.tabChange.emit('posts');
 	}
 
 	@Output() tabChange = new EventEmitter<string>();

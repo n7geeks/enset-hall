@@ -1,6 +1,10 @@
 <n7h-section-nav>
 	<ng-container *ngIf="club$ | async as club; else noClub">
-		<n7h-club-header-card [club]="club" (tabChange)="onTabChanged($event)"></n7h-club-header-card>
+		<n7h-club-header-card [club]="club" [tab]="tab" (tabChange)="onTabChanged($event)"></n7h-club-header-card>
+		<n7h-club-about *ngIf="tab === 'about'"></n7h-club-about>
+		<n7h-club-members *ngIf="tab === 'members'"></n7h-club-members>
+		<n7h-club-activities *ngIf="tab === 'activities'"></n7h-club-activities>
+		<n7h-club-posts *ngIf="tab === 'posts'"></n7h-club-posts>
 	</ng-container>
 	<ng-template #noClub>
 		<div class="loading">

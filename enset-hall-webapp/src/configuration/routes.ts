@@ -26,10 +26,9 @@ export const routes: Routes = [
 		data: { authGuardPipe: redirectUnauthorizedToLogin },
 		children: [
 			{ path: 'home', component: HomeComponent },
-			{
-				path: 'clubs', component: ClubsComponent
-			},
-			{ path: 'clubs/:handle', component: ClubComponent },
+			{ path: 'clubs', component: ClubsComponent },
+			{ path: 'clubs/:handle/:tab', component: ClubComponent },
+			{ path: 'clubs/:handle', redirectTo: 'clubs/:handle/posts', pathMatch: 'full' },
 			{ path: 'settings', component: SettingsComponent, children: [
 					{ path: 'account', component: AccountSettingsComponent },
 					{ path: 'notifications', component: NotificationsSettingsComponent },

@@ -1,5 +1,6 @@
-import {Component} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {CommonModule} from "@angular/common";
+import {Club} from "../../club.models";
 
 @Component({
 	selector: "n7h-club-posts",
@@ -8,10 +9,12 @@ import {CommonModule} from "@angular/common";
 		CommonModule
 	],
 	template: `
-		Posts
+		<ng-container *ngIf="club">
+		</ng-container>
 	`,
 	styles: [``]
 })
 export class ClubPostsComponent {
 	constructor() {}
+	@Input() club?: Club;
 }

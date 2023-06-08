@@ -8,6 +8,7 @@ export interface StatelessClub {
 	banner: string;
 	isAdeClub: boolean;
 	catchphrase: string;
+	about: string;
 	isOpen: boolean;
 	chapters: ClubChapter[];
 }

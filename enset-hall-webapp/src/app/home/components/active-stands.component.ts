@@ -49,6 +49,7 @@ export class ActiveStandsComponent {
 		subject: 'Registration is open, join N7Geeks now!',
 		club: {
 			id: '1',
+			about: '',
 			name: 'N7Geeks',
 			logo: 'https://files.bensadik.net/download/ejajZJWy.png',
 			banner: '',

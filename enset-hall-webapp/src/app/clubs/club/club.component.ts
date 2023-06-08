@@ -7,10 +7,10 @@ import { CommonModule } from "@angular/common";
 import { SectionNavComponent } from "../../main/ui/section-nav.component";
 import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { ClubHeaderCardComponent } from "./ui/club-header-card.component";
-import { ClubAboutComponent } from "./components/club-about.component";
-import { ClubMembersComponent } from "./components/club-members.component";
-import { ClubActivitiesComponent } from "./components/club-activities.component";
-import { ClubPostsComponent } from "./components/club-posts.component";
+import { ClubAboutComponent } from "./ui/club-about.component";
+import { ClubMembersComponent } from "./ui/club-members.component";
+import { ClubActivitiesComponent } from "./ui/club-activities.component";
+import { ClubPostsComponent } from "./ui/club-posts.component";
 
 @Component({
 	selector: "n7h-club",

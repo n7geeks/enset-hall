@@ -4,6 +4,6 @@
 <p>
 	Extracurricular Activities Management and Social Media Platform for the Students of ENSET Mohammedia.
 </p>
-<a href="https://yellow-pond-0ac82ba03.2.azurestaticapps.net/" target="_blank">
+<a href="https://wonderful-smoke-005f7c503.3.azurestaticapps.net" target="_blank">
 	<img src="https://img.shields.io/static/v1?label=&message=Production&color=informational&style=for-the-badge&logo=azurepipelines" />
 </a>

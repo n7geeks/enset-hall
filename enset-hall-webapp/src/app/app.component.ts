@@ -11,7 +11,6 @@ import { ConnectivityStatus } from "./connectivity/connectivity.state";
 import { ConnectivityActions } from "./connectivity/connectivity.actions";
 import { PushNotificationService } from "./notifications/push-notification.service";
 import {ScopesActions} from "./scopes/scopes.actions";
-import {ClubsActions} from "./clubs/clubs.actions";
 @Component({
 	selector: 'n7h-root',
 	templateUrl: './app.component.html',

@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from "@angular/core";
+import {AfterViewInit, Component, OnDestroy, OnInit} from "@angular/core";
 import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { MatRippleModule } from "@angular/material/core";
@@ -9,6 +9,8 @@ import {MatIconModule} from "@angular/material/icon";
 import {SectionNavComponent} from "../main/ui/section-nav.component";
 import {SideExtraComponent} from "./components/side-extra.component";
 import {MainContentComponent} from "./components/main-content.component";
+import {Store} from "@ngxs/store";
+import {AnnouncementsActions} from "../announcements/announcements.actions";
 
 
 @Component({
@@ -31,8 +33,9 @@ import {MainContentComponent} from "./components/main-content.component";
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 	isSmallScreen: boolean = false;
+	constructor(private store: Store) { }
 	ngOnInit(): void {
 		this.isSmallScreen = window.innerWidth < 680;
 		window.addEventListener("resize", () => {
@@ -43,6 +46,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 		window.removeEventListener("resize", () => {
 			this.isSmallScreen = window.innerWidth < 680;
 		});
+	}
+
+	ngAfterViewInit(): void {
+		this.store.dispatch(new AnnouncementsActions.FetchAnnouncements());
 	}
 
 }

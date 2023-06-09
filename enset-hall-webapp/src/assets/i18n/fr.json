@@ -73,5 +73,7 @@
 	"CLUBS.CHAPTERS": "Chapitres",
 	"CLUBS.POSTS": "Publications",
 	"CLUBS.ACTIVITIES": "Activités",
-	"CLUBS.ABOUT": "À propos"
+	"CLUBS.ABOUT": "À propos",
+	"ANNOUNCEMENT.VIEWS_COUNT": "{{count}} vues",
+	"ANNOUNCEMENT.LIKES_COUNT": "{{count}} cœurs"
 }

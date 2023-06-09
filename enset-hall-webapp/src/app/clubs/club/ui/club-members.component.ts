@@ -18,40 +18,40 @@ import {ClubChaptersComponent} from "./club-chapters.component";
 		ClubChaptersComponent
 	],
 	template: `
-			<n7h-club-chapters (chapterChange)="onChapterChange($event)" [club]="club">
-				<h2>{{ 'CLUBS.OFFICE_MEMBERS' | translate }}</h2>
-				<ul>
-					<li class="member" *ngFor="let member of chapter?.officeMembers">
-						<a [routerLink]="'../../../profiles/' + member.id">
-							<img
-								[ngSrc]="member.photoUrl"
-								width="75"
-								height="75"
-								[alt]="member.displayName"/>
-							<span>
-								<h3>{{ member.displayName }}</h3>
-								<p>{{ member.title }}</p>
-							</span>
-						</a>
-					</li>
-				</ul>
-				<h2>{{ 'CLUBS.MEMBERS' | translate }}</h2>
-				<ul>
-					<li class="member" *ngFor="let member of chapter?.members">
-						<a [routerLink]="'../../../profiles/' + member.id">
-							<img
-								[ngSrc]="member.photoUrl"
-								width="75"
-								height="75"
-								[alt]="member.displayName"/>
-							<span>
-								<h3>{{ member.displayName }}</h3>
-								<p>{{ member.email }}</p>
-							</span>
-						</a>
-					</li>
-				</ul>
-			</n7h-club-chapters>
+		<n7h-club-chapters (chapterChange)="onChapterChange($event)" [club]="club">
+			<h2>{{ 'CLUBS.OFFICE_MEMBERS' | translate }}</h2>
+			<ul>
+				<li class="member" *ngFor="let member of chapter?.officeMembers">
+					<a [routerLink]="'../../../profiles/' + member.id">
+						<img
+							[ngSrc]="member.photoUrl"
+							width="75"
+							height="75"
+							[alt]="member.displayName"/>
+						<span>
+							<h3>{{ member.displayName }}</h3>
+							<p>{{ member.title }}</p>
+						</span>
+					</a>
+				</li>
+			</ul>
+			<h2>{{ 'CLUBS.MEMBERS' | translate }}</h2>
+			<ul>
+				<li class="member" *ngFor="let member of chapter?.members">
+					<a [routerLink]="'../../../profiles/' + member.id">
+						<img
+							[ngSrc]="member.photoUrl"
+							width="75"
+							height="75"
+							[alt]="member.displayName"/>
+						<span>
+							<h3>{{ member.displayName }}</h3>
+							<p>{{ member.email }}</p>
+						</span>
+					</a>
+				</li>
+			</ul>
+		</n7h-club-chapters>
 	`,
 	styles: [`
 		.container {

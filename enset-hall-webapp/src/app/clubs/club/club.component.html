@@ -5,6 +5,7 @@
 		<n7h-club-members *ngIf="tab === 'members'" [club]="club"></n7h-club-members>
 		<n7h-club-activities *ngIf="tab === 'activities'" [club]="club"></n7h-club-activities>
 		<n7h-club-posts *ngIf="tab === 'posts'" [club]="club"></n7h-club-posts>
+		<n7h-club-requests *ngIf="tab === 'requests'" [club]="club"></n7h-club-requests>
 	</ng-container>
 	<ng-template #noClub>
 		<div class="loading">

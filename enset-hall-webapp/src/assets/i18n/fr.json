@@ -77,5 +77,9 @@
 	"CLUBS.ABOUT": "À propos",
 	"ANNOUNCEMENT.VIEWS_COUNT": "{{count}} vues",
 	"ANNOUNCEMENT.LIKES_COUNT": "{{count}} cœurs",
-	"CLUBS.PENDING": "En attente"
+	"CLUBS.PENDING": "En attente",
+	"CLUBS.REQUESTS": "Demandes",
+	"CLUBS.PENDING_TOOLTIP": "Demande en attente, cliquez pour annuler",
+	"CLUB_REQUEST.ACCEPT": "Accepter",
+	"CLUB_REQUEST.REJECT": "Rejeter"
 }

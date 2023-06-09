@@ -79,5 +79,9 @@
 	"ANNOUNCEMENT.LIKES_COUNT": "{{count}} hearts",
 	"CLUBS.PENDING": "Pending",
 	"TRAINING": "FORMATION",
-	"WORKSHOP": "WORKSHOP"
+	"WORKSHOP": "WORKSHOP",
+	"CLUBS.REQUESTS": "Requests",
+	"CLUBS.PENDING_TOOLTIP": "Request is pending, click to cancel",
+	"CLUB_REQUEST.ACCEPT": "Accept",
+	"CLUB_REQUEST.REJECT": "Reject"
 }

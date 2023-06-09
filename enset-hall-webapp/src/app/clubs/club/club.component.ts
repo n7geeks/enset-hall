@@ -11,6 +11,7 @@ import { ClubAboutComponent } from "./ui/club-about.component";
 import { ClubMembersComponent } from "./ui/club-members.component";
 import { ClubActivitiesComponent } from "./ui/club-activities.component";
 import { ClubPostsComponent } from "./ui/club-posts.component";
+import {ClubRequestsComponent} from "./ui/club-requests.component";
 
 @Component({
 	selector: "n7h-club",
@@ -23,7 +24,8 @@ import { ClubPostsComponent } from "./ui/club-posts.component";
 		ClubAboutComponent,
 		ClubMembersComponent,
 		ClubActivitiesComponent,
-		ClubPostsComponent
+		ClubPostsComponent,
+		ClubRequestsComponent
 	],
 	templateUrl: "./club.component.html",
 	styleUrls: ["./club.component.scss"]
@@ -36,7 +38,7 @@ export class ClubComponent  {
 			return clubs.find(club => club.handle === handle);
 		}));
 	constructor(private store: Store, private router: Router) {
-		const availableTabs = ["about", "members", "activities", "posts"];
+		const availableTabs = ["about", "members", "activities", "posts", "requests"];
 		const split = this.router.url.split("/");
 		const tab = split[3];
 		if (!availableTabs.includes(tab)) {

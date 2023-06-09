@@ -8,11 +8,14 @@ import {PeopleInvolvedComponent} from "./people-involved.component";
 import {AppUser} from "../../authentication/models/AppUser";
 import {MatButtonModule} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
+import { Store } from "@ngxs/store";
+import {ClubRequestsActions} from "../club/requests/club-requests.actions";
+import {ClubActionButtonComponent} from "./club-action-button.component";
 
 @Component({
 	selector: 'n7h-club-card',
 	standalone: true,
-	imports: [CommonModule, MatButtonModule, MatRippleModule, RouterLink, NgOptimizedImage, MatIconModule, PeopleInvolvedComponent, TranslateModule],
+	imports: [CommonModule, MatButtonModule, MatRippleModule, RouterLink, NgOptimizedImage, MatIconModule, PeopleInvolvedComponent, TranslateModule, ClubActionButtonComponent],
 	template: `
 	<div matRipple
 		 class="club-card"
@@ -45,9 +48,7 @@ import {TranslateModule} from "@ngx-translate/core";
 				<div class="spacer"></div>
 				<p>{{ people.length }}</p>
 			</div>
-			<button *ngIf="!club.isMember && club.isOpen" mat-raised-button color="primary">{{ 'CLUBS.JOIN' | translate }}</button>
-			<button *ngIf="club.isPending" mat-raised-button color="accent">{{ 'CLUBS.PENDING' | translate }}</button>
-			<div class="is-member" *ngIf="club.isMember">{{ 'CLUBS.YOU_ARE_MEMBER' | translate }}</div>
+			<n7h-club-action-button [club]="club"></n7h-club-action-button>
 		</div>
 	</div>
 `,
@@ -56,22 +57,7 @@ import {TranslateModule} from "@ngx-translate/core";
 			text-decoration: none;
 			color: white;
 		}
-		.is-member {
-			background-color: rgba(0, 0, 0, 0.2);
-			padding: 1rem;
-			border-radius: 10px;
-			color: white;
-			width: 7rem;
-			height: .2rem;
-			display: flex;
-			text-align: center;
-			align-items: center;
-			justify-content: center;
-			overflow: hidden;
-			white-space: nowrap;
-			text-overflow: ellipsis;
-			font-size: .75rem;
-		}
+
 		.club-card__content__members-actions {
 			position: absolute;
 			right: 0;
@@ -93,7 +79,7 @@ import {TranslateModule} from "@ngx-translate/core";
 				align-items: center;
 				margin-bottom: .5rem;
 			}
-			button {
+			n7h-club-action-button {
 				width: 100%;
 			}
 

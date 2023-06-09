@@ -5,11 +5,12 @@ import {MatButtonModule} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
 import {AppUser} from "../../../authentication/models/AppUser";
 import {RouterLink} from "@angular/router";
+import {ClubActionButtonComponent} from "../../ui/club-action-button.component";
 
 @Component({
 	selector: "n7h-club-header-card",
 	standalone: true,
-	imports: [CommonModule, NgOptimizedImage, MatButtonModule, TranslateModule, RouterLink],
+	imports: [CommonModule, NgOptimizedImage, MatButtonModule, TranslateModule, RouterLink, ClubActionButtonComponent],
 	template: `
 		<ng-container *ngIf="club">
 			<div class="card">
@@ -30,13 +31,7 @@ import {RouterLink} from "@angular/router";
 					height="40"
 				/>
 				<div class="spacer"></div>
-				<button
-					*ngIf="!club.isMember && club.isOpen"
-					mat-raised-button color="primary"
-					class="item action">
-					{{ 'CLUBS.JOIN' | translate }}
-				</button>
-				<div class="item is-member" *ngIf="club.isMember">{{ 'CLUBS.YOU_ARE_MEMBER' | translate }}</div>
+				<n7h-club-action-button class="item action" [club]="club"></n7h-club-action-button>
 				<h2 class="item catchphrase">{{ club.catchphrase }}</h2>
 				<div class="item index chapters">
 					<p>{{ 'CLUBS.CHAPTERS' | translate }}</p>
@@ -90,6 +85,16 @@ import {RouterLink} from "@angular/router";
 							name="tabs"
 							[checked]="tab === 'about'"
 							value="about"
+							(change)="onTabChange($event)">
+						<span class="checkmark"></span>
+					</label>
+					<label class="tab" *ngIf="club.isOfficeMember">
+						{{ 'CLUBS.REQUESTS' | translate }}
+						<input
+							type="radio"
+							name="tabs"
+							[checked]="tab === 'requests'"
+							value="requests"
 							(change)="onTabChange($event)">
 						<span class="checkmark"></span>
 					</label>
@@ -188,7 +193,7 @@ import {RouterLink} from "@angular/router";
 			bottom: 0;
 			left: 2rem;
 			display: flex;
-			width: 25rem;
+			width: 30rem;
 			justify-content: space-between;
 			.tab {
 				display: flex;

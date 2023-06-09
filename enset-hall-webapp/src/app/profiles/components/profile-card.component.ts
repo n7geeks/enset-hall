@@ -31,7 +31,7 @@ import {AuthUser} from "../../authentication/models/AuthUser";
 					*ngIf="scope.role != 'external'"
 					[title]="(scope.major | uppercase) + '_TOOLTIP' | translate"
 					class="chip">
-					{{ scope.major | uppercase }} {{ yearOfStudy$ | async }}
+					{{ scope.major | uppercase }}
 				</div>
 				<div [class]="'chip ' + scope.role"
 					 *ngIf="scope.role == 'external'"

@@ -1,10 +1,16 @@
 import {Action, State, StateContext} from "@ngxs/store";
 import {Injectable} from "@angular/core";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {StatelessClub, Club, UserClubsData} from "./club.models";
+import {StatelessClub, Club, UserClubsData, UserClubState} from "./club.models";
 import {ClubsActions} from "./clubs.actions";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 
+const defaultUserClubState: UserClubState = {
+	isMember: false,
+	isOfficeMember: false,
+	isGodfather: false,
+	isPending: false
+}
 
 
 @State<Club[]>({
@@ -29,12 +35,22 @@ export class ClubsState {
 			.valueChanges()
 			.subscribe(userClubsData => {
 				if (!userClubsData) {
+					this.afs.collection<UserClubsData>('user-clubs')
+						.doc(userId)
+						.set({});
 					return;
 				}
 				this.afs.collection<StatelessClub>('clubs')
 					.valueChanges({idField: 'id'})
 					.subscribe(clubs => {
 						const clubWithState: Club[] = clubs.map(club => {
+							if (!userClubsData[club.id]) {
+								this.afs.collection<UserClubsData>('user-clubs')
+									.doc(userId)
+									.set({
+										[club.id]: defaultUserClubState
+									}, {merge: true});
+							}
 							return {
 								...club,
 								...userClubsData[club.id]

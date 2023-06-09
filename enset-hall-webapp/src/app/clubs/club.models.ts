@@ -13,10 +13,20 @@ export interface StatelessClub {
 	chapters: ClubChapter[];
 }
 
+export interface ClubActivity {
+	id: string;
+	type: string;
+	title: string;
+	description: string;
+	startDate: string;
+	endDate: string;
+}
+
 export interface ClubChapter {
 	year: number;
 	officeMembers: ClubOfficeMember[];
 	members: AppUser[];
+	activities: ClubActivity[];
 }
 
 export interface Club extends StatelessClub, UserClubState {}

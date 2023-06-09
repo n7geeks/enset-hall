@@ -1,6 +1,6 @@
-import {AfterViewInit, Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
-import {Club, ClubChapter} from "../club.models";
+import {Club} from "../club.models";
 import {MatRippleModule} from "@angular/material/core";
 import {RouterLink} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
@@ -46,6 +46,7 @@ import {TranslateModule} from "@ngx-translate/core";
 				<p>{{ people.length }}</p>
 			</div>
 			<button *ngIf="!club.isMember && club.isOpen" mat-raised-button color="primary">{{ 'CLUBS.JOIN' | translate }}</button>
+			<button *ngIf="club.isPending" mat-raised-button color="accent">{{ 'CLUBS.PENDING' | translate }}</button>
 			<div class="is-member" *ngIf="club.isMember">{{ 'CLUBS.YOU_ARE_MEMBER' | translate }}</div>
 		</div>
 	</div>

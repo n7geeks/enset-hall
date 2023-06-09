@@ -75,5 +75,6 @@
 	"CLUBS.ACTIVITIES": "Activities",
 	"CLUBS.ABOUT": "About",
 	"ANNOUNCEMENT.VIEWS_COUNT": "{{count}} views",
-	"ANNOUNCEMENT.LIKES_COUNT": "{{count}} hearts"
+	"ANNOUNCEMENT.LIKES_COUNT": "{{count}} hearts",
+	"CLUBS.PENDING": "Pending"
 }

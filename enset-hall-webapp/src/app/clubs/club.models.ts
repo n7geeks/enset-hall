@@ -1,4 +1,4 @@
-import {AppUser} from "../authentication/models/AppUser";
+import {AppUser, ClubOfficeMember} from "../authentication/models/AppUser";
 
 export interface StatelessClub {
 	id: string;
@@ -15,7 +15,7 @@ export interface StatelessClub {
 
 export interface ClubChapter {
 	year: number;
-	officeMembers: AppUser[];
+	officeMembers: ClubOfficeMember[];
 	members: AppUser[];
 }
 

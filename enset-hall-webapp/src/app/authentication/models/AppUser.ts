@@ -7,3 +7,7 @@ export interface AppUser {
 	is_allowed: boolean;
 	scope_id: string;
 }
+
+export interface ClubOfficeMember extends AppUser {
+	title: string;
+}

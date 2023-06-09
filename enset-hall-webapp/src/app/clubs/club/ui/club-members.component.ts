@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input} from "@angular/core";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {Club, ClubChapter} from "../../club.models";
 import {TranslateModule} from "@ngx-translate/core";
 import {RouterLink} from "@angular/router";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {ClubChaptersComponent} from "./club-chapters.component";
 
 @Component({
 	selector: "n7h-club-members",
@@ -11,43 +13,45 @@ import {RouterLink} from "@angular/router";
 		CommonModule,
 		TranslateModule,
 		NgOptimizedImage,
-		RouterLink
+		RouterLink,
+		MatButtonToggleModule,
+		ClubChaptersComponent
 	],
 	template: `
-		<div class="container" *ngIf="latestChapter">
-			<h2>{{ 'CLUBS.OFFICE_MEMBERS' | translate }}</h2>
-			<ul>
-				<li class="member" *ngFor="let member of latestChapter.officeMembers">
-					<a [routerLink]="'../../../profiles/' + member.id">
-						<img
-							[ngSrc]="member.photoUrl"
-							width="75"
-							height="75"
-							[alt]="member.displayName" />
-						<span>
-							<h3>{{ member.displayName }}</h3>
-							<p>{{ member.title }}</p>
-						</span>
-					</a>
-				</li>
-			</ul>
-			<h2>{{ 'CLUBS.MEMBERS' | translate }}</h2>
-			<ul>
-				<li class="member" *ngFor="let member of latestChapter.members">
-					<a [routerLink]="'../../../profiles/' + member.id">
-						<img
-							[ngSrc]="member.photoUrl"
-							width="75"
-							height="75"
-							[alt]="member.displayName" />
-						<span>
-							<h3>{{ member.displayName }}</h3>
-							<p>{{ member.email }}</p>
-						</span>
-					</a>
-				</li>
-			</ul>
-		</div>
+			<n7h-club-chapters (chapterChange)="onChapterChange($event)" [club]="club">
+				<h2>{{ 'CLUBS.OFFICE_MEMBERS' | translate }}</h2>
+				<ul>
+					<li class="member" *ngFor="let member of chapter?.officeMembers">
+						<a [routerLink]="'../../../profiles/' + member.id">
+							<img
+								[ngSrc]="member.photoUrl"
+								width="75"
+								height="75"
+								[alt]="member.displayName"/>
+							<span>
+								<h3>{{ member.displayName }}</h3>
+								<p>{{ member.title }}</p>
+							</span>
+						</a>
+					</li>
+				</ul>
+				<h2>{{ 'CLUBS.MEMBERS' | translate }}</h2>
+				<ul>
+					<li class="member" *ngFor="let member of chapter?.members">
+						<a [routerLink]="'../../../profiles/' + member.id">
+							<img
+								[ngSrc]="member.photoUrl"
+								width="75"
+								height="75"
+								[alt]="member.displayName"/>
+							<span>
+								<h3>{{ member.displayName }}</h3>
+								<p>{{ member.email }}</p>
+							</span>
+						</a>
+					</li>
+				</ul>
+			</n7h-club-chapters>
 	`,
 	styles: [`
 		.container {
@@ -103,16 +107,11 @@ import {RouterLink} from "@angular/router";
 		}
 	`]
 })
-export class ClubMembersComponent implements OnInit {
+export class ClubMembersComponent {
 	constructor() {}
-	@Input() club?: Club;
-	latestChapter: ClubChapter | undefined;
-
-	ngOnInit(): void {
-		if (this.club) {
-			this.latestChapter = this.club.chapters
-				.sort((a, b) => b.year - a.year)[0];
-		}
+	@Input() club!: Club;
+	chapter: ClubChapter | undefined;
+	onChapterChange(event: ClubChapter): void {
+		this.chapter = event;
 	}
-
 }

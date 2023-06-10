@@ -19,6 +19,7 @@
 	"CONTACT_US": "Contactez-nous",
 	"ROADMAP": "Roadmap",
 	"CANCEL": "annuler",
+	"LEAVE": "quitter",
 	"ENSET_HALL": "ENSET Hall",
 	"LOGGED_IN_AS": "Connecté en tant que",
 	"PROFILE_MENU.HI": "Salut, ",
@@ -81,5 +82,9 @@
 	"CLUBS.REQUESTS": "Demandes",
 	"CLUBS.PENDING_TOOLTIP": "Demande en attente, cliquez pour annuler",
 	"CLUB_REQUEST.ACCEPT": "Accepter",
-	"CLUB_REQUEST.REJECT": "Rejeter"
+	"CLUB_REQUEST.REJECT": "Rejeter",
+	"CLUBS.LEAVE": "Quitter le club",
+	"CLUBS.COPY_LINK": "Copier le lien",
+	"CLUBS.LEAVE_DIALOG_TITLE": "Quitter {{clubName}}",
+	"CLUBS.LEAVE_DIALOG_CONTENT": "Êtes-vous sûr de vouloir quitter {{clubName}} ?"
 }

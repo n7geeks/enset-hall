@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from "@angular/core";
 import {Club} from "../../club.models";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
@@ -6,14 +6,44 @@ import {TranslateModule} from "@ngx-translate/core";
 import {AppUser} from "../../../authentication/models/AppUser";
 import {RouterLink} from "@angular/router";
 import {ClubActionButtonComponent} from "../../ui/club-action-button.component";
+import {MatIconModule} from "@angular/material/icon";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {take} from "rxjs";
+import {Store} from "@ngxs/store";
+import {ClubRequestsActions} from "../requests/club-requests.actions";
+import LeaveClub = ClubRequestsActions.LeaveClub;
 
 @Component({
 	selector: "n7h-club-header-card",
 	standalone: true,
-	imports: [CommonModule, NgOptimizedImage, MatButtonModule, TranslateModule, RouterLink, ClubActionButtonComponent],
+	imports: [
+		CommonModule,
+		NgOptimizedImage,
+		MatButtonModule,
+		TranslateModule,
+		RouterLink,
+		MatIconModule,
+		MatMenuModule,
+		ClubActionButtonComponent
+	],
 	template: `
 		<ng-container *ngIf="club">
 			<div class="card">
+				<button class="menu-toggle" mat-icon-button [matMenuTriggerFor]="menu">
+					<mat-icon>more_vert</mat-icon>
+				</button>
+				<mat-menu #menu="matMenu">
+					<button mat-menu-item>
+						<mat-icon>content_copy</mat-icon>
+						<span>{{ 'CLUBS.COPY_LINK' | translate }}</span>
+					</button>
+					<button mat-menu-item (click)="leaveClub(club)">
+						<mat-icon>exit_to_app</mat-icon>
+						<span>{{ 'CLUBS.LEAVE' | translate }}</span>
+					</button>
+				</mat-menu>
+
 				<img class="banner" [src]="club.banner" [alt]="club.name + ' banner'" />
 				<img
 					class="club-logo item"
@@ -130,6 +160,12 @@ import {ClubActionButtonComponent} from "../../ui/club-action-button.component";
 			padding: 0 2rem;
 			display: flex;
 			align-items: center;
+			.menu-toggle {
+				position: absolute;
+				top: 0;
+				right: 0;
+				z-index: 2;
+			}
 			.banner {
 				position: absolute;
 				top: 0;
@@ -254,7 +290,7 @@ export class ClubHeaderCardComponent implements OnInit {
 	people: AppUser[] = [];
 	officeMembers: AppUser[] = [];
 	@Input() tab: string = 'posts';
-	constructor() {}
+	constructor(private dialog: MatDialog, private store: Store) {}
 	ngOnInit(): void {
 		if (!this.club) return;
 		const latestChapter = this.club.chapters.reduce((a, b) => a.year > b.year ? a : b);
@@ -271,4 +307,51 @@ export class ClubHeaderCardComponent implements OnInit {
 		const selectedTab = event.target.value;
 		this.tabChange.emit(selectedTab);
 	}
+
+	leaveClub(club: Club) {
+		const dialogRef = this.dialog
+			.open(ConfirmLeaveDialog, {
+				restoreFocus: false,
+				data: club
+			});
+		dialogRef.afterClosed()
+			.pipe(take(1))
+			.subscribe(result => {
+				if (result) {
+					this.store.dispatch(new LeaveClub(club.id));
+				}
+		});
+	}
+
+}
+
+@Component({
+	selector: 'confirm-leave-dialog',
+	standalone: true,
+	imports: [MatDialogModule, MatButtonModule, TranslateModule],
+	template: `
+		<h1 mat-dialog-title>{{ 'CLUBS.LEAVE_DIALOG_TITLE' | translate: { clubName: data.name }  }}</h1>
+		<mat-dialog-content>
+            {{ 'CLUBS.LEAVE_DIALOG_CONTENT' | translate: { clubName: data.name }  }}
+		</mat-dialog-content>
+		<mat-dialog-actions>
+			<button mat-button mat-dialog-close [mat-dialog-close]="true" (click)="dialogRef.close(false)">
+                {{ 'CANCEL' | translate }}
+			</button>
+			<button mat-raised-button [mat-dialog-close]="true" color="warn" (click)="dialogRef.close(true)">
+				{{ 'LEAVE' | translate }}
+			</button>
+		</mat-dialog-actions>
+	`,
+	styles: [`
+		.mat-mdc-dialog-actions {
+			justify-content: flex-end;
+		}
+	`]
+})
+export class ConfirmLeaveDialog {
+	constructor(
+		@Inject(MAT_DIALOG_DATA) public data: Club,
+		public dialogRef: MatDialogRef<ConfirmLeaveDialog>
+	) {}
 }

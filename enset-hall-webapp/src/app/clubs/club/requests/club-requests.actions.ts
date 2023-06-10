@@ -26,4 +26,9 @@ export namespace ClubRequestsActions {
 		constructor(public requestId: string) {}
 	}
 
+	export class LeaveClub {
+		static readonly type = "[ClubRequests] Leave Club";
+		constructor(public clubId: string) {}
+	}
+
 }

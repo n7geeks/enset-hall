@@ -212,4 +212,44 @@ export class ClubRequestsState {
 
 	}
 
+	@Action(ClubRequestsActions.LeaveClub)
+	async leaveClub(ctx: StateContext<ClubRequestsStateModel>, action: ClubRequestsActions.LeaveClub) {
+		const user = await this.auth.currentUser;
+		if (!user) return;
+		const userId = user.uid;
+		const { clubId } = action;
+		const club = await this.afs
+			.collection<StatelessClub>("clubs")
+			.doc(clubId)
+			.ref.get();
+		if (!club.exists) return;
+		const clubData = club.data();
+		if (!clubData) return;
+		const lastChapter = clubData.chapters.sort((a, b) => b.year - a.year)[0];
+		lastChapter.members = lastChapter.members.filter((member) => member.id !== userId);
+		lastChapter.officeMembers = lastChapter.officeMembers.filter((member) => member.id !== userId);
+		clubData.chapters = clubData.chapters.map((chapter) => {
+			if (chapter.year === lastChapter.year) return lastChapter;
+			return chapter;
+		});
+		console.log(clubData);
+		await this.afs
+			.collection("clubs")
+			.doc(clubId)
+			.update({
+				chapters: clubData.chapters
+			});
+		await this.afs
+			.collection('user-clubs')
+			.doc<UserClubsData>(userId)
+			.update({
+				[clubId]: {
+					isMember: false,
+					isPending: false,
+					isGodfather: false,
+					isOfficeMember: false
+				}
+			});
+	}
+
 }

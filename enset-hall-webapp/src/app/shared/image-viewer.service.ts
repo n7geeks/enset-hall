@@ -4,6 +4,7 @@ import {TranslateModule} from "@ngx-translate/core";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
+import {PinchZoomModule} from "@across-the-stars/ngx-pinch-zoom";
 
 
 @Injectable({providedIn: "root"})
@@ -24,19 +25,18 @@ export class ImageViewerService {
 @Component({
 	selector: "n7h-image-view",
 	standalone: true,
-	imports: [CommonModule, TranslateModule, MatButtonModule, MatIconModule, NgOptimizedImage],
+	imports: [CommonModule, TranslateModule, MatButtonModule, MatIconModule, NgOptimizedImage, PinchZoomModule],
 	template: `
 		<button mat-icon-button class="close" color="warn" (click)="close()">
 			<mat-icon>close</mat-icon>
 		</button>
-		<div
-			class="view"
-		>
+
+		<pinch-zoom class="view" backgroundColor="var(--tab)">
 			<img
 				[ngSrc]="data"
 				alt=""
 				fill="fill" />
-		</div>
+		</pinch-zoom>
 	`,
 	styles: [`
 		:host {
@@ -57,10 +57,9 @@ export class ImageViewerService {
 
 			.view {
 				position: relative;
-				height: 90%;
-				width: 90%;
+				height: 100%;
+				width: 100%;
 				aspect-ratio: 1 / 1;
-				border-radius: 1rem;
 				overflow: hidden;
 				img {
 					position: absolute;

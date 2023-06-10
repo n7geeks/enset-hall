@@ -232,7 +232,6 @@ export class ClubRequestsState {
 			if (chapter.year === lastChapter.year) return lastChapter;
 			return chapter;
 		});
-		console.log(clubData);
 		await this.afs
 			.collection("clubs")
 			.doc(clubId)
@@ -242,6 +241,42 @@ export class ClubRequestsState {
 		await this.afs
 			.collection('user-clubs')
 			.doc<UserClubsData>(userId)
+			.update({
+				[clubId]: {
+					isMember: false,
+					isPending: false,
+					isGodfather: false,
+					isOfficeMember: false
+				}
+			});
+	}
+
+	@Action(ClubRequestsActions.KickMember)
+	async kickMember(ctx: StateContext<ClubRequestsStateModel>, action: ClubRequestsActions.KickMember) {
+		const { clubId, memberId } = action;
+		const club = await this.afs
+			.collection<StatelessClub>("clubs")
+			.doc(clubId)
+			.ref.get();
+		if (!club.exists) return;
+		const clubData = club.data();
+		if (!clubData) return;
+		const lastChapter = clubData.chapters.sort((a, b) => b.year - a.year)[0];
+		lastChapter.members = lastChapter.members.filter((member) => member.id !== memberId);
+		lastChapter.officeMembers = lastChapter.officeMembers.filter((member) => member.id !== memberId);
+		clubData.chapters = clubData.chapters.map((chapter) => {
+			if (chapter.year === lastChapter.year) return lastChapter;
+			return chapter;
+		});
+		await this.afs
+			.collection("clubs")
+			.doc(clubId)
+			.update({
+				chapters: clubData.chapters
+			});
+		await this.afs
+			.collection('user-clubs')
+			.doc<UserClubsData>(memberId)
 			.update({
 				[clubId]: {
 					isMember: false,

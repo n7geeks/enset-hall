@@ -91,5 +91,7 @@
 	"CLUBS.KICK_OUT": "Exclure",
 	"CLUBS.CHANGE_TITLE": "Changer le titre",
 	"CLUBS.PROMOTE_TO_OFFICE": "Promouvoir au bureau",
-	"CLUBS.UPDATE_DETAILS": "Mettre à jour les détails"
+	"CLUBS.UPDATE_DETAILS": "Mettre à jour les détails",
+	"CLUBS.KICK_OUT_DIALOG_TITLE": "Exclure {{targetName}}",
+	"CLUBS.KICK_OUT_DIALOG_CONTENT": "Êtes-vous sûr de vouloir exclure {{targetName}} de {{clubName}} ?"
 }

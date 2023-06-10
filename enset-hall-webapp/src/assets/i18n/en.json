@@ -93,5 +93,7 @@
 	"CLUBS.KICK_OUT": "Kick out",
 	"CLUBS.CHANGE_TITLE": "Change title",
 	"CLUBS.PROMOTE_TO_OFFICE": "Promote to office",
-	"CLUBS.UPDATE_DETAILS": "Update details"
+	"CLUBS.UPDATE_DETAILS": "Update details",
+	"CLUBS.KICK_OUT_DIALOG_TITLE": "Kicking out {{targetName}}",
+	"CLUBS.KICK_OUT_DIALOG_CONTENT": "Are you sure you want to kick out {{targetName}} from {{clubName}}?"
 }

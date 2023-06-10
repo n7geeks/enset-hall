@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Club} from "../../club.models";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
@@ -8,12 +8,13 @@ import {RouterLink} from "@angular/router";
 import {ClubActionButtonComponent} from "../../ui/club-action-button.component";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
-import {MatDialog, MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MatDialog} from "@angular/material/dialog";
 import {take} from "rxjs";
 import {Store} from "@ngxs/store";
 import {ClubRequestsActions} from "../requests/club-requests.actions";
 import LeaveClub = ClubRequestsActions.LeaveClub;
 import {ImageViewerService} from "../../../shared/image-viewer.service";
+import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 
 @Component({
 	selector: "n7h-club-header-card",
@@ -365,9 +366,15 @@ export class ClubHeaderCardComponent implements OnInit {
 
 	leaveClub(club: Club) {
 		const dialogRef = this.dialog
-			.open(ConfirmLeaveDialog, {
+			.open(ClubConfirmDialog, {
 				restoreFocus: false,
-				data: club
+				data: {
+					club: club,
+					action: 'LEAVE',
+					title: 'CLUBS.LEAVE_DIALOG_TITLE',
+					content: 'CLUBS.LEAVE_DIALOG_CONTENT',
+					severity: 'warn'
+				}
 			});
 		dialogRef.afterClosed()
 			.pipe(take(1))
@@ -379,38 +386,7 @@ export class ClubHeaderCardComponent implements OnInit {
 	}
 
 	editLogo(clubId: string) {
-		console.log('edit logo');
+		// TODO Edit logo logic
 	}
 
-}
-
-@Component({
-	selector: 'confirm-leave-dialog',
-	standalone: true,
-	imports: [MatDialogModule, MatButtonModule, TranslateModule],
-	template: `
-		<h1 mat-dialog-title>{{ 'CLUBS.LEAVE_DIALOG_TITLE' | translate: { clubName: data.name }  }}</h1>
-		<mat-dialog-content>
-            {{ 'CLUBS.LEAVE_DIALOG_CONTENT' | translate: { clubName: data.name }  }}
-		</mat-dialog-content>
-		<mat-dialog-actions>
-			<button mat-button mat-dialog-close [mat-dialog-close]="true" (click)="dialogRef.close(false)">
-                {{ 'CANCEL' | translate }}
-			</button>
-			<button mat-raised-button [mat-dialog-close]="true" color="warn" (click)="dialogRef.close(true)">
-				{{ 'LEAVE' | translate }}
-			</button>
-		</mat-dialog-actions>
-	`,
-	styles: [`
-		.mat-mdc-dialog-actions {
-			justify-content: flex-end;
-		}
-	`]
-})
-export class ConfirmLeaveDialog {
-	constructor(
-		@Inject(MAT_DIALOG_DATA) public data: Club,
-		public dialogRef: MatDialogRef<ConfirmLeaveDialog>
-	) {}
 }

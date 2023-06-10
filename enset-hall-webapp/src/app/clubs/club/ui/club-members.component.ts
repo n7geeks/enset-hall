@@ -8,6 +8,12 @@ import {ClubChaptersComponent} from "./club-chapters.component";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
+import {AppUser} from "../../../authentication/models/AppUser";
+import {MatDialog} from "@angular/material/dialog";
+import {ClubConfirmDialog} from "../dialogs/club-confirm.dialog";
+import {CLubDialogData} from "../dialogs/dialog-data.models";
+import {Store} from "@ngxs/store";
+import {ClubRequestsActions} from "../requests/club-requests.actions";
 
 @Component({
 	selector: "n7h-club-members",
@@ -75,7 +81,7 @@ import {MatMenuModule} from "@angular/material/menu";
 							<mat-icon>trending_up</mat-icon>
 							<span>{{ 'CLUBS.PROMOTE_TO_OFFICE' | translate }}</span>
 						</button>
-						<button mat-menu-item *ngIf="club.isOfficeMember">
+						<button mat-menu-item *ngIf="club.isOfficeMember" (click)="kickOut(member)">
 							<mat-icon>remove_circle_outline</mat-icon>
 							<span>{{ 'CLUBS.KICK_OUT' | translate }}</span>
 						</button>
@@ -157,10 +163,28 @@ import {MatMenuModule} from "@angular/material/menu";
 	`]
 })
 export class ClubMembersComponent {
-	constructor() {}
+	constructor(private dialog: MatDialog, private store: Store) {}
 	@Input() club!: Club;
 	chapter: ClubChapter | undefined;
 	onChapterChange(event: ClubChapter): void {
 		this.chapter = event;
+	}
+
+	kickOut(member: AppUser) {
+		const ref = this.dialog.open(ClubConfirmDialog, {
+			data: <CLubDialogData>{
+				club: this.club,
+				target: member.displayName,
+				action: "CLUBS.KICK_OUT",
+				severity: "warn",
+				title: "CLUBS.KICK_OUT_DIALOG_TITLE",
+				content: "CLUBS.KICK_OUT_DIALOG_CONTENT"
+			}
+		});
+		ref.afterClosed().subscribe((result: boolean) => {
+			if (result) {
+				this.store.dispatch(new ClubRequestsActions.KickMember(this.club.id, member.id));
+			}
+		});
 	}
 }

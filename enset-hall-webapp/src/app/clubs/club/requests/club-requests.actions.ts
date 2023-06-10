@@ -31,4 +31,9 @@ export namespace ClubRequestsActions {
 		constructor(public clubId: string) {}
 	}
 
+	export class KickMember {
+		static readonly type = "[ClubRequests] Kick Member";
+		constructor(public clubId: string, public memberId: string) {}
+	}
+
 }

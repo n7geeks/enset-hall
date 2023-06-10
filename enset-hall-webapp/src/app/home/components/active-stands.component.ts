@@ -48,6 +48,15 @@ export class ActiveStandsComponent {
 		id: '1',
 		subject: 'Registration is open, join N7Geeks now!',
 		club: {
+			godfather: {
+				id: '1',
+				displayName: "Zineb EDDAMGHI",
+				email: "z.eddamghi@etu.enset-media.ac.ma",
+				is_allowed: true,
+				photoUrl: "https://lh3.googleusercontent.com/a/AGNmyxaJyl7qRfyDcQz2fvT1qV1kfKWT6A_iaHcPNf6U=s96-c",
+				scope_id: "iibdcc2021",
+				deleted: false,
+			},
 			id: '1',
 			about: '',
 			name: 'N7Geeks',

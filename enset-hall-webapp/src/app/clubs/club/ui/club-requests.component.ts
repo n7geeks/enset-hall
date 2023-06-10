@@ -27,7 +27,7 @@ import {MatButtonModule} from "@angular/material/button";
 	template: `
 		<ng-container *ngIf="club">
 			<h2>{{ "CLUBS.REQUESTS" | translate }}</h2>
-			<ul>
+			<ul *ngIf="((requests$ | async)?.length || 0) > 0; else noRequests">
 				<li *ngFor="let request of requests$ | async">
 					<a [routerLink]="'../../../profiles/' + request.requesterId">
 						<img
@@ -51,6 +51,9 @@ import {MatButtonModule} from "@angular/material/button";
 					</div>
 				</li>
 			</ul>
+			<ng-template #noRequests>
+				<p>{{ "CLUB_REQUEST.NO_REQUESTS" | translate }}</p>
+			</ng-template>
 		</ng-container>
 	`,
 	styles: [`

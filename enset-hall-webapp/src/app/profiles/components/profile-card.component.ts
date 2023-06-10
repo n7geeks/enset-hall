@@ -10,6 +10,7 @@ import {map, Observable} from "rxjs";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {AuthUser} from "../../authentication/models/AuthUser";
+import {ImageViewerService} from "../../shared/image-viewer.service";
 
 @Component({
 	selector: "n7h-profile-card",
@@ -23,7 +24,12 @@ import {AuthUser} from "../../authentication/models/AuthUser";
 	],
 	template: `
 		<div class="card" *ngIf="profile">
-			<img [ngSrc]="profile.photoUrl" [alt]="profile.displayName" width="120" height="120" />
+			<img
+				[ngSrc]="profile.photoUrl"
+				[alt]="profile.displayName"
+				(click)="imageViewer.view(profile.photoUrl)"
+				width="120"
+				height="120"/>
 			<h2>{{profile.displayName}}</h2>
 			<p>{{profile.email}}</p>
 			<ng-container *ngIf="scope$ | async as scope">
@@ -41,9 +47,11 @@ import {AuthUser} from "../../authentication/models/AuthUser";
 			</ng-container>
 			<div class="spacer"></div>
 			<div class="actions">
-				<button *ngIf="!(isMe$ | async)" mat-icon-button [title]="'ACTIONS.CHAT_TOOLTIP' | translate: {name: profile.displayName}">
+				<button *ngIf="!(isMe$ | async)" mat-icon-button
+						[title]="'ACTIONS.CHAT_TOOLTIP' | translate: {name: profile.displayName}">
 					<mat-icon>
-						<svg viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+						<svg viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+							 stroke-linecap="round" stroke-linejoin="round">
 							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 							<path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4"></path>
 							<path d="M12 11l0 .01"></path>
@@ -99,6 +107,11 @@ import {AuthUser} from "../../authentication/models/AuthUser";
 				margin: -3rem;
 				border: .5rem solid var(--primary);
 				box-shadow: 0 0 1rem 0.5rem rgb(0 0 0 / 10%);
+				cursor: pointer;
+				transition: scale .2s ease-in-out;
+				&:hover {
+					scale: 1.02;
+				}
 			}
 			h2 {
 				margin-top: 5rem;
@@ -122,7 +135,7 @@ export class ProfileCardComponent {
 			const scopeId = this.profile.scope_id;
 			return scopes.find(scope => scope.id === scopeId);
 		}));
-	constructor(private store: Store) {
+	constructor(private store: Store, public imageViewer: ImageViewerService) {
 		this.isMe$ = this.store
 			.select<AuthUser>(state => state.authentication.user)
 			.pipe(map(user => user?.uid === this.profile?.id));

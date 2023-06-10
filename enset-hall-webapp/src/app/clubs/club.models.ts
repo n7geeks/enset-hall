@@ -10,6 +10,7 @@ export interface StatelessClub {
 	catchphrase: string;
 	about: string;
 	isOpen: boolean;
+	godfather: AppUser;
 	chapters: ClubChapter[];
 }
 

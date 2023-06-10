@@ -85,8 +85,13 @@
 	"CLUBS.PENDING_TOOLTIP": "Request is pending, click to cancel",
 	"CLUB_REQUEST.ACCEPT": "Accept",
 	"CLUB_REQUEST.REJECT": "Reject",
+	"CLUB_REQUEST.NO_REQUESTS": "No requests pending for now!",
 	"CLUBS.LEAVE": "Leave this club",
 	"CLUBS.COPY_LINK": "Copy link",
 	"CLUBS.LEAVE_DIALOG_TITLE": "Leaving {{clubName}}",
-	"CLUBS.LEAVE_DIALOG_CONTENT": "Are you sure you want to leave {{clubName}}?"
+	"CLUBS.LEAVE_DIALOG_CONTENT": "Are you sure you want to leave {{clubName}}?",
+	"CLUBS.KICK_OUT": "Kick out",
+	"CLUBS.CHANGE_TITLE": "Change title",
+	"CLUBS.PROMOTE_TO_OFFICE": "Promote to office",
+	"CLUBS.UPDATE_DETAILS": "Update details"
 }

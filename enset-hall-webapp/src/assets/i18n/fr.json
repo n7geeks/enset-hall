@@ -83,8 +83,13 @@
 	"CLUBS.PENDING_TOOLTIP": "Demande en attente, cliquez pour annuler",
 	"CLUB_REQUEST.ACCEPT": "Accepter",
 	"CLUB_REQUEST.REJECT": "Rejeter",
+	"CLUB_REQUEST.NO_REQUESTS": "Aucune demande en attente pour le moment!",
 	"CLUBS.LEAVE": "Quitter le club",
 	"CLUBS.COPY_LINK": "Copier le lien",
 	"CLUBS.LEAVE_DIALOG_TITLE": "Quitter {{clubName}}",
-	"CLUBS.LEAVE_DIALOG_CONTENT": "Êtes-vous sûr de vouloir quitter {{clubName}} ?"
+	"CLUBS.LEAVE_DIALOG_CONTENT": "Êtes-vous sûr de vouloir quitter {{clubName}} ?",
+	"CLUBS.KICK_OUT": "Exclure",
+	"CLUBS.CHANGE_TITLE": "Changer le titre",
+	"CLUBS.PROMOTE_TO_OFFICE": "Promouvoir au bureau",
+	"CLUBS.UPDATE_DETAILS": "Mettre à jour les détails"
 }

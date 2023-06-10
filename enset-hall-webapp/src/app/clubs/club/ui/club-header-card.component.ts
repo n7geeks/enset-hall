@@ -13,6 +13,7 @@ import {take} from "rxjs";
 import {Store} from "@ngxs/store";
 import {ClubRequestsActions} from "../requests/club-requests.actions";
 import LeaveClub = ClubRequestsActions.LeaveClub;
+import {ImageViewerService} from "../../../shared/image-viewer.service";
 
 @Component({
 	selector: "n7h-club-header-card",
@@ -34,6 +35,10 @@ import LeaveClub = ClubRequestsActions.LeaveClub;
 					<mat-icon>more_vert</mat-icon>
 				</button>
 				<mat-menu #menu="matMenu">
+					<button mat-menu-item *ngIf="club.isOfficeMember || club.isGodfather">
+						<mat-icon>edit</mat-icon>
+						<span>{{ 'CLUBS.UPDATE_DETAILS' | translate }}</span>
+					</button>
 					<button mat-menu-item>
 						<mat-icon>content_copy</mat-icon>
 						<span>{{ 'CLUBS.COPY_LINK' | translate }}</span>
@@ -44,13 +49,33 @@ import LeaveClub = ClubRequestsActions.LeaveClub;
 					</button>
 				</mat-menu>
 
-				<img class="banner" [src]="club.banner" [alt]="club.name + ' banner'" />
 				<img
+					class="banner"
+					[src]="club.banner"
+					(click)="imageService.view(club.banner)"
+					[alt]="club.name + ' banner'"/>
+				<div
+					(click)="imageService.view(club.logo)"
 					class="club-logo item"
-					[ngSrc]="club.logo"
-					width="100"
-					height="100"
-					[alt]="club.name + ' logo'" />
+					[style.background-image]="'url(' + club.logo + ')'">
+					<button
+						mat-mini-fab
+						color="primary"
+						(click)="$event.stopPropagation();editLogo(club.id)"
+						*ngIf="club.isOfficeMember || club.isGodfather">
+						<mat-icon>
+							<svg viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+								 stroke-linecap="round" stroke-linejoin="round">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+								<path d="M15 8h.01"></path>
+								<path
+									d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z"></path>
+								<path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path>
+								<path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"></path>
+							</svg>
+						</mat-icon>
+					</button>
+				</div>
 				<h1 class="item">{{ club.name }}</h1>
 				<img
 					class="item"
@@ -160,6 +185,7 @@ import LeaveClub = ClubRequestsActions.LeaveClub;
 			padding: 0 2rem;
 			display: flex;
 			align-items: center;
+			overflow: hidden;
 			.menu-toggle {
 				position: absolute;
 				top: 0;
@@ -175,14 +201,40 @@ import LeaveClub = ClubRequestsActions.LeaveClub;
 				object-fit: cover;
 				border-radius: 10px;
 				-webkit-user-drag: none;
+				cursor: pointer;
+				transition: scale 0.2s ease-in-out;
+				&:hover {
+					scale: 1.02;
+				}
 			}
 			.item {
 				z-index: 1;
 			}
 			.club-logo {
-				display: block;
+				display: flex;
 				border-radius: 50%;
 				margin-inline-end: 1rem;
+				width: 100px;
+				height: 100px;
+				-webkit-user-drag: none;
+				z-index: 1;
+				background-size: cover;
+				background-position: center;
+				background-repeat: no-repeat;
+				overflow: hidden;
+				align-items: center;
+				justify-content: center;
+				cursor: pointer;
+				transition: scale 0.2s ease-in-out;
+				button {
+					display: none;
+				}
+				&:hover {
+					scale: 1.02;
+					button {
+						display: block;
+					}
+				}
 			}
 			h1 {
 				font-size: 2rem;
@@ -290,7 +342,10 @@ export class ClubHeaderCardComponent implements OnInit {
 	people: AppUser[] = [];
 	officeMembers: AppUser[] = [];
 	@Input() tab: string = 'posts';
-	constructor(private dialog: MatDialog, private store: Store) {}
+	constructor(
+		public imageService: ImageViewerService,
+		private dialog: MatDialog,
+		private store: Store) {}
 	ngOnInit(): void {
 		if (!this.club) return;
 		const latestChapter = this.club.chapters.reduce((a, b) => a.year > b.year ? a : b);
@@ -321,6 +376,10 @@ export class ClubHeaderCardComponent implements OnInit {
 					this.store.dispatch(new LeaveClub(club.id));
 				}
 		});
+	}
+
+	editLogo(clubId: string) {
+		console.log('edit logo');
 	}
 
 }

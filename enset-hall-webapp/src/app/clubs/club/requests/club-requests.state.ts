@@ -287,4 +287,26 @@ export class ClubRequestsState {
 			});
 	}
 
+	@Action(ClubRequestsActions.RenameClub)
+	async renameClub(ctx: StateContext<ClubRequestsStateModel>, action: ClubRequestsActions.RenameClub) {
+		const { clubId, newName } = action;
+		await this.afs
+			.collection<StatelessClub>("clubs")
+			.doc(clubId)
+			.update({
+				name: newName
+			});
+	}
+
+	@Action(ClubRequestsActions.ChangeClubCatchphrase)
+	async changeClubCatchphrase(ctx: StateContext<ClubRequestsStateModel>, action: ClubRequestsActions.ChangeClubCatchphrase) {
+		const { clubId, newCatchphrase } = action;
+		await this.afs
+			.collection<StatelessClub>("clubs")
+			.doc(clubId)
+			.update({
+				catchphrase: newCatchphrase
+			});
+	}
+
 }

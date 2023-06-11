@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Inject, Input, OnInit, Output} from "@angular/core";
 import {Club} from "../../club.models";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
@@ -8,13 +8,16 @@ import {RouterLink} from "@angular/router";
 import {ClubActionButtonComponent} from "../../ui/club-action-button.component";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
-import {MatDialog} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
 import {take} from "rxjs";
 import {Store} from "@ngxs/store";
 import {ClubRequestsActions} from "../requests/club-requests.actions";
 import LeaveClub = ClubRequestsActions.LeaveClub;
 import {ImageViewerService} from "../../../shared/image-viewer.service";
 import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
+import {ClubNewNameDialogData, ClubRenameDialog} from "../dialogs/club-rename.dialog";
+import {UploadService} from "../../../shared/uplaod.service";
+import {MatRippleModule} from "@angular/material/core";
 
 @Component({
 	selector: "n7h-club-header-card",
@@ -27,7 +30,8 @@ import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 		RouterLink,
 		MatIconModule,
 		MatMenuModule,
-		ClubActionButtonComponent
+		ClubActionButtonComponent,
+		MatRippleModule
 	],
 	template: `
 		<ng-container *ngIf="club">
@@ -36,11 +40,23 @@ import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 					<mat-icon>more_vert</mat-icon>
 				</button>
 				<mat-menu #menu="matMenu">
-					<button mat-menu-item *ngIf="club.isOfficeMember || club.isGodfather">
-						<mat-icon>edit</mat-icon>
-						<span>{{ 'CLUBS.UPDATE_DETAILS' | translate }}</span>
+					<button mat-menu-item
+							(click)="changeBanner(club.id)"
+							*ngIf="club.isOfficeMember || club.isGodfather">
+						<mat-icon>
+							<svg viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+								 stroke-linecap="round" stroke-linejoin="round">
+								<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+								<path d="M15 8h.01"></path>
+								<path
+									d="M3 6a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v12a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3v-12z"></path>
+								<path d="M3 16l5 -5c.928 -.893 2.072 -.893 3 0l5 5"></path>
+								<path d="M14 14l1 -1c.928 -.893 2.072 -.893 3 0l3 3"></path>
+							</svg>
+						</mat-icon>
+						<span>{{ 'CLUBS.CHANGE_BANNER' | translate }}</span>
 					</button>
-					<button mat-menu-item>
+					<button mat-menu-item (click)="copyLink(club.handle)">
 						<mat-icon>content_copy</mat-icon>
 						<span>{{ 'CLUBS.COPY_LINK' | translate }}</span>
 					</button>
@@ -51,6 +67,7 @@ import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 				</mat-menu>
 
 				<img
+					matRipple
 					class="banner"
 					[src]="club.banner"
 					(click)="imageService.view(club.banner)"
@@ -58,11 +75,12 @@ import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 				<div
 					(click)="imageService.view(club.logo)"
 					class="club-logo item"
+					matRipple
 					[style.background-image]="'url(' + club.logo + ')'">
 					<button
 						mat-mini-fab
 						color="primary"
-						(click)="$event.stopPropagation();editLogo(club.id)"
+						(click)="$event.stopPropagation();changeLogo(club.id)"
 						*ngIf="club.isOfficeMember || club.isGodfather">
 						<mat-icon>
 							<svg viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -77,7 +95,18 @@ import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 						</mat-icon>
 					</button>
 				</div>
-				<h1 class="item">{{ club.name }}</h1>
+				<h1
+					class="item"
+					[ngClass]="(club.isOfficeMember || club.isGodfather) ? 'text-item' : ''">
+					{{ club.name }}
+					<button
+						mat-icon-button
+						(click)="editName(club)"
+						*ngIf="club.isOfficeMember || club.isGodfather"
+					>
+						<mat-icon>edit</mat-icon>
+					</button>
+				</h1>
 				<img
 					class="item"
 					*ngIf="club.isAdeClub"
@@ -88,7 +117,16 @@ import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 				/>
 				<div class="spacer"></div>
 				<n7h-club-action-button class="item action" [club]="club"></n7h-club-action-button>
-				<h2 class="item catchphrase">{{ club.catchphrase }}</h2>
+				<h2 class="item catchphrase" [ngClass]="(club.isOfficeMember || club.isGodfather) ? 'text-item catchphrase-edit' : ''">
+					{{ club.catchphrase }}
+					<button
+						mat-icon-button
+						(click)="editCatchphrase(club)"
+						*ngIf="club.isOfficeMember || club.isGodfather"
+					>
+						<mat-icon>edit</mat-icon>
+					</button>
+				</h2>
 				<div class="item index chapters">
 					<p>{{ 'CLUBS.CHAPTERS' | translate }}</p>
 					<div class="spacer"></div>
@@ -159,6 +197,22 @@ import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 		</ng-container>
 	`,
 	styles: [`
+
+		.text-item {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			button {
+				display: none;
+				transition: display .5s ease-in-out;
+			}
+			&:hover {
+				button {
+					display: block;
+				}
+			}
+		}
 		.is-member {
 			background-color: var(--tab);
 			padding: 1rem;
@@ -254,6 +308,12 @@ import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 			bottom: 83px;
 			left: 150px;
 		}
+		.catchphrase-edit {
+			&:hover {
+				bottom: 74px;
+			}
+		}
+
 		.index {
 			position: absolute;
 			right: 1rem;
@@ -330,7 +390,6 @@ import { ClubConfirmDialog } from "../dialogs/club-confirm.dialog";
 				display: none;
 			}
 
-			/* Show the indicator (dot/circle) when checked */
 			.tab input:checked ~ .checkmark:after {
 				display: block;
 			}
@@ -345,6 +404,7 @@ export class ClubHeaderCardComponent implements OnInit {
 	@Input() tab: string = 'posts';
 	constructor(
 		public imageService: ImageViewerService,
+		public upload: UploadService,
 		private dialog: MatDialog,
 		private store: Store) {}
 	ngOnInit(): void {
@@ -385,8 +445,53 @@ export class ClubHeaderCardComponent implements OnInit {
 		});
 	}
 
-	editLogo(clubId: string) {
-		// TODO Edit logo logic
+	changeLogo(clubId: string) {
+		this.upload.selectImageAndUpload();
 	}
 
+	editName(club: Club) {
+		const ref = this.dialog.open(ClubRenameDialog, {
+			restoreFocus: false,
+			data: <ClubNewNameDialogData>{
+				club: club,
+				target: 'name'
+			},
+		});
+		ref.afterClosed()
+			.pipe(take(1))
+			.subscribe((result: {newName?:string,resolved:boolean}) => {
+				if (result.resolved && result.newName) {
+					this.store.dispatch(new ClubRequestsActions.RenameClub(club.id, result.newName));
+				}
+			});
+	}
+
+	editCatchphrase(club: Club) {
+		const ref = this.dialog.open(ClubRenameDialog, {
+			restoreFocus: false,
+			data: <ClubNewNameDialogData>{
+				club: club,
+				target: 'catchphrase'
+			},
+		});
+		ref.afterClosed()
+			.pipe(take(1))
+			.subscribe((result: {newName?:string,resolved?:boolean}) => {
+				if (result?.resolved && result.newName) {
+					this.store.dispatch(new ClubRequestsActions.ChangeClubCatchphrase(club.id, result.newName));
+				}
+			});
+	}
+
+	changeBanner(id: string) {
+		// TODO Change banner logic
+	}
+
+	copyLink(handle: string) {
+		const baseUrl = window.location.origin;
+		const url = `${baseUrl}/clubs/${handle}`;
+		navigator.clipboard.writeText(url);
+	}
 }
+
+

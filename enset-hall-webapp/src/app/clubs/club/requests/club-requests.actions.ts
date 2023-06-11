@@ -36,4 +36,14 @@ export namespace ClubRequestsActions {
 		constructor(public clubId: string, public memberId: string) {}
 	}
 
+	export class RenameClub {
+		static readonly type = "[ClubRequests] Rename Club";
+		constructor(public clubId: string, public newName: string) {}
+	}
+
+	export class ChangeClubCatchphrase {
+		static readonly type = "[ClubRequests] Change Club Catchphrase";
+		constructor(public clubId: string, public newCatchphrase: string) {}
+	}
+
 }

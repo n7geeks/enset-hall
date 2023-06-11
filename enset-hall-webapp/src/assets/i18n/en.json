@@ -18,8 +18,8 @@
 	"FAQ": "FAQ",
 	"CONTACT_US": "Contact us",
 	"ROADMAP": "Roadmap",
-	"CANCEL": "cancel",
-	"LEAVE": "leave",
+	"CANCEL": "Cancel",
+	"LEAVE": "Leave",
 	"ENSET_HALL": "ENSET Hall",
 	"LOGGED_IN_AS": "Logged in as",
 	"PROFILE_MENU.HI": "Hi, ",
@@ -93,7 +93,14 @@
 	"CLUBS.KICK_OUT": "Kick out",
 	"CLUBS.CHANGE_TITLE": "Change title",
 	"CLUBS.PROMOTE_TO_OFFICE": "Promote to office",
-	"CLUBS.UPDATE_DETAILS": "Update details",
+	"CLUBS.CHANGE_BANNER": "Change banner",
 	"CLUBS.KICK_OUT_DIALOG_TITLE": "Kicking out {{targetName}}",
-	"CLUBS.KICK_OUT_DIALOG_CONTENT": "Are you sure you want to kick out {{targetName}} from {{clubName}}?"
+	"CLUBS.KICK_OUT_DIALOG_CONTENT": "Are you sure you want to kick out {{targetName}} from {{clubName}}?",
+	"CLUBS.REAMING_NAME_TITLE": "Renaming {{clubName}}",
+	"CLUBS.REAMING_CATCHPHRASE_TITLE": "Renaming {{clubName}} catchphrase",
+	"CLUBS.REAMING_NAME_CONTENT": "What's going to be the new name of {{clubName}}?",
+	"CLUBS.REAMING_CATCHPHRASE_CONTENT": "What's going to be the new catchphrase of {{clubName}}?",
+	"CLUBS.REAMING_NAME_LABEL": "Club name",
+	"CLUBS.REAMING_CATCHPHRASE_LABEL": "Club catchphrase",
+	"CLUBS.REAMING_ACTION": "Rename"
 }

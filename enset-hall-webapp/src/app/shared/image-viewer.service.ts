@@ -1,10 +1,11 @@
-import {Component, Inject, Injectable} from "@angular/core";
+import {Component, Inject, Injectable, Input} from "@angular/core";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MAT_DIALOG_DATA, MatDialogRef, MatDialog} from "@angular/material/dialog";
 import {PinchZoomModule} from "@across-the-stars/ngx-pinch-zoom";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 
 @Injectable({providedIn: "root"})
@@ -25,17 +26,20 @@ export class ImageViewerService {
 @Component({
 	selector: "n7h-image-view",
 	standalone: true,
-	imports: [CommonModule, TranslateModule, MatButtonModule, MatIconModule, NgOptimizedImage, PinchZoomModule],
+	imports: [CommonModule, TranslateModule, MatButtonModule, MatIconModule, NgOptimizedImage, PinchZoomModule, MatProgressSpinnerModule],
 	template: `
 		<button mat-icon-button class="close" color="warn" (click)="close()">
 			<mat-icon>close</mat-icon>
 		</button>
-
 		<pinch-zoom class="view" backgroundColor="var(--tab)">
+			<div class="loading" *ngIf="!imgLoaded">
+				<mat-spinner diameter="50"></mat-spinner>
+			</div>
 			<img
-				[ngSrc]="data"
-				alt=""
-				fill="fill" />
+				(load)="onImgLoaded()"
+				[hidden]="!imgLoaded"
+				[src]="data"
+				alt="" />
 		</pinch-zoom>
 	`,
 	styles: [`
@@ -48,13 +52,20 @@ export class ImageViewerService {
 			width: 100%;
 			height: 100%;
 
+			.loading {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 100%;
+				height: 100%;
+			}
+
 			.close {
 				position: absolute;
 				top: .5rem;
 				right: .5rem;
 				z-index: 1;
 			}
-
 			.view {
 				position: relative;
 				height: 100%;
@@ -77,6 +88,11 @@ export class ImageViewComponent {
 	constructor(
 		public dialogRef: MatDialogRef<ImageViewerService>,
 		@Inject(MAT_DIALOG_DATA) public data: string) {}
+
+	imgLoaded: boolean = false;
+	onImgLoaded() {
+		this.imgLoaded = true;
+	}
 
 	close() {
 		this.dialogRef.close();

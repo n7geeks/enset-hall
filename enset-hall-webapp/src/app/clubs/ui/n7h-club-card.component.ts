@@ -8,8 +8,6 @@ import {PeopleInvolvedComponent} from "./people-involved.component";
 import {AppUser} from "../../authentication/models/AppUser";
 import {MatButtonModule} from "@angular/material/button";
 import {TranslateModule} from "@ngx-translate/core";
-import { Store } from "@ngxs/store";
-import {ClubRequestsActions} from "../club/requests/club-requests.actions";
 import {ClubActionButtonComponent} from "./club-action-button.component";
 
 @Component({
@@ -144,4 +142,6 @@ export class ClubCardComponent implements OnInit {
 		latestChapter.officeMembers.forEach(member => set.add(member));
 		this.people = Array.from(set);
 	}
+
+	protected readonly console = console;
 }

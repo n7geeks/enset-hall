@@ -18,8 +18,8 @@
 	"FAQ": "FAQ",
 	"CONTACT_US": "Contactez-nous",
 	"ROADMAP": "Roadmap",
-	"CANCEL": "annuler",
-	"LEAVE": "quitter",
+	"CANCEL": "Annuler",
+	"LEAVE": "Quitter",
 	"ENSET_HALL": "ENSET Hall",
 	"LOGGED_IN_AS": "Connecté en tant que",
 	"PROFILE_MENU.HI": "Salut, ",
@@ -91,7 +91,14 @@
 	"CLUBS.KICK_OUT": "Exclure",
 	"CLUBS.CHANGE_TITLE": "Changer le titre",
 	"CLUBS.PROMOTE_TO_OFFICE": "Promouvoir au bureau",
-	"CLUBS.UPDATE_DETAILS": "Mettre à jour les détails",
+	"CLUBS.CHANGE_BANNER": "Changer la bannière",
 	"CLUBS.KICK_OUT_DIALOG_TITLE": "Exclure {{targetName}}",
-	"CLUBS.KICK_OUT_DIALOG_CONTENT": "Êtes-vous sûr de vouloir exclure {{targetName}} de {{clubName}} ?"
+	"CLUBS.KICK_OUT_DIALOG_CONTENT": "Êtes-vous sûr de vouloir exclure {{targetName}} de {{clubName}} ?",
+	"CLUBS.REAMING_NAME_TITLE": "Renommer {{clubName}}",
+	"CLUBS.REAMING_CATCHPHRASE_TITLE": "Changer la devise de {{clubName}}",
+	"CLUBS.REAMING_NAME_CONTENT": "Quel sera le nouveau nom de {{clubName}} ?",
+	"CLUBS.REAMING_CATCHPHRASE_CONTENT": "Quelle sera la nouvelle devise de {{clubName}} ?",
+	"CLUBS.REAMING_NAME_LABEL": "Nom du club",
+	"CLUBS.REAMING_CATCHPHRASE_LABEL": "Devise du club",
+	"CLUBS.REAMING_ACTION": "Renommer"
 }

@@ -100,5 +100,15 @@
 	"CLUBS.REAMING_CATCHPHRASE_CONTENT": "Quelle sera la nouvelle devise de {{clubName}} ?",
 	"CLUBS.REAMING_NAME_LABEL": "Nom du club",
 	"CLUBS.REAMING_CATCHPHRASE_LABEL": "Devise du club",
-	"CLUBS.REAMING_ACTION": "Renommer"
+	"CLUBS.REAMING_ACTION": "Renommer",
+	"CLUBS.ADD_ACTIVITY_TOOLTIP": "Ajouter une nouvelle activité",
+	"CLUBS.NEW_ACTIVITY": "Nouvelle activité",
+	"CLUBS.ACTIVITY_TYPE": "Type",
+	"CLUBS.ACTIVITY_TITLE": "Titre",
+	"CLUBS.ADD_ACTIVITY": "Ajouter une activité",
+	"CLUBS.ACTIVITY_DESCRIPTION": "Description",
+	"CLUBS.ACTIVITY_START_DATE": "Date de début",
+	"CLUBS.ACTIVITY_END_DATE": "Date de fin",
+	"WORKSHOP": "Atelier",
+	"TRAINING": "Formation"
 }

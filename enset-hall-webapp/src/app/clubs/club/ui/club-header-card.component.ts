@@ -8,7 +8,7 @@ import {RouterLink} from "@angular/router";
 import {ClubActionButtonComponent} from "../../ui/club-action-button.component";
 import {MatIconModule} from "@angular/material/icon";
 import {MatMenuModule} from "@angular/material/menu";
-import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
+import { MatDialog } from "@angular/material/dialog";
 import {take} from "rxjs";
 import {Store} from "@ngxs/store";
 import {ClubRequestsActions} from "../requests/club-requests.actions";
@@ -143,7 +143,7 @@ import {MatRippleModule} from "@angular/material/core";
 					<p>{{ people.length }}</p>
 				</div>
 				<div class="tabs-container item">
-					<label class="tab">
+					<label matRipple class="tab">
 						{{ 'CLUBS.POSTS' | translate }}
 						<input
 							type="radio"
@@ -152,7 +152,7 @@ import {MatRippleModule} from "@angular/material/core";
 							(change)="onTabChange($event)">
 						<span class="checkmark"></span>
 					</label>
-					<label class="tab">
+					<label matRipple class="tab">
 						{{ 'CLUBS.ACTIVITIES' | translate }}
 						<input
 							type="radio"
@@ -162,7 +162,7 @@ import {MatRippleModule} from "@angular/material/core";
 							(change)="onTabChange($event)">
 						<span class="checkmark"></span>
 					</label>
-					<label class="tab">
+					<label matRipple class="tab">
 						{{ 'CLUBS.MEMBERS' | translate }}
 						<input
 							type="radio"
@@ -172,7 +172,7 @@ import {MatRippleModule} from "@angular/material/core";
 							(change)="onTabChange($event)">
 						<span class="checkmark"></span>
 					</label>
-					<label class="tab">
+					<label matRipple class="tab">
 						{{ 'CLUBS.ABOUT' | translate }}
 						<input
 							type="radio"
@@ -182,7 +182,7 @@ import {MatRippleModule} from "@angular/material/core";
 							(change)="onTabChange($event)">
 						<span class="checkmark"></span>
 					</label>
-					<label class="tab" *ngIf="club.isOfficeMember">
+					<label matRipple class="tab" *ngIf="club.isOfficeMember">
 						{{ 'CLUBS.REQUESTS' | translate }}
 						<input
 							type="radio"
@@ -356,6 +356,7 @@ import {MatRippleModule} from "@angular/material/core";
 				-ms-user-select: none;
 				user-select: none;
 				padding-bottom: .9rem;
+				border-radius: .6rem .6rem 0 0;
 			}
 
 			.tab input {

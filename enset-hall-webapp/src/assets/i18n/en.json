@@ -79,8 +79,6 @@
 	"ANNOUNCEMENT.VIEWS_COUNT": "{{count}} views",
 	"ANNOUNCEMENT.LIKES_COUNT": "{{count}} hearts",
 	"CLUBS.PENDING": "Pending",
-	"TRAINING": "FORMATION",
-	"WORKSHOP": "WORKSHOP",
 	"CLUBS.REQUESTS": "Requests",
 	"CLUBS.PENDING_TOOLTIP": "Request is pending, click to cancel",
 	"CLUB_REQUEST.ACCEPT": "Accept",
@@ -102,5 +100,15 @@
 	"CLUBS.REAMING_CATCHPHRASE_CONTENT": "What's going to be the new catchphrase of {{clubName}}?",
 	"CLUBS.REAMING_NAME_LABEL": "Club name",
 	"CLUBS.REAMING_CATCHPHRASE_LABEL": "Club catchphrase",
-	"CLUBS.REAMING_ACTION": "Rename"
+	"CLUBS.REAMING_ACTION": "Rename",
+	"CLUBS.ADD_ACTIVITY_TOOLTIP": "Add a new activity",
+	"CLUBS.NEW_ACTIVITY": "New activity",
+	"CLUBS.ADD_ACTIVITY": "Add activity",
+	"CLUBS.ACTIVITY_TYPE": "Type",
+	"CLUBS.ACTIVITY_TITLE": "Title",
+	"CLUBS.ACTIVITY_DESCRIPTION": "Description",
+	"CLUBS.ACTIVITY_START_DATE": "Start date",
+	"CLUBS.ACTIVITY_END_DATE": "End date",
+	"WORKSHOP": "Workshop",
+	"TRAINING": "Training"
 }

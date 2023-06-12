@@ -9,6 +9,7 @@ import {ScopesState} from "../app/scopes/scopes.state";
 import {ProfilesState} from "../app/profiles/profiles.state";
 import {AnnouncementsState} from "../app/announcements/announcements.state";
 import {ClubRequestsState} from "../app/clubs/club/requests/club-requests.state";
+import {PostsState} from "../app/posts/posts.state";
 
 export const states: StateClass[] = [
 	AuthenticationState,
@@ -19,7 +20,8 @@ export const states: StateClass[] = [
 	ClubsState,
 	ProfilesState,
 	AnnouncementsState,
-	ClubRequestsState
+	ClubRequestsState,
+	PostsState
 ];
 export const storage: NgxsStoragePluginOptions = {
 	key: [UserPreferencesState]

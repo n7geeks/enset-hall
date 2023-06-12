@@ -17,6 +17,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AngularFireAuthGuardModule } from "@angular/fire/compat/auth-guard";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
+import {MatNativeDateModule} from "@angular/material/core";
 
 const modules = [
 	ServiceWorkerModule.register('ngsw-worker.js', {
@@ -27,6 +28,7 @@ const modules = [
 	AngularFireModule.initializeApp(environment.firebaseConfig),
 	AngularFireAuthModule,
 	AngularFirestoreModule,
+	MatNativeDateModule,
 	MatSnackBarModule,
 	NgxsModule.forRoot(states),
 	NgxsStoragePluginModule.forRoot(storage),

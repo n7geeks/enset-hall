@@ -5,6 +5,14 @@ import {ClubChaptersComponent} from "./club-chapters.component";
 import {TranslateModule} from "@ngx-translate/core";
 import {MatCardModule} from "@angular/material/card";
 import {MatRippleModule} from "@angular/material/core";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatBottomSheet, MatBottomSheetModule, MatBottomSheetRef} from "@angular/material/bottom-sheet";
+import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {MatSelectModule} from "@angular/material/select";
+import {MatInputModule} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import { AddActivityBottomSheet } from "../bottom-sheets/new-activity-bottom-sheet.component";
 
 @Component({
 	selector: "n7h-club-activities",
@@ -12,9 +20,12 @@ import {MatRippleModule} from "@angular/material/core";
 	imports: [
 		CommonModule,
 		ClubChaptersComponent,
+		MatBottomSheetModule,
 		TranslateModule,
 		MatCardModule,
-		MatRippleModule
+		MatRippleModule,
+		MatButtonModule,
+		MatIconModule
 	],
 	template: `
 		<n7h-club-chapters (chapterChange)="onChapterChange($event)" [club]="club">
@@ -37,6 +48,14 @@ import {MatRippleModule} from "@angular/material/core";
 					</mat-card>
 				</li>
 			</ul>
+			<button
+				*ngIf="club.isOfficeMember"
+				(click)="addActivity()"
+				[title]=" 'CLUBS.ADD_ACTIVITY_TOOLTIP' | translate "
+				class="add-activity"
+				mat-fab color="primary">
+				<mat-icon>add</mat-icon>
+			</button>
 		</n7h-club-chapters>
 	`,
 	styles: [`
@@ -56,13 +75,21 @@ import {MatRippleModule} from "@angular/material/core";
 				scale: 1.01;
 			}
 		}
+		.add-activity {
+			position: fixed;
+			bottom: 1rem;
+			right: 1rem;
+		}
 	`]
 })
 export class ClubActivitiesComponent {
-	constructor() {}
+	constructor(private bottomSheet: MatBottomSheet) {}
 	@Input() club!: Club;
 	chapter?: ClubChapter;
 	onChapterChange($event: ClubChapter) {
 		this.chapter = $event;
+	}
+	addActivity() {
+		this.bottomSheet.open(AddActivityBottomSheet);
 	}
 }

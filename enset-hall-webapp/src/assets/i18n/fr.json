@@ -110,5 +110,13 @@
 	"CLUBS.ACTIVITY_START_DATE": "Date de début",
 	"CLUBS.ACTIVITY_END_DATE": "Date de fin",
 	"WORKSHOP": "Atelier",
-	"TRAINING": "Formation"
+	"TRAINING": "Formation",
+	"POSTS.NEW_POST_HINT": "Partager des pensées, des idées ou des mises à jour...",
+	"POSTS.POLL": "Sondage",
+	"POSTS.POST": "Publication",
+	"POSTS.ANNOUNCEMENT": "Annonce",
+	"POSTS.NO_POSTS": "Aucune publication à afficher",
+	"POSTS.HEARTS_COUNT": "{{count}} cœurs",
+	"POSTS.COMMENTS_COUNT": "{{count}} commentaires",
+	"POSTS.SHARE": "Partager"
 }

@@ -7,6 +7,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatBadgeModule} from "@angular/material/badge";
 import {TranslateModule} from "@ngx-translate/core";
 import {ImageViewerService} from "../../shared/image-viewer.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
 	selector: "n7h-post",
@@ -17,18 +18,35 @@ import {ImageViewerService} from "../../shared/image-viewer.service";
 		MatButtonModule,
 		MatIconModule,
 		MatBadgeModule,
-		TranslateModule
+		TranslateModule,
+		RouterLink
 	],
 	template: `
         <mat-card class="card">
-            <mat-card-header>
+            <mat-card-header *ngIf="!post.isClub; else clubHeader">
                 <div mat-card-avatar
+                     routerLink="/profiles/{{ post.poster?.id }}"
                      [style.background-image]="'url(' + post.poster?.photoUrl + ')'"
                      class="header-image"
                 ></div>
-                <mat-card-title>{{ post.poster?.displayName }}</mat-card-title>
-                <mat-card-subtitle>{{ post.poster?.email }}</mat-card-subtitle>
+                <mat-card-title
+	                routerLink="/profiles/{{ post.poster?.id }}"
+                >{{ post.poster?.displayName }}</mat-card-title>
+                <mat-card-subtitle>{{ post.createdAt | date }}</mat-card-subtitle>
             </mat-card-header>
+            <ng-template #clubHeader>
+                <mat-card-header>
+                    <div mat-card-avatar
+                         routerLink="/clubs/{{ post.club?.handle }}"
+                         [style.background-image]="'url(' + post.club?.logo + ')'"
+                         class="header-image"
+                    ></div>
+                    <mat-card-title
+                		routerLink="/clubs/{{ post.club?.handle }}"
+                    >{{ post.club?.name }}</mat-card-title>
+                    <mat-card-subtitle>{{ post.createdAt | date }}</mat-card-subtitle>
+                </mat-card-header>
+            </ng-template>
             <mat-card-content>
                 <p>
                     {{ post.content }}

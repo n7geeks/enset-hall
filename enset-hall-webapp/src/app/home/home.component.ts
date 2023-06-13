@@ -52,8 +52,6 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 
 	ngAfterViewInit(): void {
 		this.store.dispatch(new AnnouncementsActions.FetchAnnouncements());
-		this.store.dispatch(new PostsActions.FetchPosts());
-		this.store.dispatch(new StandsActions.FetchStands());
 	}
 
 }

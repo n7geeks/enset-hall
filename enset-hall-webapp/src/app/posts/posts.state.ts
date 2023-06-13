@@ -72,6 +72,12 @@ export class PostsState {
                             hearted: userComments ? userComments[comment.id].hearted : false
                         } as PostComment;
                     });
+                    if (userPosts && !userPosts[post.id]) {
+                        userPosts[post.id] = {
+                            hearted: false,
+                            seen: false
+                        };
+                    }
                     return {
                         ...post,
                         comments: postComments,

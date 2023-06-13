@@ -309,4 +309,26 @@ export class ClubRequestsState {
 			});
 	}
 
+	@Action(ClubRequestsActions.ChangeClubLogo)
+	async changeClubLogo(ctx: StateContext<ClubRequestsStateModel>, action: ClubRequestsActions.ChangeClubLogo) {
+		const { clubId, newLogoUrl } = action;
+		await this.afs
+			.collection<StatelessClub>("clubs")
+			.doc(clubId)
+			.update({
+				logo: newLogoUrl
+			});
+	}
+
+	@Action(ClubRequestsActions.ChangeClubBanner)
+	async changeClubBanner(ctx: StateContext<ClubRequestsStateModel>, action: ClubRequestsActions.ChangeClubBanner) {
+		const { clubId, newBannerUrl } = action;
+		await this.afs
+			.collection<StatelessClub>("clubs")
+			.doc(clubId)
+			.update({
+				banner: newBannerUrl
+			});
+	}
+
 }

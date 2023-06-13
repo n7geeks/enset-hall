@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from "@angular/core";
+import {Component, EventEmitter, Input, OnInit, Output} from "@angular/core";
 import {Club} from "../../club.models";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
@@ -447,7 +447,9 @@ export class ClubHeaderCardComponent implements OnInit {
 	}
 
 	changeLogo(clubId: string) {
-		this.upload.selectImageAndUpload();
+		this.upload.selectImageAndUpload(url => {
+			this.store.dispatch(new ClubRequestsActions.ChangeClubLogo(clubId, url));
+		});
 	}
 
 	editName(club: Club) {
@@ -485,13 +487,15 @@ export class ClubHeaderCardComponent implements OnInit {
 	}
 
 	changeBanner(id: string) {
-		// TODO Change banner logic
+		this.upload.selectImageAndUpload(url => {
+			this.store.dispatch(new ClubRequestsActions.ChangeClubBanner(id, url));
+		});
 	}
 
-	copyLink(handle: string) {
+	async copyLink(handle: string) {
 		const baseUrl = window.location.origin;
 		const url = `${baseUrl}/clubs/${handle}`;
-		navigator.clipboard.writeText(url);
+		await navigator.clipboard.writeText(url);
 	}
 }
 

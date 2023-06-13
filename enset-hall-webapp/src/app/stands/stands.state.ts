@@ -4,7 +4,6 @@ import { Injectable } from "@angular/core";
 import {StandsActions} from "./stands.actions";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {AuthUser} from "../authentication/models/AuthUser";
 import {Club} from "../clubs/club.models";
 import {AppUser} from "../authentication/models/AppUser";
 import {combineLatest, map, tap} from "rxjs";

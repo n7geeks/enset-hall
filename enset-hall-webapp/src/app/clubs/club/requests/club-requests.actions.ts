@@ -46,4 +46,14 @@ export namespace ClubRequestsActions {
 		constructor(public clubId: string, public newCatchphrase: string) {}
 	}
 
+	export class ChangeClubLogo {
+		static readonly type = "[ClubRequests] Change Club Logo";
+		constructor(public clubId: string, public newLogoUrl: string) {}
+	}
+
+	export class ChangeClubBanner {
+		static readonly type = "[ClubRequests] Change Club Banner";
+		constructor(public clubId: string, public newBannerUrl: string) {}
+	}
+
 }

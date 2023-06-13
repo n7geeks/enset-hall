@@ -11,7 +11,6 @@ import {SideExtraComponent} from "./components/side-extra.component";
 import {MainContentComponent} from "./components/main-content.component";
 import {Store} from "@ngxs/store";
 import {AnnouncementsActions} from "../announcements/announcements.actions";
-import {PostsState} from "../posts/posts.state";
 import {PostsActions} from "../posts/posts.actions";
 import {StandsActions} from "../stands/stands.actions";
 

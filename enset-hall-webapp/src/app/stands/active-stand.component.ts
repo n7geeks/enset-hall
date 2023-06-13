@@ -4,6 +4,8 @@ import {Stand} from "./stands.models";
 import {RouterLink} from "@angular/router";
 import {MatRippleModule} from "@angular/material/core";
 import {PeopleInvolvedComponent} from "../clubs/ui/people-involved.component";
+import {MatBottomSheet} from "@angular/material/bottom-sheet";
+import {StandDiscussionsBottomSheet} from "./stand-discussions.bottom-sheet";
 
 @Component({
 	selector: 'n7h-active-stand',
@@ -14,12 +16,15 @@ import {PeopleInvolvedComponent} from "../clubs/ui/people-involved.component";
 			class="active-stand"
 			matRipple
 			*ngIf="stand">
-			<a class="active-stand__link">
+			<a
+				class="active-stand__link"
+				(click)="openDiscussions(stand)"
+			>
 				<div class="club-info">
-					<h2>{{stand.club.name}}</h2>
+					<h2>{{stand.club?.name}}</h2>
 					<img
-						[ngSrc]="stand.club.logo"
-						[alt]="stand.club.name"
+						[ngSrc]="stand.club?.logo || 'assets/images/club-logo-placeholder.png'"
+						[alt]="stand.club?.name"
 						[width]="imageSize"
 						[height]="imageSize" />
 				</div>
@@ -65,9 +70,18 @@ import {PeopleInvolvedComponent} from "../clubs/ui/people-involved.component";
 				filter: brightness(1.1);
 			}
 		}
+		
 	`]
 })
 export class ActiveStandComponent {
 	@Input() stand?: Stand;
 	imageSize = 45;
+	constructor(private bottomSheet: MatBottomSheet) {
+	}
+
+	openDiscussions(stand: Stand) {
+		this.bottomSheet.open(StandDiscussionsBottomSheet, {
+			data: stand.id
+		})
+	}
 }

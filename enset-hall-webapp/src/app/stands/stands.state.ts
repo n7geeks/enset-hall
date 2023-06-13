@@ -1,5 +1,5 @@
 import {Action, State, StateContext, Store} from "@ngxs/store";
-import {Discussion, Stand, StatelessStand, UserStandsDiscussionsHearts} from "./stands.models";
+import {Discussion, Stand, StatelessDiscussion, StatelessStand, UserStandsDiscussionsHearts} from "./stands.models";
 import { Injectable } from "@angular/core";
 import {StandsActions} from "./stands.actions";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
@@ -62,4 +62,44 @@ export class StandsState {
 			}))
 			.pipe(tap(stands => ctx.setState(stands)));
 	}
+
+	@Action(StandsActions.SubmitDiscussion)
+	async submitDiscussion(ctx: StateContext<Stand[]>, action: StandsActions.SubmitDiscussion) {
+		const user = await this.auth.currentUser;
+		if (!user) {
+			return;
+		}
+		const discusserId = user.uid;
+		const {standId, content} = action;
+		const discussionId = this.afs.createId();
+		const discussion: StatelessDiscussion = {
+			discussedAt: (new Date()).getTime(),
+			hearts: 0,
+			content,
+			discusserId,
+			id: discussionId
+		}
+		let discussions: StatelessDiscussion[] | undefined = ctx.getState()
+			.find(stand => stand.id === standId)?.discussions;
+		if (!discussions) {
+			return;
+		}
+		discussions = discussions.map(discussion => {
+			return {
+				discussedAt: discussion.discussedAt,
+				hearts: discussion.hearts,
+				discusserId: discussion.discusserId,
+				content: discussion.content,
+				id: discussion.id
+			} as StatelessDiscussion;
+		});
+		discussions.push(discussion);
+		await this.afs
+			.collection("stands")
+			.doc(standId)
+			.update({
+				discussions
+			});
+	}
+
 }

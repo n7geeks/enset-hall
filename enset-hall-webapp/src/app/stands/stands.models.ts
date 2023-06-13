@@ -2,6 +2,7 @@ import {StatelessClub} from "../clubs/club.models";
 import {AppUser} from "../authentication/models/AppUser";
 
 export interface StatelessStand {
+	id: string;
 	clubId: string;
 	discussions: StatelessDiscussion[];
 	ended: boolean;
@@ -32,6 +33,6 @@ export interface UserStandsDiscussionsHearts {
 
 export interface Stand extends StatelessStand {
 	organizers: AppUser[];
-	club: StatelessClub;
+	club?: StatelessClub;
 	discussions: Discussion[];
 }

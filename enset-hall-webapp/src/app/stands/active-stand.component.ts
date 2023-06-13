@@ -1,6 +1,6 @@
 import {Component, Input} from "@angular/core";
 import {CommonModule, NgOptimizedImage} from "@angular/common";
-import {Stand} from "./stand.model";
+import {Stand} from "./stands.models";
 import {RouterLink} from "@angular/router";
 import {MatRippleModule} from "@angular/material/core";
 import {PeopleInvolvedComponent} from "../clubs/ui/people-involved.component";
@@ -14,8 +14,7 @@ import {PeopleInvolvedComponent} from "../clubs/ui/people-involved.component";
 			class="active-stand"
 			matRipple
 			*ngIf="stand">
-			<a class="active-stand__link"
-				[routerLink]="[stand.link]">
+			<a class="active-stand__link">
 				<div class="club-info">
 					<h2>{{stand.club.name}}</h2>
 					<img

@@ -1,7 +1,6 @@
 import {Component} from "@angular/core";
-import {Store} from "@ngxs/store";
 import {FooterComponent} from "../../footer/footer.component";
-import {ActiveStandsComponent} from "./active-stands.component";
+import {ActiveStandsComponent} from "../../stands/active-stands.component";
 import {AsideFooterComponent} from "./aside-footer.component";
 
 @Component({

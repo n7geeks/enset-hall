@@ -13,6 +13,7 @@ import {Store} from "@ngxs/store";
 import {AnnouncementsActions} from "../announcements/announcements.actions";
 import {PostsState} from "../posts/posts.state";
 import {PostsActions} from "../posts/posts.actions";
+import {StandsActions} from "../stands/stands.actions";
 
 
 @Component({
@@ -53,6 +54,7 @@ export class HomeComponent implements OnInit, OnDestroy, AfterViewInit {
 	ngAfterViewInit(): void {
 		this.store.dispatch(new AnnouncementsActions.FetchAnnouncements());
 		this.store.dispatch(new PostsActions.FetchPosts());
+		this.store.dispatch(new StandsActions.FetchStands());
 	}
 
 }

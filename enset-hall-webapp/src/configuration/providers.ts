@@ -18,7 +18,7 @@ import { AngularFireAuthGuardModule } from "@angular/fire/compat/auth-guard";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatNativeDateModule} from "@angular/material/core";
-import {MatBottomSheet, MatBottomSheetModule} from "@angular/material/bottom-sheet";
+import {MatBottomSheetModule} from "@angular/material/bottom-sheet";
 
 const modules = [
 	ServiceWorkerModule.register('ngsw-worker.js', {

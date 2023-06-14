@@ -13,4 +13,8 @@ export namespace AuthenticationActions {
 	export class SignOut {
 		static readonly type = '[Authentication] SignOut';
 	}
+	export class SetUserScope {
+		static readonly type = '[Authentication] Set User Scope';
+		constructor(public scopeId: string) {}
+	}
 }

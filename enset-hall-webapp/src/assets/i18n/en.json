@@ -54,9 +54,9 @@
 	"SIDE_NAV.HOME": "Home",
 	"SIDE_NAV.CLUBS": "Clubs",
 	"DIALOG.NOT_STUDENT_ENSET_TITLE": "Hey! you don't seem to be an ENSET Mohammedia Student",
-	"DIALOG.NOT_STUDENT_ENSET_PAR1": "The email you used to logged in is not an ENSET institutional  email",
-	"DIALOG.NOT_STUDENT_ENSET_PAR2": "Sign in with your institutional email to access all features ",
-	"DIALOG.NOT_STUDENT_ENSET_PAR3": "If you believe something is wrong, ",
+	"DIALOG.NOT_STUDENT_ENSET_1": "The email you used to logged in is not an ENSET institutional email!",
+	"DIALOG.NOT_STUDENT_ENSET_2": "Please Upload your Inscription Document to access all the features.",
+	"DIALOG.NOT_STUDENT_ENSET_3": "If you believe something is wrong, ",
 	"DIALOG.NOT_STUDENT_ENSET_LINK": "contact us!",
 	"DIALOG.NOT_STUDENT_ENSET_CHECKBOX": "Don't show this again",
 	"DIALOG.NOT_STUDENT_ENSET_BUTTON": "Ok",
@@ -118,5 +118,8 @@
 	"POSTS.NO_POSTS": "No more posts to show",
 	"POSTS.HEARTS_COUNT": "{{count}} hearts",
 	"POSTS.COMMENTS_COUNT": "{{count}} comments",
-	"POSTS.SHARE": "Share"
+	"POSTS.SHARE": "Share",
+	"DROPZONE.HEADER": "Drop or click to choose files",
+	"DROPZONE.MAX_4MB": "Max file size 4MB",
+	"DIALOG.DISCARD": "Discard"
 }

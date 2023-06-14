@@ -11,6 +11,8 @@ import { AppUser } from "../models/AppUser";
 import { UserScopes } from "../models/UserScopes";
 import { YearOfStudyService } from "../year-of-study.service";
 import {ClubsActions} from "../../clubs/clubs.actions";
+import {MatDialog} from "@angular/material/dialog";
+import {NotEnsetStudentDialog} from "../components/ui/not-enset-student.dialog";
 export interface AuthenticationStateModel {
 	user?: AuthUser;
 	isAuthenticated?: boolean;
@@ -29,14 +31,21 @@ export class AuthenticationState {
 	private readonly provider;
 	private userSubscription!: Subscription;
 	private appUserSubscription!: Subscription;
+	alertShown = false;
 	constructor(
 		private store: Store,
 		private angularFireAuth: AngularFireAuth,
 		private router: Router,
+		private dialog: MatDialog,
 		private afs: AngularFirestore) {
 		this.provider = new firebase.auth.GoogleAuthProvider();
 	}
 	ngxsOnInit(ctx: StateContext<AuthenticationStateModel>) {
+		const showString = localStorage.getItem('not-student-dialog-not-show');
+		if (showString === null || showString === undefined) {
+			this.alertShown = false;
+		}
+		this.alertShown = JSON.parse(showString!);
 		this.userSubscription = this.angularFireAuth.user.subscribe(user => {
 			if (user === null) {
 				return;
@@ -115,6 +124,26 @@ export class AuthenticationState {
 	async setUser({ patchState }: StateContext<AuthenticationStateModel>,
 	        { user }: AuthenticationActions.SetUser) {
 		patchState({ user, isAuthenticated: true, inProgress: false });
+		if (user.scopes.role === 'external' && !this.alertShown) {
+			this.dialog.open(NotEnsetStudentDialog, {
+				disableClose: true,
+				width: '650px',
+			});
+			this.alertShown = true;
+		}
 		this.store.dispatch(new ClubsActions.GetClubs());
+	}
+
+	@Action(AuthenticationActions.SetUserScope)
+	async setUserScope(ctx: StateContext<AuthenticationStateModel>,
+                       	        { scopeId }: AuthenticationActions.SetUserScope) {
+		const user = ctx.getState().user;
+		if (user === undefined) {
+			return;
+		}
+		const appUser = await this.afs
+			.collection('users')
+			.doc<AppUser>(user.uid)
+			.update({ scope_id: scopeId });
 	}
 }

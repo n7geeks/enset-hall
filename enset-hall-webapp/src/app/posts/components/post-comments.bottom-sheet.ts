@@ -1,5 +1,4 @@
 import {Component, Inject} from "@angular/core";
-import {Stand} from "./stands.models";
 import {CommonModule} from "@angular/common";
 import {MAT_BOTTOM_SHEET_DATA} from "@angular/material/bottom-sheet";
 import {MatListModule} from "@angular/material/list";
@@ -11,46 +10,57 @@ import {TranslateModule} from "@ngx-translate/core";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {MatInputModule} from "@angular/material/input";
 import {Store} from "@ngxs/store";
-import { StandsActions } from "./stands.actions";
 import {map} from "rxjs";
 import {RouterLink} from "@angular/router";
-import {toggle} from "cli-cursor";
+import {Post, PostComment} from "../posts.models";
+import { PostsActions } from "../posts.actions";
 
 @Component({
-	selector: "n7h-stand-discussions",
+	selector: "n7h-post-comments",
 	standalone: true,
-	imports: [CommonModule, MatListModule, MatLineModule, MatCardModule, MatButtonModule, MatIconModule, TranslateModule, ReactiveFormsModule, MatInputModule, RouterLink],
+	imports: [
+		CommonModule,
+		MatListModule,
+		MatLineModule,
+		MatCardModule,
+		MatButtonModule,
+		MatIconModule,
+		TranslateModule,
+		ReactiveFormsModule,
+		MatInputModule,
+		RouterLink
+	],
 	template: `
-        <mat-nav-list *ngIf="stand$ | async as stand">
-            <mat-card mat-list-item *ngFor="let discussion of stand.discussions" class="card">
-                <mat-card-header routerLink="/profiles/{{discussion.discusser.id}}">
+        <mat-nav-list *ngIf="post$ | async as post">
+            <mat-card mat-list-item *ngFor="let comment of post.comments" class="card">
+                <mat-card-header routerLink="/profiles/{{comment.commenter?.id}}">
                     <div
-	                    [style.background-image]="'url(' + discussion.discusser.photoUrl + ')'"
-	                    mat-card-avatar class="header-image">
+                            [style.background-image]="'url(' + comment.commenter?.photoUrl + ')'"
+                            mat-card-avatar class="header-image">
                     </div>
-                    <mat-card-title>{{discussion.discusser.displayName}}</mat-card-title>
-                    <mat-card-subtitle>{{ discussion.discussedAt | date }}</mat-card-subtitle>
+                    <mat-card-title>{{comment.commenter?.displayName}}</mat-card-title>
+                    <mat-card-subtitle>{{ comment.createdAt | date }}</mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                    <p>{{discussion.content}}</p>
+                    <p>{{comment.content}}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-button (click)="toggleHeart(discussion.id)">
-                        <mat-icon color="warn" *ngIf="discussion.hearted; else notHearted">favorite</mat-icon>
+                    <button mat-button (click)="toggleHeart(comment)">
+                        <mat-icon color="warn" *ngIf="comment.hearted; else notHearted">favorite</mat-icon>
                         <ng-template #notHearted>
                             <mat-icon color="warn">favorite_outline</mat-icon>
                         </ng-template>
-                        <span>{{ 'POSTS.HEARTS_COUNT' | translate: { count: discussion.hearts } }}</span>
+                        <span>{{ 'POSTS.HEARTS_COUNT' | translate: {count: comment.heartsNumber} }}</span>
                     </button>
                 </mat-card-actions>
             </mat-card>
         </mat-nav-list>
         <form [formGroup]="form">
             <mat-form-field
-		            class="form-field"
-		            hintLabel="max 255 characters"
-		            appearance="outline">
-                <input matInput type="text" formControlName="newDiscussion" >
+                class="form-field"
+                hintLabel="max 255 characters"
+                appearance="outline">
+                <input matInput type="text" formControlName="newComment">
                 <button matSuffix mat-icon-button [disabled]="!form.valid" (click)="submit()">
                     <mat-icon>send</mat-icon>
                 </button>
@@ -93,10 +103,10 @@ import {toggle} from "cli-cursor";
         }
 	`]
 })
-export class StandDiscussionsBottomSheet {
-	stand$ = this.store
-		.select<Stand[]>(state => state.stands)
-		.pipe(map(stands => stands.find(stand => stand.id === this.data)));
+export class PostCommentsBottomSheet {
+	post$ = this.store
+		.select<Post[]>(state => state.posts)
+		.pipe(map(posts => posts.find(post => post.id === this.data)));
 	constructor(private store: Store,
 	            @Inject(MAT_BOTTOM_SHEET_DATA) public data: string) {}
 	form = new FormGroup({
@@ -108,13 +118,13 @@ export class StandDiscussionsBottomSheet {
 	});
 	submit() {
 		if (!this.form.valid) return;
-		const newDiscussion = this.form.value.newComment;
-		if (!newDiscussion) return;
-		this.store.dispatch(new StandsActions.SubmitDiscussion(this.data, newDiscussion));
+		const newComment = this.form.value.newComment;
+		if (!newComment) return;
+		this.store.dispatch(new PostsActions.SubmitComment(this.data, newComment));
 		this.form.reset();
 	}
 
-	toggleHeart(discussionId: string) {
-		this.store.dispatch(new StandsActions.ToggleHeartDiscussion(this.data, discussionId));
+	toggleHeart(comment: PostComment) {
+		this.store.dispatch(new PostsActions.ToggleHeartComment(comment));
 	}
 }

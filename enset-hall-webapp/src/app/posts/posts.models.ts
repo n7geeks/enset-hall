@@ -20,7 +20,8 @@ export interface StatelessComment {
     commenterId: string;
     content: string;
     heartsNumber: number;
-    createdAt: string;
+    createdAt: number
+    postId: string;
 }
 
 export interface UserPost {
@@ -32,7 +33,9 @@ export interface UserComment {
     hearted: boolean;
 }
 
-export interface PostComment extends StatelessComment, UserComment {}
+export interface PostComment extends StatelessComment, UserComment {
+    commenter?: AppUser;
+}
 
 export interface Post extends StatelessPost, UserPost {
     comments: PostComment[];

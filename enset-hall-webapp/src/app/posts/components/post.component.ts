@@ -8,6 +8,10 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {TranslateModule} from "@ngx-translate/core";
 import {ImageViewerService} from "../../shared/image-viewer.service";
 import {RouterLink} from "@angular/router";
+import {Store} from "@ngxs/store";
+import {PostsActions} from "../posts.actions";
+import {MatBottomSheet} from "@angular/material/bottom-sheet";
+import {PostCommentsBottomSheet} from "./post-comments.bottom-sheet";
 
 @Component({
 	selector: "n7h-post",
@@ -58,14 +62,14 @@ import {RouterLink} from "@angular/router";
 	                 alt="" />
             </mat-card-content>
             <mat-card-actions>
-                <button mat-button>
+                <button mat-button (click)="toggleHearts()">
                     <mat-icon color="warn" *ngIf="post.hearted; else notHearted">favorite</mat-icon>
 	                <ng-template #notHearted>
 						<mat-icon color="warn">favorite_outline</mat-icon>
 					</ng-template>
 	                <span>{{ 'POSTS.HEARTS_COUNT' | translate: { count: post.heartsNumber } }}</span>
                 </button>
-                <button mat-button>
+                <button mat-button (click)="showComments()">
                     <mat-icon>comment</mat-icon>
 	                <span>{{ 'POSTS.COMMENTS_COUNT' | translate: { count: post.commentsNumber } }}</span>
                 </button>
@@ -101,6 +105,20 @@ import {RouterLink} from "@angular/router";
 })
 export class PostComponent {
 	@Input() post!: Post;
-	constructor(public imageViewer: ImageViewerService) {
+	constructor(
+		private store: Store,
+		private bottomSheet: MatBottomSheet,
+		public imageViewer: ImageViewerService) {
 	}
+
+	toggleHearts() {
+		this.store.dispatch(new PostsActions.ToggleHeartPost(this.post));
+	}
+
+	showComments() {
+		this.bottomSheet.open(PostCommentsBottomSheet, {
+			data: this.post.id
+		});
+	}
+
 }

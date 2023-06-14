@@ -13,15 +13,17 @@ import {MatInputModule} from "@angular/material/input";
 import {Store} from "@ngxs/store";
 import { StandsActions } from "./stands.actions";
 import {map} from "rxjs";
+import {RouterLink} from "@angular/router";
+import {toggle} from "cli-cursor";
 
 @Component({
 	selector: "n7h-stand-discussions",
 	standalone: true,
-	imports: [CommonModule, MatListModule, MatLineModule, MatCardModule, MatButtonModule, MatIconModule, TranslateModule, ReactiveFormsModule, MatInputModule],
+	imports: [CommonModule, MatListModule, MatLineModule, MatCardModule, MatButtonModule, MatIconModule, TranslateModule, ReactiveFormsModule, MatInputModule, RouterLink],
 	template: `
         <mat-nav-list *ngIf="stand$ | async as stand">
             <mat-card mat-list-item *ngFor="let discussion of stand.discussions" class="card">
-                <mat-card-header>
+                <mat-card-header routerLink="/profiles/{{discussion.discusser.id}}">
                     <div
 	                    [style.background-image]="'url(' + discussion.discusser.photoUrl + ')'"
 	                    mat-card-avatar class="header-image">
@@ -33,7 +35,7 @@ import {map} from "rxjs";
                     <p>{{discussion.content}}</p>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-button>
+                    <button mat-button (click)="toggleHeart(discussion.id)">
                         <mat-icon color="warn" *ngIf="discussion.hearted; else notHearted">favorite</mat-icon>
                         <ng-template #notHearted>
                             <mat-icon color="warn">favorite_outline</mat-icon>
@@ -56,6 +58,9 @@ import {map} from "rxjs";
         </form>
 	`,
 	styles: [`
+      mat-card-header {
+        cursor: pointer;
+      }
 	    .mat-mdc-list-base {
 	      display: flex;
 	      flex-direction: column;
@@ -107,5 +112,9 @@ export class StandDiscussionsBottomSheet {
 		if (!newDiscussion) return;
 		this.store.dispatch(new StandsActions.SubmitDiscussion(this.data, newDiscussion));
 		this.form.reset();
+	}
+
+	toggleHeart(discussionId: string) {
+		this.store.dispatch(new StandsActions.ToggleHeartDiscussion(this.data, discussionId));
 	}
 }

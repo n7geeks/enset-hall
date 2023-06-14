@@ -6,7 +6,7 @@ import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Club} from "../clubs/club.models";
 import {AppUser} from "../authentication/models/AppUser";
-import {combineLatest, map, tap} from "rxjs";
+import {combineLatest, map, take, tap} from "rxjs";
 
 @State<Stand[]>({
 	name: "stands",
@@ -100,6 +100,91 @@ export class StandsState {
 			.update({
 				discussions
 			});
+	}
+
+	@Action(StandsActions.ToggleHeartDiscussion)
+	async heartDiscussion(ctx: StateContext<Stand[]>, action: StandsActions.ToggleHeartDiscussion) {
+		const user = await this.auth.currentUser;
+		if (!user) {
+			return;
+		}
+		const userId = user.uid;
+		const {standId, discussionId} = action;
+		const stands = ctx.getState();
+		const stand = stands.find(stand => stand.id === standId);
+		if (!stand) {
+			return;
+		}
+
+		let hearted = false;
+
+		const discussions = stand.discussions.map(discussion => {
+			if (discussion.id === discussionId) {
+				hearted = !discussion.hearted;
+				const hearts = hearted ? discussion.hearts + 1 : discussion.hearts - 1;
+				return {
+					hearts,
+					id: discussion.id,
+					content: discussion.content,
+					discusserId: discussion.discusserId,
+					discussedAt: discussion.discussedAt
+				} as StatelessDiscussion;
+			}
+			return {
+				hearts: discussion.hearts,
+				id: discussion.id,
+				content: discussion.content,
+				discusserId: discussion.discusserId,
+				discussedAt: discussion.discussedAt
+			} as StatelessDiscussion;
+		});
+
+		const userStandsDiscussionsHeartsSnapshot = await this.afs
+			.collection("user-stands-discussions-hearts")
+			.doc<UserStandsDiscussionsHearts>(userId)
+			.ref.get();
+
+		const userStandsDiscussionsHearts = userStandsDiscussionsHeartsSnapshot.data();
+
+		await this.afs
+			.collection("stands")
+			.doc(standId)
+			.update({
+				discussions
+			});
+
+		if (!userStandsDiscussionsHearts) {
+			await this.afs
+				.collection("user-stands-discussions-hearts")
+				.doc(userId)
+				.set({
+					[standId]: {
+						[discussionId]: hearted
+					}
+				});
+		} else {
+			if (!userStandsDiscussionsHearts[standId]) {
+				await this.afs
+					.collection("user-stands-discussions-hearts")
+					.doc(userId)
+					.update({
+						[standId]: {
+							[discussionId]: hearted
+						}
+					});
+			} else {
+				await this.afs
+					.collection("user-stands-discussions-hearts")
+					.doc(userId)
+					.update({
+						[standId]: {
+							...userStandsDiscussionsHearts[standId],
+							[discussionId]: hearted
+						}
+					});
+			}
+		}
+
 	}
 
 }

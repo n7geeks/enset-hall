@@ -114,6 +114,8 @@
 	"POSTS.NEW_POST_HINT": "Share thoughts, ideas, or updates...",
 	"POSTS.POLL": "Poll",
 	"POSTS.POST": "Post",
+	"POSTS.NEW_POST": "New Post",
+	"POSTS.ADD_IMAGE": "Add image",
 	"POSTS.ANNOUNCEMENT": "Announcement",
 	"POSTS.NO_POSTS": "No more posts to show",
 	"POSTS.HEARTS_COUNT": "{{count}} hearts",

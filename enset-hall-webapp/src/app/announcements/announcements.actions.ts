@@ -1,4 +1,4 @@
-import {Announcement} from "./announcements.models";
+import {Announcement, StatelessAnnouncement} from "./announcements.models";
 
 export namespace AnnouncementsActions {
 	export class FetchAnnouncements {
@@ -20,5 +20,9 @@ export namespace AnnouncementsActions {
 	export class SetAnnouncementUnliked {
 		static readonly type = "[Announcements] Set Announcement Disliked";
 		constructor(public announcementId: string) {}
+	}
+	export class AddAnnouncement {
+		static readonly type = "[Announcements] Add Announcement";
+		constructor(public announcement: Partial<StatelessAnnouncement>) {}
 	}
 }

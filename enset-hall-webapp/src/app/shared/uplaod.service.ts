@@ -22,7 +22,7 @@ export class UploadService {
 		input.click();
 	}
 
-	private uploadFile(file: File): Observable<string> {
+	public uploadFile(file: File): Observable<string> {
 		const filePath = `images/${this.afs.createId()}`;
 		const fileRef = this.storage.ref(filePath);
 		const task = this.storage.upload(filePath, file);

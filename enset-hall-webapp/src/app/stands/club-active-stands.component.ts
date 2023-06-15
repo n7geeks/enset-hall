@@ -6,11 +6,12 @@ import {Stand} from "./stands.models";
 import {ActiveStandComponent} from "./active-stand.component";
 import {Store} from "@ngxs/store";
 import {map} from "rxjs";
+import {MatButtonModule} from "@angular/material/button";
 
 @Component({
 	selector: 'n7h-club-active-stands',
 	standalone: true,
-	imports: [CommonModule, TranslateModule, MatIconModule, ActiveStandComponent],
+	imports: [CommonModule, TranslateModule, MatIconModule, ActiveStandComponent, MatButtonModule],
 	template: `
 		<ng-container *ngIf="stands$ | async as stands">
 			<h3 *ngIf="stands.length > 0">
@@ -25,6 +26,12 @@ import {map} from "rxjs";
 					</svg>
 				</mat-icon>
 				{{ 'ACTIVE_STANDS' | translate }}
+                <button
+                        mat-mini-fab
+                        color="primary"
+                        (click)="openDialog()">
+                    <mat-icon>add</mat-icon>
+                </button>
 			</h3>
 			<div class="active-stands">
 				<n7h-active-stand *ngFor="let stand of stands" [stand]="stand"></n7h-active-stand>
@@ -36,6 +43,9 @@ import {map} from "rxjs";
 			display: flex;
 			align-items: center;
 			gap: 0.5rem;
+          button {
+            scale: .7;
+          }
 		}
 		.active-stands {
 			display: flex;
@@ -54,4 +64,7 @@ export class ClubActiveStandsComponent {
 	select<Stand[]>(state => state.stands).
 	pipe(map(stands => stands.
 	filter(stand => stand.clubId === this.clubId)))
+
+	openDialog() {
+	}
 }

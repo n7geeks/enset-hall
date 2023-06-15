@@ -4,7 +4,6 @@ import { NbMenuModule } from "@nebular/theme";
 import { ThemeModule } from "../@theme/theme.module";
 import { PagesComponent } from "./pages.component";
 import { PagesRoutingModule } from "./pages-routing.module";
-import { DashboardModule } from "./dashboard/dashboard.module";
 import { NotFoundModule } from "./not-found/not-found.module";
 import { ClubsModule } from "./clubs/clubs.module";
 import { AdeModule } from "./ade/ade.module";
@@ -16,7 +15,6 @@ import { ScopesModule } from "./scopes/scopes.module";
     PagesRoutingModule,
     ThemeModule,
     NbMenuModule,
-    DashboardModule,
     ClubsModule,
     AdeModule,
     UsersModule,

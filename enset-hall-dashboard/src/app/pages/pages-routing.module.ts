@@ -2,7 +2,6 @@ import { RouterModule, Routes } from "@angular/router";
 import { NgModule } from "@angular/core";
 
 import { PagesComponent } from "./pages.component";
-import { DashboardComponent } from "./dashboard/dashboard.component";
 import { NotFoundComponent } from "./not-found/not-found.component";
 import { ClubsComponent } from "./clubs/clubs.component";
 import { AdeComponent } from "./ade/ade.component";
@@ -17,7 +16,8 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        component: DashboardComponent,
+        redirectTo: "clubs",
+        pathMatch: "full",
       },
       {
         path: "clubs",
@@ -51,4 +51,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class PagesRoutingModule {}
+export class PagesRoutingModule { }

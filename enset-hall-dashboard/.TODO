@@ -1,5 +1,5 @@
 01 =>
-02 => Create new club
+02 =>
 03 => Enable authentication
 05 => Filter users by email
 06 =>
@@ -17,3 +17,4 @@
 (Done) Toggle club ADE badge
 (Done) Scopes CRUD
 (Done) Change user scope
+(Done) Create new club

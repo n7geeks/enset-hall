@@ -1,0 +1,132 @@
+<nb-card>
+  <nb-card-header>
+    <div class="d-flex justify-content-between align-items-center">
+      Ajouter un club
+    </div>
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="form" (ngSubmit)="createClub()" id="scopes-form">
+      <!-- Logo & Banner -->
+      <div class="upload-club-images">
+        <div class="banner">
+          <img [src]="bannerUrl" alt="" />
+          <div class="upload-btn">
+            <input
+              type="file"
+              id="banner"
+              accept="image/*"
+              (change)="previewBanner($event)"
+            />
+            <button type="button">
+              <nb-icon icon="upload-outline"></nb-icon>
+              <span>Upload banner</span>
+            </button>
+          </div>
+        </div>
+        <div class="logo">
+          <img [src]="logoUrl" alt="" />
+          <div class="upload-btn">
+            <input
+              type="file"
+              id="logo"
+              accept="image/*"
+              (change)="previewLogo($event)"
+            />
+            <button type="button">
+              <nb-icon icon="camera-outline"></nb-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Name & Handle -->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="name">Nom du club</label>
+            <input
+              nbInput
+              fullWidth
+              type="text"
+              id="name"
+              formControlName="name"
+              placeholder="Nom"
+              [class.is-invalid]="name.invalid && (name.dirty || name.touched)"
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="name.invalid && (name.dirty || name.touched)"
+            >
+              Le nom du club est obligatoire
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="handle">Handle du club</label>
+            <input
+              nbInput
+              fullWidth
+              type="text"
+              id="handle"
+              formControlName="handle"
+              placeholder="Handle"
+              [class.is-invalid]="
+                handle.invalid && (handle.dirty || handle.touched)
+              "
+            />
+            <div
+              class="invalid-feedback"
+              *ngIf="handle.invalid && (handle.dirty || handle.touched)"
+            >
+              Le handle du club est obligatoire
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Catchphrase -->
+      <div class="form-group">
+        <label for="catchphrase">Phrase d'accroche</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          id="catchphrase"
+          formControlName="catchphrase"
+          placeholder="Phrase d'accroche"
+        />
+      </div>
+      <!-- About -->
+      <div class="form-group">
+        <label for="about">À propos du club</label>
+        <textarea
+          nbInput
+          fullWidth
+          type="text"
+          id="about"
+          formControlName="about"
+          placeholder="À propos"
+        ></textarea>
+      </div>
+      <!-- Is open -->
+      <div class="form-group d-flex align-items-center">
+        <nb-checkbox
+          id="isOpen"
+          formControlName="isOpen"
+          [checked]="isOpen.value"
+        ></nb-checkbox>
+        <label for="isOpen" class="ml-2">Ouvert au public</label>
+      </div>
+      <!-- Godfather -->
+      <ngx-choose-godfather
+        (godfatherSelected)="selectGodfather($event)"
+      ></ngx-choose-godfather>
+      <hr />
+      <!-- Submit -->
+      <div class="form-group">
+        <button nbButton status="primary" type="submit" [disabled]="isLoading">
+          {{ isLoading ? "En cours ..." : "Sauvegarder" }}
+        </button>
+      </div>
+    </form>
+  </nb-card-body>
+</nb-card>

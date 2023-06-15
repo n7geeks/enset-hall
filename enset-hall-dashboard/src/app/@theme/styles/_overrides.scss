@@ -1,0 +1,56 @@
+@import "./themes";
+
+@mixin nb-overrides() {
+  nb-select.size-medium button {
+    padding: 0.4375rem 2.2rem 0.4375rem 1.125rem !important;
+
+    nb-icon {
+      right: 0.41rem !important;
+    }
+  }
+
+  ng2-smart-table.hide-default-actions
+    .ng2-smart-actions
+    ng2-st-tbody-edit-delete {
+    display: none !important;
+  }
+
+  .user-custom-radio {
+    border: 1px #ddd solid;
+    border-radius: 5px;
+    padding: 10px;
+    display: flex;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.3s all ease-in-out;
+
+    &.active {
+      border: 1px #007bff solid;
+      background-color: #007bff20;
+    }
+
+    &:hover:not(.active) {
+      background-color: #fafafa;
+    }
+
+    .info {
+      .username {
+        font-weight: bold;
+      }
+
+      .email {
+        font-size: 0.8rem;
+        color: #888;
+      }
+    }
+  }
+
+  nb-dialog-container {
+    overflow: auto;
+    padding: 50px 0 !important;
+
+    &::-webkit-scrollbar {
+      opacity: 0;
+    }
+  }
+}

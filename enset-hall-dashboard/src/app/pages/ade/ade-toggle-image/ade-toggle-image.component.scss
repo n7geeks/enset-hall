@@ -1,0 +1,8 @@
+.ade-toggle {
+  filter: grayscale(100%);
+  cursor: pointer;
+
+  &.ade {
+    filter: grayscale(0%);
+  }
+}

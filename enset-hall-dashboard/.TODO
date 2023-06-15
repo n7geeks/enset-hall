@@ -1,7 +1,7 @@
-01 => 
+01 =>
 02 => Create new club
-03 => Toggle club ADE badge
-05 =>
+03 => Change user scope
+05 => Filter users by email
 06 =>
 07 =>
 08 =>
@@ -14,3 +14,5 @@
 (Done) Setup pages components and sidebar menu
 (Done) Setup firebase
 (Done) Assign godfather to a club
+(Done) Toggle club ADE badge
+(Done) Scopes CRUD

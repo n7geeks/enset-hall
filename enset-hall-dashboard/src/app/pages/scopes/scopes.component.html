@@ -1,4 +1,20 @@
 <nb-card>
-  <nb-card-header> Scopes </nb-card-header>
-  <nb-card-body> Scopes list </nb-card-body>
+  <nb-card-header>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>Scopes</div>
+      <div>
+        <button nbButton status="primary" (click)="openScopesFormModal()">
+          Ajouter Scope
+        </button>
+      </div>
+    </div>
+  </nb-card-header>
+  <nb-card-body *ngIf="scopes$ | async as scopes">
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="scopes"
+      (edit)="openScopesFormModal($event.data)"
+      (delete)="deleteScope($event.data)"
+    ></ng2-smart-table>
+  </nb-card-body>
 </nb-card>

@@ -1,0 +1,160 @@
+<nb-card>
+  <nb-card-header>
+    {{ isEdit ? "Modifier le scope" : "Ajouter un scope" }}
+  </nb-card-header>
+  <nb-card-body>
+    <form [formGroup]="form" (ngSubmit)="submit()" id="scopes-form">
+      <!-- ID -->
+      <div class="form-group" *ngIf="!isEdit">
+        <label for="id">ID</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          id="id"
+          formControlName="id"
+          placeholder="ID Scope"
+          [class.is-invalid]="id.invalid && (id.dirty || id.touched)"
+        />
+        <div class="invalid-feedback" *ngIf="id.invalid && (id.dirty || id.touched)">
+          L'ID du scope est obligatoire
+        </div>
+      </div>
+      <!-- School -->
+      <div class="form-group">
+        <label for="school">Ecole</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          id="school"
+          formControlName="school"
+          placeholder="Ecole"
+          [class.is-invalid]="school.invalid && (school.dirty || school.touched)"
+        />
+        <div class="invalid-feedback" *ngIf="school.invalid && (school.dirty || school.touched)">
+          L'école est obligatoire
+        </div>
+      </div>
+      <!-- Major -->
+      <div class="form-group">
+        <label for="major">Filière</label>
+        <nb-select
+          fullWidth
+          formControlName="major"
+          id="major"
+          [class.is-invalid]="major.invalid && (major.dirty || major.touched)"
+        >
+          <nb-option *ngFor="let major of majors" [value]="major.name">
+            {{ major.label }}
+          </nb-option>
+        </nb-select>
+        <div class="invalid-feedback" *ngIf="major.invalid && (major.dirty || major.touched)">
+          La filière est obligatoire
+        </div>
+      </div>
+      <!-- Department -->
+      <div class="form-group">
+        <label for="department">Département</label>
+        <nb-select
+          fullWidth
+          formControlName="department"
+          id="department"
+          [class.is-invalid]="department.invalid && (department.dirty || department.touched)"
+        >
+          <nb-option
+            *ngFor="let department of departments"
+            [value]="department.name"
+          >
+            {{ department.label }}
+          </nb-option>
+        </nb-select>
+        <div
+          class="invalid-feedback"
+          *ngIf="department.invalid && (department.dirty || department.touched)"
+        >
+          Le département est obligatoire
+        </div>
+      </div>
+      <!-- Promo -->
+      <div class="form-group">
+        <label for="promo">Promotion</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          id="promo"
+          formControlName="promo"
+          placeholder="Promotion"
+        />
+      </div>
+      <!-- Role -->
+      <div class="form-group">
+        <label for="role">Rôle</label>
+        <nb-select
+          fullWidth
+          formControlName="role"
+          id="role"
+          [class.is-invalid]="role.invalid && (role.dirty || role.touched)"
+        >
+          <nb-option *ngFor="let role of roles" [value]="role.name">
+            {{ role.name }}
+          </nb-option>
+        </nb-select>
+        <div class="invalid-feedback" *ngIf="role.invalid && (role.dirty || role.touched)">
+          Le rôle est obligatoire
+        </div>
+      </div>
+      <!-- Diploma -->
+      <div class="form-group">
+        <label for="diploma">Diplôme</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          id="diploma"
+          formControlName="diploma"
+          placeholder="Diplôme"
+        />
+      </div>
+      <!-- Formation -->
+      <div class="form-group">
+        <label for="formation">Formation</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          id="formation"
+          formControlName="formation"
+          placeholder="Formation"
+        />
+      </div>
+      <!-- Laboratory -->
+      <div class="form-group">
+        <label for="laboratory">Laboratoire</label>
+        <input
+          nbInput
+          fullWidth
+          type="text"
+          id="laboratory"
+          formControlName="laboratory"
+          placeholder="Laboratoire"
+        />
+      </div>
+    </form>
+  </nb-card-body>
+  <nb-card-footer>
+    <button
+      nbButton
+      status="primary"
+      class="mr-2"
+      type="submit"
+      form="scopes-form"
+    >
+      Enregistrer
+    </button>
+    <button class="cancel" nbButton status="danger" (click)="cancel()">
+      Annuler
+    </button>
+  </nb-card-footer>
+</nb-card>

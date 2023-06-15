@@ -35,7 +35,6 @@ export class ClubsComponent {
     private dialogService: NbDialogService,
     private router: Router
   ) {}
-  ) { }
 
   handleCustomAction(event: any) {
     switch (event.action) {

@@ -18,16 +18,9 @@ export class AssignGodfatherModalComponent {
 
   constructor(
     protected ref: NbDialogRef<AssignGodfatherModalComponent>,
-    private usersService: UsersService,
     private clubsService: ClubsService,
     private toastr: NbToastrService
   ) {}
-
-  loadUsers(email: string) {
-    if (email.length > 0) {
-      this.users$ = this.usersService.findUsersByEmail(email);
-    }
-  }
 
   selectUser(user: User) {
     this.godfather = user;

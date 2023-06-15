@@ -4,16 +4,19 @@ import {Announcement} from "./announcements.models";
 import {AnnouncementComponent} from "./announcement.component";
 import {CommonModule} from "@angular/common";
 import {map} from "rxjs";
+import {AddAnnouncementComponent} from "./add-announcement.component";
 
 @Component({
 	selector: "n7h-announcements",
 	standalone: true,
 	imports: [
 		CommonModule,
-		AnnouncementComponent
+		AnnouncementComponent,
+		AddAnnouncementComponent
 	],
 	template: `
 		<div class="announcements">
+            <n7h-add-announcement></n7h-add-announcement>
 			<n7h-announcement
 				*ngFor="let announcement of announcement$ | async"
 				[announcement]="announcement"></n7h-announcement>

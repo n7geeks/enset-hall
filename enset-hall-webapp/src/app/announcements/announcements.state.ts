@@ -87,7 +87,7 @@ export class AnnouncementsState {
 	}
 
 	@Action(AnnouncementsActions.FetchAnnouncements)
-	async fetchAnnouncements(ctx: StateContext<Announcement[]>, action: AnnouncementsActions.FetchAnnouncements) {
+	async fetchAnnouncements(ctx: StateContext<Announcement[]>) {
 		const user = await this.auth.currentUser;
 		if (!user) {
 			return;
@@ -137,4 +137,11 @@ export class AnnouncementsState {
 					});
 			});
 	}
+
+	@Action(AnnouncementsActions.AddAnnouncement)
+	async addAnnouncement(ctx: StateContext<Announcement[]>, action: AnnouncementsActions.AddAnnouncement) {
+		await this.afs.collection("announcements")
+			.add(action.announcement);
+	}
+
 }

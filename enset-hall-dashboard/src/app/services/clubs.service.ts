@@ -22,4 +22,11 @@ export class ClubsService {
       .doc(clubId)
       .update({ godfather: godfather });
   }
+
+  toggleAdeClub(clubId: string, isAdeClub: boolean) {
+    return this.store
+      .collection("clubs")
+      .doc(clubId)
+      .update({ isAdeClub: isAdeClub });
+  }
 }

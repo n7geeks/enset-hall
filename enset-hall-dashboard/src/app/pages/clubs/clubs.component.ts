@@ -2,6 +2,8 @@ import { Component } from "@angular/core";
 import { Club } from "../../models/clubs.model";
 import { ClubsService } from "../../services/clubs.service";
 import { User } from "../../models/users.model";
+import { NbDialogService } from "@nebular/theme";
+import { AssignGodfatherModalComponent } from "./assign-godfather-modal/assign-godfather-modal.component";
 
 @Component({
   selector: "ngx-clubs",
@@ -58,7 +60,10 @@ export class ClubsComponent {
 
   clubs$ = this.clubsService.getAll();
 
-  constructor(private clubsService: ClubsService) {}
+  constructor(
+    private clubsService: ClubsService,
+    private dialogService: NbDialogService
+  ) {}
 
   handleCustomAction(event: any) {
     switch (event.action) {
@@ -71,6 +76,10 @@ export class ClubsComponent {
   }
 
   openAssignGodfatherModal(club: Club) {
-    console.log(club);
+    this.dialogService.open(AssignGodfatherModalComponent, {
+      context: {
+        club,
+      },
+    });
   }
 }

@@ -1,6 +1,6 @@
 01 => 
-02 => 
-03 => Setup firebase
+02 => Create new club
+03 => Toggle club ADE badge
 05 =>
 06 =>
 07 =>
@@ -12,3 +12,5 @@
 
 (Done) Setup the project
 (Done) Setup pages components and sidebar menu
+(Done) Setup firebase
+(Done) Assign godfather to a club

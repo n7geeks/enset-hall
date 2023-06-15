@@ -4,7 +4,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatRippleModule} from "@angular/material/core";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {RouterLink, RouterLinkActive} from "@angular/router";
+import {Store} from "@ngxs/store";
 import {TranslateModule} from "@ngx-translate/core";
+import {AuthUser} from "../../authentication/models/AuthUser";
 
 @Component({
 	selector: 'n7h-section-nav',
@@ -45,6 +47,21 @@ import {TranslateModule} from "@ngx-translate/core";
 							{{ "SIDE_NAV.CLUBS" | translate }}
 						</a>
 					</li>
+					<ng-container *ngIf="user$ | async as user">
+						<li *ngIf="user.email === 'y.bensadik@etu.enset-media.ac.ma'">
+							<a matRipple
+							   href="https://thoughtless-icicle.surge.sh/"
+							   target="_blank">
+								<mat-icon>
+									<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-crown" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+										<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+										<path d="M12 6l4 6l5 -4l-2 10h-14l-2 -10l5 4z"></path>
+									</svg>
+								</mat-icon>
+								{{ "SIDE_NAV.ADMIN" | translate }}
+							</a>
+						</li>
+					</ng-container>
 				</ul>
 			</mat-drawer>
 			<mat-drawer-content>
@@ -110,6 +127,8 @@ import {TranslateModule} from "@ngx-translate/core";
 })
 export class SectionNavComponent implements OnInit, OnDestroy {
 	isSmallScreen: boolean = false;
+	constructor(private store: Store) {}
+	user$ = this.store.select<AuthUser>(state => state.authentication.user);
 	ngOnInit(): void {
 		this.isSmallScreen = window.innerWidth < 680;
 		window.addEventListener("resize", () => {

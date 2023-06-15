@@ -123,5 +123,6 @@
 	"POSTS.SHARE": "Share",
 	"DROPZONE.HEADER": "Drop or click to choose files",
 	"DROPZONE.MAX_4MB": "Max file size 4MB",
-	"DIALOG.DISCARD": "Discard"
+	"DIALOG.DISCARD": "Discard",
+	"SIDE_NAV.ADMIN": "Admin"
 }

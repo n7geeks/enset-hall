@@ -90,6 +90,7 @@ import {PostCommentsBottomSheet} from "./post-comments.bottom-sheet";
 	    background-color: var(--highlight);
         img {
           border-radius: 10px;
+          width: 100%;
         }
         mat-card-title {
           font-size: 1rem;

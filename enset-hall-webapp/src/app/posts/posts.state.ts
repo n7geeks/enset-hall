@@ -5,8 +5,9 @@ import {PostsActions} from "./posts.actions";
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {StatelessClub} from "../clubs/club.models";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {combineLatest, map, tap} from "rxjs";
+import {combineLatest, map, take, tap} from "rxjs";
 import {AppUser} from "../authentication/models/AppUser";
+import {UploadService} from "../shared/uplaod.service";
 
 @State<Post[]>({
 	name: "posts",
@@ -14,7 +15,10 @@ import {AppUser} from "../authentication/models/AppUser";
 })
 @Injectable()
 export class PostsState {
-	constructor(private afs: AngularFirestore, private auth: AngularFireAuth) {}
+	constructor(
+		private afs: AngularFirestore,
+		private uploadService: UploadService,
+		private auth: AngularFireAuth) {}
 	@Action(PostsActions.FetchPosts)
 	async fetchPosts(ctx: StateContext<Post[]>, action: PostsActions.FetchPosts) {
 		const user = await this.auth.currentUser;
@@ -206,5 +210,61 @@ export class PostsState {
 
 	}
 
+	@Action(PostsActions.SubmitPost)
+	async submitPost(ctx: StateContext<Post[]>, action: PostsActions.SubmitPost) {
+		const user = await this.auth.currentUser;
+		if (!user) {
+			return;
+		}
+		const userId = user.uid;
+		const { content, image } = action;
+		const id = this.afs.createId();
+
+		const postData = {
+			posterId: userId,
+			heartsNumber: 0,
+			commentsNumber: 0,
+			createdAt: (new Date()).getTime(),
+			content,
+			commentIds: [],
+			isClub: false,
+			id,
+			hasImage: false,
+			scopeIds: []
+		} as StatelessPost;
+
+		if (image) {
+			this.uploadService
+				.uploadFile(image)
+				.pipe(take(1))
+				.subscribe(async (url) => {
+					await this.afs
+						.collection("posts")
+						.doc(id)
+						.set({
+							...postData,
+							hasImage: true,
+							imageUrl: url
+						});
+				});
+		} else {
+			await this.afs
+				.collection("posts")
+				.doc(id)
+				.set(postData);
+		}
+
+		await this.afs
+			.collection("user-posts")
+			.doc<UserPost>(userId)
+			.update({
+				[id]: {
+					hearted: false,
+					seen: true
+				}
+			});
+
+
+	}
 
 }

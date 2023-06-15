@@ -22,4 +22,10 @@ export namespace PostsActions {
         static readonly type = "[Posts] Submit Comment";
         constructor(public postId: string, public comment: string) {}
     }
+
+    export class SubmitPost {
+        static readonly type = "[Posts] Submit Post";
+        constructor(public content: string, public image?: File) {}
+    }
+
 }

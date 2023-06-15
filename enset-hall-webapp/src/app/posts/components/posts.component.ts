@@ -4,6 +4,7 @@ import {Store} from "@ngxs/store";
 import {Post} from "../posts.models";
 import {PostComponent} from "./post.component";
 import {TranslateModule} from "@ngx-translate/core";
+import { map } from "rxjs";
 
 @Component({
 	selector: "n7h-posts",
@@ -47,5 +48,7 @@ import {TranslateModule} from "@ngx-translate/core";
 })
 export class PostsComponent {
 	constructor(private store: Store) {}
-	posts$ = this.store.select<Post[]>(state => state.posts);
+	posts$ = this.store
+		.select<Post[]>(state => state.posts)
+		.pipe(map(posts => posts.sort((a, b) => b.createdAt - a.createdAt)));
 }

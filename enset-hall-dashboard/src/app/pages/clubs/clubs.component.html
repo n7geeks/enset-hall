@@ -1,4 +1,12 @@
-<nb-card>
+<nb-card *ngIf="clubs$ | async as clubs">
   <nb-card-header> Clubs </nb-card-header>
-  <nb-card-body> Clubs list </nb-card-body>
+  <nb-card-body>
+    <ng2-smart-table
+      class="hide-default-actions"
+      [settings]="settings"
+      [source]="clubs"
+      (custom)="handleCustomAction($event)"
+    >
+    </ng2-smart-table>
+  </nb-card-body>
 </nb-card>

@@ -8,4 +8,8 @@
       right: 0.41rem !important;
     }
   }
+
+  ng2-smart-table.hide-default-actions .ng2-smart-actions ng2-st-tbody-edit-delete {
+    display: none !important;
+  }
 }

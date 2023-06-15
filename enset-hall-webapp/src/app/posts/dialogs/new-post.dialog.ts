@@ -1,7 +1,7 @@
-import {Component} from "@angular/core";
+import {Component, Inject} from "@angular/core";
 import {CommonModule} from "@angular/common";
 import {Store} from "@ngxs/store";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
@@ -9,6 +9,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {TranslateModule} from "@ngx-translate/core";
 import {MatIconModule} from "@angular/material/icon";
 import {PostsActions} from "../posts.actions";
+import {Club} from "../../clubs/club.models";
 
 @Component({
 	selector: "n7h-new-post-dialog",
@@ -34,7 +35,7 @@ import {PostsActions} from "../posts.actions";
                             <path d="M9 18h-3a3 3 0 0 1 -3 -3v-8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-3l-3 3l-3 -3z"></path>
                         </svg>
 					</mat-icon>
-					<h3>New Post</h3>
+					<h3>{{ 'POSTS.NEW_POST' | translate }}</h3>
 				</mat-card-title>
 			</mat-card-header>
 			<mat-card-content>
@@ -51,7 +52,13 @@ import {PostsActions} from "../posts.actions";
 						{{ image.name }}
 					</span>
 					<ng-template #addImage>
-	                    <button [style.width]="'100%'" type="button" mat-raised-button (click)="fileInput.click()">Add image</button>
+	                    <button
+		                    [style.width]="'100%'"
+		                    type="button"
+		                    mat-raised-button
+		                    (click)="fileInput.click()">
+		                    {{ 'POSTS.ADD_IMAGE' | translate }}
+	                    </button>
 					</ng-template>
                     <input (change)="onChange($event)" hidden #fileInput type="file" [multiple]="false">
 				</form>
@@ -100,6 +107,7 @@ import {PostsActions} from "../posts.actions";
 export class NewPostDialog {
 	constructor(
 		public ref: MatDialogRef<NewPostDialog>,
+		@Inject(MAT_DIALOG_DATA) public club: Club,
 		private store: Store) {}
 	image?: File;
 	form = new FormGroup({
@@ -111,7 +119,11 @@ export class NewPostDialog {
 	post() {
 		const { content } = this.form.value;
 		if (!content) return;
-		this.store.dispatch(new PostsActions.SubmitPost(content, this.image));
+		if (this.club) {
+			this.store.dispatch(new PostsActions.SubmitClubPost(this.club, content, this.image));
+		} else {
+			this.store.dispatch(new PostsActions.SubmitPost(content, this.image));
+		}
 		this.ref.close();
 	}
 

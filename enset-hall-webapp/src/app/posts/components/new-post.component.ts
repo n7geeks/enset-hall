@@ -4,11 +4,9 @@ import {MatCardModule} from "@angular/material/card";
 import {Store} from "@ngxs/store";
 import {AuthUser} from "../../authentication/models/AuthUser";
 import {RouterLink} from "@angular/router";
-import {MatButtonToggleGroup, MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatIconModule} from "@angular/material/icon";
 import {TranslateModule} from "@ngx-translate/core";
-import {Club} from "../../clubs/club.models";
-import {map} from "rxjs";
 import { MatDialog } from "@angular/material/dialog";
 import { NewPostDialog } from "../dialogs/new-post.dialog";
 

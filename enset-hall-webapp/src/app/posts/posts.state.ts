@@ -263,8 +263,61 @@ export class PostsState {
 					seen: true
 				}
 			});
+	}
 
+	@Action(PostsActions.SubmitClubPost)
+	async submitClubPost(ctx: StateContext<Post[]>, action: PostsActions.SubmitClubPost) {
+		const user = await this.auth.currentUser;
+		if (!user) {
+			return;
+		}
+		const userId = user.uid;
+		const { club, content, image } = action;
+		const id = this.afs.createId();
 
+		const postData = {
+			posterId: club.id,
+			heartsNumber: 0,
+			commentsNumber: 0,
+			createdAt: (new Date()).getTime(),
+			content,
+			commentIds: [],
+			isClub: true,
+			id,
+			hasImage: false,
+			scopeIds: []
+		} as StatelessPost;
+
+		if (image) {
+			this.uploadService
+				.uploadFile(image)
+				.pipe(take(1))
+				.subscribe(async (url) => {
+					await this.afs
+						.collection("posts")
+						.doc(id)
+						.set({
+							...postData,
+							hasImage: true,
+							imageUrl: url
+						});
+				});
+		} else {
+			await this.afs
+				.collection("posts")
+				.doc(id)
+				.set(postData);
+		}
+
+		await this.afs
+			.collection("user-posts")
+			.doc<UserPost>(userId)
+			.update({
+				[id]: {
+					hearted: false,
+					seen: true
+				}
+			});
 	}
 
 }

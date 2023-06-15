@@ -32,7 +32,7 @@ export class ClubsComponent {
   constructor(
     private clubsService: ClubsService,
     private dialogService: NbDialogService
-  ) {}
+  ) { }
 
   handleCustomAction(event: any) {
     switch (event.action) {
@@ -51,4 +51,5 @@ export class ClubsComponent {
       },
     });
   }
+
 }

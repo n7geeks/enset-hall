@@ -1,5 +1,12 @@
 <nb-card *ngIf="clubs$ | async as clubs">
-  <nb-card-header> Clubs </nb-card-header>
+  <nb-card-header>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>Clubs</div>
+      <div>
+        <button nbButton status="primary">Ajouter Club</button>
+      </div>
+    </div>
+  </nb-card-header>
   <nb-card-body>
     <ng2-smart-table
       class="hide-default-actions"

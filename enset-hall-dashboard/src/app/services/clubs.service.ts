@@ -16,6 +16,10 @@ export class ClubsService {
     });
   }
 
+  create(club: Club) {
+    return this.store.collection("clubs").add(club);
+  }
+
   assignGodfather(clubId: string, godfather: User) {
     return this.store
       .collection("clubs")

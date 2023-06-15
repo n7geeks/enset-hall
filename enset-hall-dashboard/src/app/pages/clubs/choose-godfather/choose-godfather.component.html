@@ -1,0 +1,26 @@
+<div class="form-group mb-3">
+  <label for="email" class="label form-control-label">
+    Chercher un parain par email
+  </label>
+  <input
+    type="email"
+    nbInput
+    fullWidth
+    id="email"
+    placeholder="example@example.com"
+    (input)="loadUsers($event.target.value)"
+  />
+</div>
+<div *ngIf="users$ | async as users">
+  <ngx-user-radio-button-card
+    *ngFor="let user of users"
+    (click)="selectUser(user)"
+    [user]="user"
+    [active]="selectedUser && user.id === selectedUser.id"
+  ></ngx-user-radio-button-card>
+  <div *ngIf="users.length === 0">
+    <div class="text-center p-4">
+      Aucun utilisateur ne correspond à cette adresse email
+    </div>
+  </div>
+</div>

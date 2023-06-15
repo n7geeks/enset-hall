@@ -7,6 +7,7 @@ import { ClubsComponent } from "./clubs/clubs.component";
 import { AdeComponent } from "./ade/ade.component";
 import { UsersComponent } from "./users/users.component";
 import { ScopesComponent } from "./scopes/scopes.component";
+import { CreateClubFormComponent } from "./clubs/create-club-form/create-club-form.component";
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
       {
         path: "clubs",
         component: ClubsComponent,
+      },
+      {
+        path: "clubs/create",
+        component: CreateClubFormComponent,
       },
       {
         path: "ade",

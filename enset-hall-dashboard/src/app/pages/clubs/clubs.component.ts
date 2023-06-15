@@ -4,6 +4,7 @@ import { ClubsService } from "../../services/clubs.service";
 import { NbDialogService } from "@nebular/theme";
 import { AssignGodfatherModalComponent } from "./assign-godfather-modal/assign-godfather-modal.component";
 import { columns } from "../../shared/clubs-table-columns";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "ngx-clubs",
@@ -31,7 +32,9 @@ export class ClubsComponent {
 
   constructor(
     private clubsService: ClubsService,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
+    private router: Router
+  ) {}
   ) { }
 
   handleCustomAction(event: any) {
@@ -52,4 +55,7 @@ export class ClubsComponent {
     });
   }
 
+  createClub() {
+    this.router.navigate(["/clubs/create"]);
+  }
 }

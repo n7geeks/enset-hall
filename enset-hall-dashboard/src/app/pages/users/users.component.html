@@ -1,4 +1,10 @@
 <nb-card>
   <nb-card-header> Users </nb-card-header>
-  <nb-card-body> Users list </nb-card-body>
+  <nb-card-body *ngIf="users$ | async as users">
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="users"
+      (editConfirm)="changeScope($event)"
+    ></ng2-smart-table>
+  </nb-card-body>
 </nb-card>

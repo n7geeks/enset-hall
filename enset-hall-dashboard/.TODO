@@ -1,6 +1,6 @@
 01 =>
 02 => Create new club
-03 => Change user scope
+03 => Enable authentication
 05 => Filter users by email
 06 =>
 07 =>
@@ -16,3 +16,4 @@
 (Done) Assign godfather to a club
 (Done) Toggle club ADE badge
 (Done) Scopes CRUD
+(Done) Change user scope
